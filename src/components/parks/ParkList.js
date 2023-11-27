@@ -1,0 +1,34 @@
+import React from 'react';
+import '../style/ParkList.css';
+
+const ParkList = ({ parks, selectedPark, setSelectedPark }) => {
+
+  const handleParkClick = (park) => {
+    setSelectedPark(park); // 공원을 클릭하면 선택된 공원을 업데이트
+  }
+
+  return (
+    <div className="park-list">
+      {/* <h2>공원 목록</h2> */}
+      <ul>
+        {parks.map((park, index) => (
+            <li
+            key={index}
+            onClick={() => handleParkClick(park)}
+            style={
+              (selectedPark && selectedPark.parkNm) === park.parkNm
+                ? { backgroundColor: '#74A3FF', color: 'white' }
+                : {}
+            }
+          >
+            <p className="park-name"><strong>공원명:</strong> {park.parkNm}</p>
+            <p className="park-address"><strong>주소:</strong> {park.lnmadr}</p>
+            <p className="park-phone"><strong>번호:</strong> {park.phoneNumber}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+export default ParkList;

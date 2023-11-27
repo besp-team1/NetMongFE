@@ -1,0 +1,32 @@
+.park-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.park-list ul {
+  padding: 0;
+}
+
+.park-list li {
+  list-style-type: none; 
+  border: none;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #F0E8E2;
+}
+
+.park-name {
+  color: black;
+  margin: 0.005em 0;
+}
+
+.park-address {
+  color: black;
+  margin: 0.005em 0;
+}
+
+.park-phone {
+  color: black;
+  margin: 0.005em 0;
+}
