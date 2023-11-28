@@ -4,17 +4,17 @@
   align-items: center;
 }
 
-.park-container h1,
-.park-container h4 {
+.park-container h2,
+.park-container h6 {
   color: #74A3FF;
   margin: 0;
 }
 
-.park-container h1 {
+.park-container h2 {
   margin-bottom: 10px;
 }
 
-.park-container h4 {
+.park-container h6 {
   margin-bottom: 20px;
 }
 

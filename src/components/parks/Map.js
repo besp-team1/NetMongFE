@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Park from './Park';
 import ParkList from './ParkList';
-import '../style/Map.css';
+import '../../style/parks/Map.css';
 
 const Map = () => {
   const [parks, setParks] = useState([]); // 공원 데이터를 저장할 상태

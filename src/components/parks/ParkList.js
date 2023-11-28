@@ -1,5 +1,5 @@
 import React from 'react';
-import '../style/ParkList.css';
+import '../../style/parks/ParkList.css';
 
 const ParkList = ({ parks, selectedPark, setSelectedPark }) => {
 
@@ -9,7 +9,6 @@ const ParkList = ({ parks, selectedPark, setSelectedPark }) => {
 
   return (
     <div className="park-list">
-      {/* <h2>공원 목록</h2> */}
       <ul>
         {parks.map((park, index) => (
             <li
