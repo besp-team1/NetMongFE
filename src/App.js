@@ -8,6 +8,8 @@ import Main from './components/layout/Main';
 import Navbar from './components/layout/Navbar';
 import Map from './components/parks/Map';
 import Footer from './components/layout/Footer';
+import PostForm from './components/posts/PostForm';
+import PostDetail from './components/posts/PostDetail';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -35,6 +37,8 @@ function App() {
             <Routes>
               <Route path="/" element={<Main />} />
               <Route path="/api/v1/parks" element={<Map />} />
+              <Route path="/api/v1/post/upload" element={<PostForm />} />
+              <Route path="/post/:id" element={<PostDetail />} />
             </Routes>
           </div>
           <Footer />
@@ -45,3 +49,4 @@ function App() {
 }
 
 export default App;
+
