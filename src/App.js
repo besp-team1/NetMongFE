@@ -8,6 +8,8 @@ import Main from './components/layout/Main';
 import Navbar from './components/layout/Navbar';
 import Map from './components/parks/Map';
 import Footer from './components/layout/Footer';
+import MyPage from './components/members/Mypage';
+import LoginForm from './components/members/LoginForm';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -35,6 +37,8 @@ function App() {
             <Routes>
               <Route path="/" element={<Main />} />
               <Route path="/api/v1/parks" element={<Map />} />
+              <Route path="/mypage" element={<MyPage/>} />
+              <Route path="/login" element={<LoginForm/>} />
             </Routes>
           </div>
           <Footer />
