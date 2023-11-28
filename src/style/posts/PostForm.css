@@ -1,77 +1,110 @@
-/* PostForm.css */
-.post-form {
-    margin-top: 120px;  /* Navbar와의 간격을 주기 위해 margin-top을 설정합니다. */
-    width: 80%;  /* 폭을 80%로 줄입니다. */
-    max-width: 600px;  /* 최대 폭을 600px로 제한합니다. */
-    margin-left: auto;  /* 양 옆 여백을 자동으로 설정하여 가운데로 정렬합니다. */
-    margin-right: auto;  /* 양 옆 여백을 자동으로 설정하여 가운데로 정렬합니다. */
-}
-
-.post-form label {
-    display: block;
+.post-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px; /* 상단 컨테이너에 패딩 추가 */
+  }
+  
+  .post-container h2,
+  .post-container h6 {
+    color: #74A3FF;
+    margin: 0;
+  }
+  
+  .post-container h2 {
     margin-bottom: 10px;
-}
-
-.post-form input[type="text"],
-.post-form textarea,
-.post-form input[type="file"] {
-    width: 100%;
-    padding: 10px;
+  }
+  
+  .post-container h6 {
     margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.post-form button[type="submit"] {
-    padding: 10px 20px;
-    background-color: #74A3FF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.post-form button[type="submit"]:hover {
-    background-color: #5680e9;
-}
-
-.preview-container {
+  }
+  
+  .post-container h6:first-of-type {
+    margin-bottom: 10px;
+  }
+  
+  .post-container h6:last-of-type {
+    margin-bottom: 20px;
+  }
+  
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    margin-top: 30px;
+    padding: 30px;
+    background-color: #fbfbfb;
+    border-radius: 20px;
+  }
+  
+  .form-right .title-label {
+    color: #74A3FF;
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
+  
+  .form-right .content-label {
+    color: #74A3FF;
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
+  
+  .form-right .upload-label {
+    color: #74A3FF;
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
+  
+  .form-left .preview-text {
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .form-left,
+  .form-right {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+  }
+  
+  .form-left {
+    margin-right: 4%;
+    align-items: center;
     display: flex;
   }
-
-  .image-preview {
-    width: 200px;  /* 이미지 프리뷰의 고정된 너비를 설정합니다. */
-    margin-right: 20px;  /* 이미지와 입력 필드 간의 간격을 조절합니다. */
+  
+  .form-left label,
+  .form-right label {
+    margin-bottom: 15px;
   }
-
-  .input-fields {
-    flex: 1;
-  }
-
-  .input-fields label {
-    display: block;
-    margin-bottom: 10px;
-  }
-
-  .input-fields input[type="text"],
-  .input-fields textarea,
-  .input-fields input[type="file"] {
-    width: 100%;  /* 입력 필드의 너비를 100%로 설정하여 유동적으로 조절됩니다. */
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
+  
+  .form-left input,
+  .form-right input,
+  .form-right textarea {
+    width: 100%;
+    padding: 5px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
     border-radius: 5px;
   }
-
-  .input-fields button[type="submit"] {
-    padding: 10px 20px;
+  
+  .form-left p {
+    color: #74A3FF;
+  }
+  
+  button {
+    padding: 10px;
     background-color: #74A3FF;
     color: white;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
   }
 
-  .input-fields button[type="submit"]:hover {
-    background-color: #5680e9;
-  }

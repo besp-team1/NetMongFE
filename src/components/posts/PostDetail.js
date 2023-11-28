@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import '../../style/posts/PostDetail.css';
 
 const PostDetail = () => {
     const { id } = useParams();  // URL 파라미터에서 게시글의 ID를 가져옵니다.
@@ -11,7 +12,7 @@ const PostDetail = () => {
             try {
                 const response = await axios.get(`http://localhost:9000/api/v1/post/${id}`, {
                     headers: {
-                        Authorization: `Bearer ${`eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VybmFtZTEyNyIsImF1dGgiOiJtZW1iZXIiLCJleHAiOjE3MDEyMzcwODF9.5KNse_Egy3cFvoLleXnjgdXINWxtNcuMYJbtKfeD2GFhw7UVu7opbJBKxPjLL_0YB-p04hE3FIAlJ8s-hxlzyA`}`,
+                        Authorization: `Bearer ${`eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VybmFtZTEyNyIsImF1dGgiOiJtZW1iZXIiLCJleHAiOjE3MDEyNDU0OTl9.5yPz5F9dieUjW7hycFr7tuPG9CVA__WfTUCD2XfpwvpO0N5j1uoUohWOganMP5OvaAYx0uBYvvkPw-hbpiQyDg`}`,
                     },
                 });
                 setPost(response.data.data);  // API 응답에서 게시글 데이터를 가져와 상태를 업데이트합니다.
@@ -33,7 +34,8 @@ const PostDetail = () => {
             <h1>{post.title}</h1>
             <p>작성자: {post.writer}</p>
             <p>{post.content}</p>
-            {post.imageUrl && <img src={`http://localhost:9000/${post.imageUrl}`} alt="게시글 이미지" />}
+            <p>작성일: {post.createDate}</p>
+            <img src={`http://localhost:9000/${post.imageUrl}`} alt="게시물 이미지" style={{ maxWidth: '100%', height: 'auto' }} />
         </div>
     );
 };

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../../style/posts/PostForm.css';
-import { useNavigate } from 'react-router-dom';
 
 const PostForm = () => {
     const [title, setTitle] = useState('');
@@ -38,7 +38,7 @@ const PostForm = () => {
             const response = await axios.post('http://localhost:9000/api/v1/post/upload', formData, {
                 headers: {
                 'Content-Type': 'multipart/form-data',
-                Authorization: `Bearer ${'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VybmFtZTEyNyIsImF1dGgiOiJtZW1iZXIiLCJleHAiOjE3MDEyMzcwODF9.5KNse_Egy3cFvoLleXnjgdXINWxtNcuMYJbtKfeD2GFhw7UVu7opbJBKxPjLL_0YB-p04hE3FIAlJ8s-hxlzyA'}`,
+                Authorization: `Bearer ${'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VybmFtZTEyNyIsImF1dGgiOiJtZW1iZXIiLCJleHAiOjE3MDEyNDU0OTl9.5yPz5F9dieUjW7hycFr7tuPG9CVA__WfTUCD2XfpwvpO0N5j1uoUohWOganMP5OvaAYx0uBYvvkPw-hbpiQyDg'}`,
                 },
             });
         
@@ -50,35 +50,48 @@ const PostForm = () => {
             console.error('게시글 업로드 중 오류 발생:', error.message);
             }
         };
+        return (
+            <div className="post-container">
+            <h2>멍스타그램 포스트 작성</h2>
+            <h6>오늘 우리 집 멍멍이를 널리 알려주세요!</h6>
+    
 
-    return (
-        <form onSubmit={handleSubmit} className="post-form">
-            <label>
-                제목:
-                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-            </label>
-            <br />
-            <label>
-                내용:
-                <textarea value={content} onChange={(e) => setContent(e.target.value)} />
-            </label>
-            <br />
-            <label>
-                이미지 업로드:
-                <input type="file" accept="image/*" onChange={handleFileChange} />
-            </label>
-            <br />
-            {imagePreview ? (
-                <div>
-                <img src={imagePreview} alt="이미지 미리보기" style={{ maxWidth: '200px', maxHeight: '200px' }} />
+            <form onSubmit={handleSubmit} className="form-container">
+              <div className="form-row">
+          
+                <div className="form-left">
+                  {imagePreview ? (
+                    <div>
+                      <img src={imagePreview} alt="이미지 미리보기" style={{ maxWidth: '200px', maxHeight: '200px' }} />
+                    </div>
+                  ) : (
+                    <p>이미지 미리보기</p>
+                  )}
                 </div>
-            ) : (
-                <p>이미지 없음</p>
-            )}
-            <br />
-            <button type="submit">게시글 업로드</button>
+          
+                <div className="form-right">
+                    <label className="title-label">
+                    제목:
+                    <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+                    </label>
+                    <label className="content-label">
+                    내용:
+                    <textarea value={content} onChange={(e) => setContent(e.target.value)} />
+                    </label>
+                    <label className="upload-label">
+                    이미지 업로드:
+                    <input type="file" accept="image/*" onChange={handleFileChange} />
+                    </label>
+
+                    <button type="submit">게시글 업로드</button>
+                </div>
+          
+              </div>
+
             </form>
-        );
-};
+            </div>
+          );
+          
+}
 
 export default PostForm;
