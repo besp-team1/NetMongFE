@@ -34,11 +34,13 @@ const PostForm = () => {
             formData.append('title', title);
             formData.append('content', content);
             formData.append('image', image);
+
+            const authToken = localStorage.getItem('token'); 
         
             const response = await axios.post('http://localhost:9000/api/v1/post/upload', formData, {
                 headers: {
                 'Content-Type': 'multipart/form-data',
-                Authorization: `Bearer ${'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VybmFtZTEyNyIsImF1dGgiOiJtZW1iZXIiLCJleHAiOjE3MDEyNDU0OTl9.5yPz5F9dieUjW7hycFr7tuPG9CVA__WfTUCD2XfpwvpO0N5j1uoUohWOganMP5OvaAYx0uBYvvkPw-hbpiQyDg'}`,
+                Authorization: `Bearer ${authToken}`,
                 },
             });
         

@@ -6,13 +6,14 @@ import '../../style/posts/PostDetail.css';
 const PostDetail = () => {
     const { id } = useParams();  // URL 파라미터에서 게시글의 ID를 가져옵니다.
     const [post, setPost] = useState(null);
+    const authToken = localStorage.getItem('token');
 
     useEffect(() => {
         const fetchPost = async () => {
             try {
                 const response = await axios.get(`http://localhost:9000/api/v1/post/${id}`, {
                     headers: {
-                        Authorization: `Bearer ${`eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VybmFtZTEyNyIsImF1dGgiOiJtZW1iZXIiLCJleHAiOjE3MDEyNDU0OTl9.5yPz5F9dieUjW7hycFr7tuPG9CVA__WfTUCD2XfpwvpO0N5j1uoUohWOganMP5OvaAYx0uBYvvkPw-hbpiQyDg`}`,
+                        Authorization: `Bearer ${authToken}`,
                     },
                 });
                 setPost(response.data.data);  // API 응답에서 게시글 데이터를 가져와 상태를 업데이트합니다.
@@ -35,7 +36,7 @@ const PostDetail = () => {
             <p>작성자: {post.writer}</p>
             <p>{post.content}</p>
             <p>작성일: {post.createDate}</p>
-            <img src={`http://localhost:9000/${post.imageUrl}`} alt="게시물 이미지" style={{ maxWidth: '100%', height: 'auto' }} />
+            <img src={`${post.imageUrl}`} alt="게시물 이미지" style={{ maxWidth: '100%', height: 'auto' }} />
         </div>
     );
 };

@@ -32,15 +32,15 @@ function Navbar() {
         <img src={logoImage} alt="로고" />
       </Link>
       <ul className="menu">
-          <li className="nav-item">
-            <Link to="/api/v1/post/upload" className="nav-link">포스트</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/market" className="nav-link">마켓</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/api/v1/parks" className="nav-link">내근처</Link>
-          </li>
+        <li className="nav-item">
+          <Link to="/api/v1/post/upload" className="nav-link">포스트</Link>
+        </li>
+        <li className="nav-item">
+          <Link to="/market" className="nav-link">마켓</Link>
+        </li>
+        <li className="nav-item">
+          <Link to="/api/v1/parks" className="nav-link">내근처</Link>
+        </li>
         <li className="nav-item">
           <Link to="/mypage" className="nav-link">마이페이지</Link>
         </li>
