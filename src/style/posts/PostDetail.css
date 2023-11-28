@@ -1,23 +1,10 @@
-.post-detail-container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #f8f8f8;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .post-detail-container h1 {
-    color: #333;
-  }
-  
-  .post-detail-container p {
-    margin: 10px 0;
-    color: #666;
-  }
-  
-  .post-detail-container img {
-    max-width: 100%;
-    height: auto;
-    margin-top: 20px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  }
+.post-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 100px;
+    padding: 50px;
+    background-color: #fbfbfb;
+    border-radius: 20px;
+}

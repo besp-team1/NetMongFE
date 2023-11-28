@@ -31,12 +31,12 @@ const PostDetail = () => {
 
     // 게시글이 불러와졌을 때는 게시글의 제목, 작성자, 내용, 이미지를 표시합니다.
     return (
-        <div>
-            <h1>{post.title}</h1>
-            <p>작성자: {post.writer}</p>
-            <p>{post.content}</p>
-            <p>작성일: {post.createDate}</p>
+        <div className="post-container">
             <img src={`${post.imageUrl}`} alt="게시물 이미지" style={{ maxWidth: '100%', height: 'auto' }} />
+            <h1>{post.writer}</h1>
+            <h1>{post.title}</h1>
+            <p>{post.content}</p>
+            <p>{post.createDate}</p>
         </div>
     );
 };
