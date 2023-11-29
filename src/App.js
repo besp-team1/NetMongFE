@@ -38,7 +38,7 @@ function App() {
           <div className="content">
             <Routes>
               <Route path="/" element={<Main />} />
-              <Route path="/api/v1/parks" element={<Map />} />
+              <Route path="/park" element={<Map />} />
               <Route path="/api/v1/post/upload" element={<PostForm />} />
               <Route path="/post/:id" element={<PostDetail />} />
               <Route path="/mypage" element={<MyPage/>} />

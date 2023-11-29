@@ -1,9 +1,11 @@
 import axios from 'axios';
 
+const authToken = localStorage.getItem('token'); 
+
 const api = axios.create({
     baseURL: 'http://localhost:9000/api/v1/parks',
     headers: {
-        'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VybmFtZTEyNiIsImF1dGgiOiJtZW1iZXIiLCJleHAiOjE3MDEyMjE0ODh9.s5NR6PAuIPFrU0eF2HdhRzSLOdg5YSem8ZcfCWtdOr6s2jIbeTU8xY8Or11n_B6uMDXU0vwy_9i7XnxOE5qKLQ',
+        Authorization: `Bearer ${authToken}`
     },
 });
 
