@@ -47,11 +47,11 @@ function Navbar() {
         {/* 로그인 상태에 따라 다른 메뉴를 보여줍니다. */}
         {isLoggedIn ? (
           <>
-            <li className="nav-item">
-              님 환영합니다!
-            </li>
             <li className="nav-item" onClick={handleLogout}>
               <Link className="nav-link">로그아웃</Link>
+            </li>
+            <li className="nav-item">
+              님 환영합니다!
             </li>
           </>
         ) : (

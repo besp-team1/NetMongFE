@@ -30,9 +30,9 @@ const LoginForm = () => {
     <div className="container">
       <form className="form-signin" onSubmit={handleSubmit}>
         <h2 className="form-signin-heading">로그인</h2>
-        <label for="inputUsername" className="sr-only">Username</label>
+        <label for="inputUsername" className="label">Username</label>
         <input type="text" id="inputUsername" className="form-control" placeholder="Username" value={username} onChange={handleUsernameChange} required autofocus />
-        <label for="inputPassword" className="sr-only">Password</label>
+        <label for="inputPassword" className="label">Password</label>
         <input type="password" id="inputPassword" className="form-control" placeholder="Password" value={password} onChange={handlePasswordChange} required />
         <button className="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
       </form>
