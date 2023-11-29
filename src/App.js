@@ -36,7 +36,7 @@ function App() {
           <div className="content">
             <Routes>
               <Route path="/" element={<Main />} />
-              <Route path="/api/v1/parks" element={<Map />} />
+              <Route path="/park" element={<Map />} />
               <Route path="/mypage" element={<MyPage/>} />
               <Route path="/login" element={<LoginForm/>} />
             </Routes>
