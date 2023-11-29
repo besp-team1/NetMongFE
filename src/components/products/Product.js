@@ -107,8 +107,6 @@ if (formData.images) {
     </form>
 
     </div>
-
-    
   );
 }
 
