@@ -1,5 +1,7 @@
 import React from "react";
 import { Container, Row, Col, Card } from 'react-bootstrap';
+import Profile from "./Profile";
+import Statistics from "./Statstics";
 
 const MyPage = () => {
   return (
@@ -16,9 +18,10 @@ const MyPage = () => {
           </Card>
         </Col>
         <Col md={8}>
-          // 여기에 사용자의 다른 정보나 기능을 추가할 수 있습니다.
         </Col>
       </Row>
+      <Profile/>
+      <Statistics/>
     </Container>
   );
 }

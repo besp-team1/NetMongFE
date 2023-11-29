@@ -8,7 +8,7 @@ import Main from './components/layout/Main';
 import Navbar from './components/layout/Navbar';
 import Map from './components/parks/Map';
 import Footer from './components/layout/Footer';
-import MyPage from './components/members/Mypage';
+import Mypage from './components/mypage/Mypage';
 import LoginForm from './components/members/LoginForm';
 import Join from './components/members/Join';
 import Welcome from './components/members/Welcome';
@@ -39,7 +39,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Main />} />
               <Route path="/api/v1/parks" element={<Map />} />
-              <Route path="/mypage" element={<MyPage/>} />
+              <Route path="/mypage" element={<Mypage/>} />
               <Route path="/login" element={<LoginForm/>} />
               <Route path="/join" element={<Join/>} />
               <Route path="/welcome" element={<Welcome/>} />
