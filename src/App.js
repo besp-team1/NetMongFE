@@ -8,6 +8,8 @@ import Main from './components/layout/Main';
 import Navbar from './components/layout/Navbar';
 import Map from './components/parks/Map';
 import Footer from './components/layout/Footer';
+import Product from './components/products/Product';
+import ProductList from './components/products/AllProduct';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -34,7 +36,10 @@ function App() {
           <div className="content">
             <Routes>
               <Route path="/" element={<Main />} />
+              <Route path="/product" element={<Product />} />
               <Route path="/api/v1/parks" element={<Map />} />
+              <Route path="/api/v1/products" element={<ProductList />} />
+
             </Routes>
           </div>
           <Footer />
