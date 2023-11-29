@@ -16,6 +16,7 @@ const PostDetail = () => {
                         Authorization: `Bearer ${authToken}`,
                     },
                 });
+                console.log("response", response);
                 setPost(response.data.data);  // API 응답에서 게시글 데이터를 가져와 상태를 업데이트합니다.
             } catch (error) {
                 console.error('게시글 불러오는 중 오류 발생:', error.message);

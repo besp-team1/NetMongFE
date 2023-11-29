@@ -1,0 +1,11 @@
+.Profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .Profile button {
+    margin-top: 1rem;
+  }
+  .Profile img {
+    width: 100px;
+  }

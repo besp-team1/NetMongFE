@@ -12,7 +12,7 @@ const MyPage = () => {
             <Card.Body>
               <Card.Title>사용자 이름</Card.Title>
               <Card.Text>
-                이곳에 사용자의 정보를 표시합니다.
+                <Profile/>
               </Card.Text>
             </Card.Body>
           </Card>
@@ -20,7 +20,7 @@ const MyPage = () => {
         <Col md={8}>
         </Col>
       </Row>
-      <Profile/>
+      
       <Statistics/>
     </Container>
   );

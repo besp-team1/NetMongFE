@@ -4,8 +4,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../style/members/Join.css';
 import joinAPI from '../../API/joinAPI';
 import { useNavigate } from 'react-router-dom';
+import dupUsernameAPI from  "../../API/dupUsernameAPI";
 
 const Join = () => {
+  const [isUsernameAvailable, setIsUsernameAvailable] = useState(false);
+  const [usernameMessage, setUsernameMessage] = useState('');
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: '',
@@ -31,11 +34,26 @@ const Join = () => {
     
   };
 
+  const checkUsernameAvailability = async (e) => {
+    e.preventDefault();
+    
+      const response = await dupUsernameAPI(
+        formData.username
+      );
+      if (response.resultCode === 'S-1') {
+        setIsUsernameAvailable(true);
+        setUsernameMessage('사용가능한 아이디입니다.');
+      } else {
+        setIsUsernameAvailable(false);
+        setUsernameMessage('이미 사용중인 아이디입니다.');
+      }
+    } 
+
   return (
     <div className="join-container">
       <h1>회원가입</h1>
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="formUsername">
+      <Form.Group controlId="formUsername">
           <Form.Label>Username</Form.Label>
           <Form.Control
             type="text"
@@ -45,6 +63,18 @@ const Join = () => {
             onChange={handleChange}
             required
           />
+          <Button
+            variant="secondary"
+            type="button"
+            onClick={checkUsernameAvailability}
+          >
+            아이디 중복체크
+          </Button>
+          {usernameMessage && (
+            <p className={isUsernameAvailable ? 'text-success' : 'text-danger'}>
+              {usernameMessage}
+            </p>
+          )}
         </Form.Group>
 
         <Form.Group controlId="formPassword">
@@ -83,7 +113,7 @@ const Join = () => {
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" disabled={!isUsernameAvailable}>
           Join
         </Button>
       </Form>
