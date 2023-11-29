@@ -8,6 +8,8 @@ import Main from './components/layout/Main';
 import Navbar from './components/layout/Navbar';
 import Map from './components/parks/Map';
 import Footer from './components/layout/Footer';
+import PostForm from './components/posts/PostForm';
+import PostDetail from './components/posts/PostDetail';
 import MyPage from './components/members/Mypage';
 import LoginForm from './components/members/LoginForm';
 
@@ -37,6 +39,8 @@ function App() {
             <Routes>
               <Route path="/" element={<Main />} />
               <Route path="/park" element={<Map />} />
+              <Route path="/api/v1/post/upload" element={<PostForm />} />
+              <Route path="/post/:id" element={<PostDetail />} />
               <Route path="/mypage" element={<MyPage/>} />
               <Route path="/login" element={<LoginForm/>} />
             </Routes>
@@ -49,3 +53,4 @@ function App() {
 }
 
 export default App;
+
