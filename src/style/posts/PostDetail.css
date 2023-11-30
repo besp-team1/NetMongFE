@@ -8,3 +8,11 @@
     background-color: #fbfbfb;
     border-radius: 20px;
 }
+.comment-list-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    align-items: center;
+    min-height: 500px;  /* 최소 높이를 설정 */
+}
+

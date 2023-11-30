@@ -50,10 +50,13 @@ const PostDetail = () => {
     return (
         <div className="post-container">
             <img src={`${post.imageUrl}`} alt="게시물 이미지" style={{ maxWidth: '100%', height: 'auto' }} />
-            <h1>{post.writer}</h1>
-            <h1>{post.title}</h1>
-            <p>{post.content}</p>
-            <p>{post.createDate}</p>
+            <div className="post-sub">
+                <p>{post.writer}</p>
+                <p>{post.content}</p>
+            </div>
+            <div className="post-date">
+                <p>{post.createDate}</p>
+            </div>
             <div>
                 <PostCommentList postId={id} comments={comments} />
                 <PostCommentForm postId={id} onCommentSubmit={fetchComments} />
