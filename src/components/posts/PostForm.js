@@ -56,11 +56,9 @@ const PostForm = () => {
             <div className="post-container">
             <h2>멍스타그램 포스트 작성</h2>
             <h6>오늘 우리 집 멍멍이를 널리 알려주세요!</h6>
-    
 
             <form onSubmit={handleSubmit} className="form-container">
               <div className="form-row">
-          
                 <div className="form-left">
                   {imagePreview ? (
                     <div>
@@ -85,11 +83,11 @@ const PostForm = () => {
                     <input type="file" accept="image/*" onChange={handleFileChange} />
                     </label>
 
-                    <button type="submit">게시글 업로드</button>
+                    <div className='button-container'>
+                        <button type="submit">UPLOAD</button>
+                    </div>     
                 </div>
-          
               </div>
-
             </form>
             </div>
           );

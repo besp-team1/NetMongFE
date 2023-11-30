@@ -37,7 +37,7 @@ function Navbar() {
       </Link>
       <ul className="menu">
         <li className="nav-item">
-          <Link to="/api/v1/post/upload" className="nav-link">포스트</Link>
+          <Link to="/post/upload" className="nav-link">포스트</Link>
         </li>
         <li className="nav-item">
           <Link to="/product" className="nav-link">마켓</Link>
