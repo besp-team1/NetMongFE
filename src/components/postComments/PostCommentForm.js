@@ -27,12 +27,12 @@ const PostCommentForm = ({ postId, onCommentSubmit }) => {
             console.log('댓글이 성공적으로 작성되었습니다:', response.data);
             setComment('');
     
-            // 서버 요청이 성공적으로 완료된 후에 클라이언트 상태를 업데이트합니다.
-            onCommentSubmit({ username: '나', content: comment, id: Date.now() });
+            // 페이지 새로 고침
+            window.location.reload();
         } catch (error) {
             console.error('댓글 작성 중 오류 발생:', error.message);
         }
-    };    
+    };        
 
     return (
         <div className="postCommemntForm-container">
