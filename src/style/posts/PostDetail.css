@@ -37,10 +37,11 @@
 .post-actions {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: flex-end;
     align-items: center;
     flex-wrap: wrap;
     width: 100%; /* 너비를 100%로 설정 */
+    margin-top: 25px;
 }
 
 .post-actions button {
@@ -62,7 +63,7 @@
     display: inline-block;
     font-size: 15px;
     border-radius: 5px;
-    margin-right: 170px; /* 수정: 오른쪽 간격 추가 */
+    margin-right: 30px; /* 수정: 오른쪽 간격 추가 */
 }
 
 /* 삭제 버튼에 대한 특별한 스타일 추가 */
