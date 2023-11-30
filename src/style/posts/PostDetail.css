@@ -41,7 +41,6 @@
     align-items: center;
     flex-wrap: wrap;
     width: 100%; /* 너비를 100%로 설정 */
-    margin-top: 20px;
 }
 
 .post-actions button {
@@ -49,7 +48,6 @@
 }
 
 .btn-update, .btn-delete {
-    
     width: 150px;
 }
 

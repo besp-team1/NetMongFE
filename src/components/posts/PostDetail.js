@@ -11,6 +11,7 @@ const PostDetail = () => {
     const [comments, setComments] = useState([]);
     const authToken = localStorage.getItem('token');
     const navigate = useNavigate();
+    const loggedInUsername = localStorage.getItem('username'); 
 
     const fetchPost = async () => {
         try {
@@ -38,8 +39,12 @@ const PostDetail = () => {
         }
     };
 
-    const handleUpdate = () => {
-        navigate(`/post/update/${id}`);
+    const handleUpdate = async () => {
+        if (loggedInUsername && loggedInUsername === post.writer) {
+            navigate(`/post/update/${id}`);
+        } else {
+            alert('작성자만이 게시글을 수정할 수 있습니다.');
+        }
     };
 
     const handleDelete = async () => {
@@ -75,14 +80,14 @@ const PostDetail = () => {
             <div className="post-date">
                 <p>{post.createDate}</p>
             </div>
-            <div>
-                <PostCommentList postId={id} comments={comments} />
-                <PostCommentForm postId={id} onCommentSubmit={fetchComments} />
-            </div>
             <div className="post-actions">
                 {/* 수정 및 삭제 버튼 추가 */}
                 <button className="btn-update" onClick={handleUpdate}>수정</button>
                 <button className="btn-delete" onClick={handleDelete}>삭제</button>
+            </div>
+            <div>
+                <PostCommentList postId={id} comments={comments} />
+                <PostCommentForm postId={id} onCommentSubmit={fetchComments} />
             </div>
         </div>
     );
