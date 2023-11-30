@@ -10,8 +10,10 @@ import Map from './components/parks/Map';
 import Footer from './components/layout/Footer';
 import PostForm from './components/posts/PostForm';
 import PostDetail from './components/posts/PostDetail';
-import MyPage from './components/members/Mypage';
+import Mypage from './components/mypage/Mypage';
 import LoginForm from './components/members/LoginForm';
+import Join from './components/members/Join';
+import Welcome from './components/members/Welcome';
 import PostUpdateForm from './components/posts/PostUpdateForm';
 
 const GlobalStyle = createGlobalStyle`
@@ -45,6 +47,8 @@ function App() {
               <Route path="/post/update/:id" element={<PostUpdateForm />} />
               <Route path="/mypage" element={<MyPage/>} />
               <Route path="/login" element={<LoginForm/>} />
+              <Route path="/join" element={<Join/>} />
+              <Route path="/welcome" element={<Welcome/>} />
             </Routes>
           </div>
           <Footer />

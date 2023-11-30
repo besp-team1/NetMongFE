@@ -97,13 +97,8 @@
   .form-left p {
     color: #74A3FF;
   }
-
-  .button-container {
-    margin-top: 50px;
-  }
   
-  button {
-    margin-top: 100px;
+  .button {
     padding: 10px;
     background-color: #74A3FF;
     color: white;
