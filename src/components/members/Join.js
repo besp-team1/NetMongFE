@@ -63,6 +63,10 @@ const Join = () => {
             onChange={handleChange}
             required
           />
+          <div class="input-group mb-3">
+                <Button class="btn btn-outline-primary" type="button">Basic Button</Button>
+                <input type="text" class="form-control" placeholder="Some text"></input>
+            </div>
           <Button
             variant="secondary"
             type="button"
@@ -75,6 +79,9 @@ const Join = () => {
               {usernameMessage}
             </p>
           )}
+
+            
+
         </Form.Group>
 
         <Form.Group controlId="formPassword">

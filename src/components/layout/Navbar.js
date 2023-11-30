@@ -55,9 +55,14 @@ function Navbar() {
             </li>
           </>
         ) : (
-          <li className="nav-item">
-            <Link to="/login" className="nav-link">로그인</Link>
-          </li>
+          <>
+            <li className="nav-item">
+              <Link to="/login" className="nav-link">로그인</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/join" className="nav-link">회원가입</Link>
+            </li>
+          </>
         )}
       </ul>
     </nav>
