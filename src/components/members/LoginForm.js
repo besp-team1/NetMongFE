@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import loginAPI from "../../API/loginAPI";
 import "../../style/members/LoginForm.css"
-import { useNavigate } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
@@ -16,14 +16,17 @@ const LoginForm = () => {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    await loginAPI(username, password).then((token)=>{
-        localStorage.setItem('token', token);
+    await loginAPI(username, password).then((res) => {
+      if (res === 'fail') {
+        navigate('/login');
+      } else {
+        localStorage.setItem('token', res);
         localStorage.setItem('username', username);
         navigate('/');
+      }
     });
-    
   };
 
   return (
