@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import '../../style/posts/PostDetail.css';
-import PostCommentForm from '../postComments/PostCommentForm';
-import PostCommentList from '../postComments/PostCommentList';
 
 const PostDetail = () => {
-    const { id } = useParams();  // URL 파라미터에서 게시글의 ID를 가져옵니다.
+    const { id } = useParams();
     const [post, setPost] = useState(null);
     const [comments, setComments] = useState([]);
     const authToken = localStorage.getItem('token');
+    const navigate = useNavigate();
 
     const fetchPost = async () => {
         try {
@@ -18,7 +17,7 @@ const PostDetail = () => {
                     Authorization: `Bearer ${authToken}`,
                 },
             });
-            setPost(response.data.data);  // API 응답에서 게시글 데이터를 가져와 상태를 업데이트합니다.
+            setPost(response.data.data);
         } catch (error) {
             console.error('게시글 불러오는 중 오류 발생:', error.message);
         }
@@ -37,27 +36,62 @@ const PostDetail = () => {
         }
     };
 
+    const handleUpdate = async () => {
+        const loggedInUsername = localStorage.getItem('username');
+
+        if (loggedInUsername && loggedInUsername === post.writer) { 
+            navigate(`/post/update/${id}`);
+        } else {
+            alert('작성자만이 게시글을 수정할 수 있습니다.'); 
+        }
+    };
+
+    const handleDelete = async () => {
+        const loggedInUsername = localStorage.getItem('username');
+        
+        if (loggedInUsername && loggedInUsername === post.writer) { 
+            try {
+                await axios.delete(`http://localhost:9000/api/v1/post/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${authToken}`,
+                    },
+                });
+
+                navigate(`/`);
+            } catch (error) {
+                console.error('게시글 삭제 중 오류 발생:', error.message);
+            }
+        } else {
+            alert('작성자만이 게시글을 삭제할 수 있습니다.'); 
+        }
+    };
+
     useEffect(() => {
-        fetchPost();  // 게시글을 불러옵니다.
-        fetchComments();  // 댓글을 불러옵니다.
-    }, [id]);  // 게시글의 ID가 바뀔 때마다 게시글을 다시 불러옵니다.
+        fetchPost();
+        fetchComments();
+    }, [id]);
 
     if (!post) {
-        return <div>게시글을 불러오는 중...</div>;  // 게시글이 아직 불러와지지 않았을 때는 로딩 메시지를 표시합니다.
+        return <div>게시글을 불러오는 중...</div>;
     }
 
-    // 게시글이 불러와졌을 때는 게시글의 제목, 작성자, 내용, 이미지를 표시합니다.
     return (
         <div className="post-container">
-            <img src={`${post.imageUrl}`} alt="게시물 이미지" style={{ maxWidth: '100%', height: 'auto' }} />
-            <h1>{post.writer}</h1>
             <h1>{post.title}</h1>
-            <p>{post.content}</p>
-            <p>{post.createDate}</p>
-            <div>
-                <PostCommentList postId={id} comments={comments} />
-                <PostCommentForm postId={id} onCommentSubmit={fetchComments} />
+            <img src={`${post.imageUrl}`} alt="게시물 이미지" style={{ maxWidth: '100%', height: 'auto' }} />
+            <div className="post-sub">
+                <p>{post.writer}</p>
+                <p>{post.content}</p>
             </div>
+            <div className="post-date">
+                <p>{post.createDate}</p>
+            </div>
+            <div className="post-actions">
+                {/* 수정 및 삭제 버튼 추가 */}
+                <button className="btn-update" onClick={handleUpdate}>수정</button>
+                <button className="btn-delete" onClick={handleDelete}>삭제</button>
+            </div>
+            
         </div>
     );
 };
