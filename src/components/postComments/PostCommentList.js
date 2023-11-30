@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import '../../style/postComments/PostCommentList.css'
+import '../../style/postComments/PostCommentList.css';
 
 const PostCommentList = ({ postId }) => {
     const [comments, setComments] = useState([]);
