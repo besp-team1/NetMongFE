@@ -42,10 +42,10 @@ function App() {
             <Routes>
               <Route path="/" element={<Main />} />
               <Route path="/park" element={<Map />} />
-              <Route path="/api/v1/post/upload" element={<PostForm />} />
+              <Route path="/post/upload" element={<PostForm />} />
               <Route path="/post/:id" element={<PostDetail />} />
               <Route path="/post/update/:id" element={<PostUpdateForm />} />
-              <Route path="/mypage" element={<MyPage/>} />
+              <Route path="/mypage" element={<Mypage/>} />
               <Route path="/login" element={<LoginForm/>} />
               <Route path="/join" element={<Join/>} />
               <Route path="/welcome" element={<Welcome/>} />

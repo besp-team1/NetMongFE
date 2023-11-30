@@ -24,10 +24,10 @@ const PostCommentList = ({ postId }) => {
 
     return (
         <div className="comment-list-container">
-            {comments.map((comment) => (
-                <div key={comment.id} className="comment-item">
-                    <p className="comment-username">{comment.username}</p>
-                    <div className="comment-content">{comment.content}</div>
+            {comments.map((comments) => (
+                <div key={comments.id} className="comment-item">
+                    <p className="comment-username">{comments.username}</p>
+                    <div className="comment-content">{comments.content}</div>
                 </div>
             ))}
         </div>

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'; // Add useEffect
-import { useNavigate, useParams } from 'react-router-dom'; // Add useParams
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import '../../style/posts/PostUpdateForm.css';
 
@@ -9,22 +9,29 @@ const PostUpdateForm = () => {
     const [content, setContent] = useState('');
     const [image, setImage] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
+    const authToken = localStorage.getItem('token');
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchPost = async () => {
             try {
-                const response = await axios.get(`http://localhost:9000/api/v1/post/${id}`);
-                setTitle(response.data.title);
-                setContent(response.data.content);
-                setImagePreview(response.data.imageUrl);
+                const response = await axios.get(`http://localhost:9000/api/v1/post/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${authToken}`,
+                    },
+                });
+                setTitle(response.data.title || '');
+                setContent(response.data.content || '');
+                // 이미지 초기값 설정
+                setImage(response.data.imageUrl || null);
+                setImagePreview(response.data.imageUrl || null);
             } catch (error) {
                 console.error('게시글 불러오기 중 오류 발생:', error.message);
             }
         };
 
         fetchPost();
-    }, [id]);
+    }, [id, authToken]);
 
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0];
@@ -32,12 +39,12 @@ const PostUpdateForm = () => {
 
         const reader = new FileReader();
         reader.onloadend = () => {
-        setImagePreview(reader.result);
+            setImagePreview(reader.result);
         };
         if (selectedFile) {
-        reader.readAsDataURL(selectedFile);
+            reader.readAsDataURL(selectedFile);
         } else {
-        setImagePreview(null);
+            setImagePreview(null);
         }
     };
 
@@ -50,8 +57,6 @@ const PostUpdateForm = () => {
             formData.append('content', content);
             formData.append('image', image);
 
-            const authToken = localStorage.getItem('token');
-
             await axios.patch(`http://localhost:9000/api/v1/post/${id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
@@ -60,7 +65,7 @@ const PostUpdateForm = () => {
             });
 
             console.log('게시글이 성공적으로 수정되었습니다');
-            navigate(`/`);
+            navigate(`/post/${id}`);
         } catch (error) {
             console.error('게시글 수정 중 오류 발생:', error.message);
         }
@@ -68,15 +73,17 @@ const PostUpdateForm = () => {
 
     return (
         <div className="post-container">
-            <h2>멍스타그램 포스트 수정</h2>
-            <h6>오늘 우리 집 멍멍이를 널리 알려주세요!</h6>
-
+            <h2>게시글 수정</h2>
             <form onSubmit={handleSubmit} className="form-container">
                 <div className="form-row">
                     <div className="form-left">
                         {imagePreview ? (
                             <div>
-                                <img src={imagePreview} alt="이미지 미리보기" style={{ maxWidth: '200px', maxHeight: '200px' }} />
+                                <img
+                                    src={imagePreview}
+                                    alt="이미지 미리보기"
+                                    style={{ maxWidth: '200px', maxHeight: '200px' }}
+                                />
                             </div>
                         ) : (
                             <p>이미지 미리보기</p>
@@ -97,7 +104,7 @@ const PostUpdateForm = () => {
                             <input type="file" accept="image/*" onChange={handleFileChange} />
                         </label>
 
-                        <div className='button-container'>
+                        <div className="button-container">
                             <button type="submit">UPDATE</button>
                         </div>
                     </div>
@@ -105,6 +112,6 @@ const PostUpdateForm = () => {
             </form>
         </div>
     );
-}
+};
 
 export default PostUpdateForm;
