@@ -20,8 +20,8 @@ const LoginForm = () => {
     e.preventDefault();
     await loginAPI(username, password).then((token)=>{
         localStorage.setItem('token', token);
+        localStorage.setItem('username', username);
         navigate('/');
-        const gotToken = localStorage.getItem('token');
     });
     
   };

@@ -63,14 +63,11 @@ const Join = () => {
             onChange={handleChange}
             required
           />
-          <div class="input-group mb-3">
-                <Button class="btn btn-outline-primary" type="button">Basic Button</Button>
-                <input type="text" class="form-control" placeholder="Some text"></input>
-            </div>
           <Button
             variant="secondary"
             type="button"
             onClick={checkUsernameAvailability}
+            name='checkDupButton'
           >
             아이디 중복체크
           </Button>
@@ -79,9 +76,7 @@ const Join = () => {
               {usernameMessage}
             </p>
           )}
-
-            
-
+          
         </Form.Group>
 
         <Form.Group controlId="formPassword">
@@ -120,7 +115,7 @@ const Join = () => {
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit" disabled={!isUsernameAvailable}>
+        <Button variant="primary btn-block" type="submit" disabled={!isUsernameAvailable}>
           Join
         </Button>
       </Form>

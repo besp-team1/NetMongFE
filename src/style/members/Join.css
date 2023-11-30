@@ -9,7 +9,7 @@
   }
   
   .join-container .form-group {
-    margin-bottom: 200px;
+    margin-bottom: 20px;
   }
   
   .form-label {
@@ -30,3 +30,19 @@
     background-color: #0056b3;
   }
   
+  .btn-block {
+    display: block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #74A3FF;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .btn{
+    width: 100%;
+    margin-bottom: 10px;
+  }

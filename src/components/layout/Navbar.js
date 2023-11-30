@@ -11,9 +11,13 @@ function Navbar() {
   const isMainPage = location.pathname === '/';
   const isLoggedIn = checkLoggedInStatus();
   const navigate = useNavigate();
+  let username = '';
+
+  if (isLoggedIn) {username = localStorage.getItem('username');}
     
   function checkLoggedInStatus() {
     const token = localStorage.getItem('token');
+    if (token) {let username = localStorage.getItem('username');}
 
     return token ? true : false;
   }
@@ -51,7 +55,7 @@ function Navbar() {
               <Link className="nav-link">로그아웃</Link>
             </li>
             <li className="nav-item">
-              님 환영합니다!
+              {username}님 환영합니다!
             </li>
           </>
         ) : (
