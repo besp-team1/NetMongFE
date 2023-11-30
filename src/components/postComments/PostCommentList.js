@@ -4,6 +4,9 @@ import '../../style/postComments/PostCommentList.css';
 
 const PostCommentList = ({ postId }) => {
     const [comments, setComments] = useState([]);
+    const [isEditing, setIsEditing] = useState(false);
+    const [editContent, setEditContent] = useState('');
+    const [editingId, setEditingId] = useState(null);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const authToken = localStorage.getItem('token');
@@ -48,6 +51,22 @@ const PostCommentList = ({ postId }) => {
         }
     };
 
+    const handleEditChange = (e) => {
+        setEditContent(e.target.value);
+    };
+
+    const handleEditSubmit = (e, id) => {
+        e.preventDefault();
+        editComment(id, editContent);
+        setIsEditing(false);
+    };
+
+    const handleEditClick = (content, id) => {
+        setIsEditing(true);
+        setEditContent(content);
+        setEditingId(id);
+    };
+
     useEffect(() => {
         fetchComments(page);
     }, [page]);
@@ -62,10 +81,23 @@ const PostCommentList = ({ postId }) => {
             {comments.map((comment) => (
                 <div key={comment.id} className="comment-item">
                     <p className="comment-username">{comment.username}</p>
-                    <div className="comment-content">{comment.isDeleted ? '삭제된 게시글입니다.' : comment.content}</div>
+                    {!isEditing || comment.id !== editingId ? (
+                        <div className="comment-content">
+                            {comment.isDeleted ? '삭제된 게시글입니다.' : comment.content}
+                        </div>
+                    ) : (
+                        <form onSubmit={(e) => handleEditSubmit(e, comment.id)}>
+                            <input type="text" value={editContent} onChange={handleEditChange} />
+                            <button type="submit">저장</button>
+                        </form>
+                    )}
                     {!comment.isDeleted && comment.username === localStorage.getItem('username') && (
                         <div>
-                            <button onClick={() => editComment(comment.id, '수정된 댓글')}>수정</button>
+                            {!isEditing || comment.id !== editingId ? (
+                                <button onClick={() => handleEditClick(comment.content, comment.id)}>수정</button>
+                            ) : (
+                                <button onClick={() => setIsEditing(false)}>취소</button>
+                            )}
                             <button onClick={() => deleteComment(comment.id)}>삭제</button>
                         </div>
                     )}
