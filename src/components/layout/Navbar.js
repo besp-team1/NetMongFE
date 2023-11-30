@@ -18,7 +18,6 @@ function Navbar() {
   function checkLoggedInStatus() {
     const token = localStorage.getItem('token');
     if (token) {let username = localStorage.getItem('username');}
-
     return token ? true : false;
   }
 

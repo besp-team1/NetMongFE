@@ -8,6 +8,8 @@ import Main from './components/layout/Main';
 import Navbar from './components/layout/Navbar';
 import Map from './components/parks/Map';
 import Footer from './components/layout/Footer';
+import Product from './components/products/Product';
+import ProductList from './components/products/AllProduct';
 import PostForm from './components/posts/PostForm';
 import PostDetail from './components/posts/PostDetail';
 import Mypage from './components/mypage/Mypage';
@@ -42,6 +44,8 @@ function App() {
           <div className="content">
             <Routes>
               <Route path="/" element={<Main />} />
+              <Route path="/product" element={<Product />} />
+              <Route path="/api/v1/products" element={<ProductList />} />
               <Route path="/park" element={<Map />} />
               <Route path="/post/upload" element={<PostForm />} />
               <Route path="/post/:id" element={<PostDetail />} />
@@ -61,4 +65,3 @@ function App() {
 }
 
 export default App;
-

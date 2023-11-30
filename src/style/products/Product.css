@@ -1,0 +1,87 @@
+.product-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 100px;  /* 상단 컨테이너에 패딩 추가 */
+}
+
+.product-container h2 {
+margin-bottom: 10px;
+}
+
+.product-container h6 {
+margin-bottom: 20px;
+}
+
+.product-container h6:first-of-type {
+  margin-bottom: 10px;
+}
+
+.product-container h6:last-of-type {
+  margin-bottom: 20px;
+}
+
+.form-container {
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: stretch;
+margin-top: 30px;
+padding: 30px;
+background-color: #fbfbfb;
+border-radius: 20px;
+}
+
+
+.form-row {
+display: flex;
+justify-content: space-between;
+}
+
+.form-left,
+.form-right {
+display: flex;
+flex-direction: column;
+width: 48%;
+}
+
+.form-left {
+margin-right: 4%;
+}
+
+.form-left label,
+.form-right label {
+margin-bottom: 15px;
+}
+
+.form-left input,
+.form-right input,
+.form-right textarea {
+width: 100%;
+padding: 5px;
+background-color: #ffffff;
+border: 1px solid #ddd;
+border-radius: 5px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px;
+  background-color: #74A3FF;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 48%;  /* 버튼 너비 조정 */
+}
+
+.edit-button {
+  color: #74A3FF;
+  background-color: white;
+  border: 1px solid #74A3FF;
+}
