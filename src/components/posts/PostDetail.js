@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import '../../style/posts/PostDetail.css';
+import PostCommentForm from '../postComments/PostCommentForm';
+import PostCommentList from '../postComments/PostCommentList';
 
 const PostDetail = () => {
     const { id } = useParams();
@@ -87,9 +89,12 @@ const PostDetail = () => {
                 <p>{post.createDate}</p>
             </div>
             <div className="post-actions">
-                {/* 수정 및 삭제 버튼 추가 */}
                 <button className="btn-update" onClick={handleUpdate}>수정</button>
                 <button className="btn-delete" onClick={handleDelete}>삭제</button>
+            </div>
+            <div>
+                <PostCommentList postId={id} comments={comments} />
+                <PostCommentForm postId={id} onCommentSubmit={fetchComments} />
             </div>
             
         </div>
