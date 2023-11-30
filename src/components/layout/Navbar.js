@@ -11,9 +11,13 @@ function Navbar() {
   const isMainPage = location.pathname === '/';
   const isLoggedIn = checkLoggedInStatus();
   const navigate = useNavigate();
+  let username = '';
+
+  if (isLoggedIn) {username = localStorage.getItem('username');}
     
   function checkLoggedInStatus() {
     const token = localStorage.getItem('token');
+    if (token) {let username = localStorage.getItem('username');}
 
     return token ? true : false;
   }
@@ -47,17 +51,22 @@ function Navbar() {
         {/* 로그인 상태에 따라 다른 메뉴를 보여줍니다. */}
         {isLoggedIn ? (
           <>
-            <li className="nav-item">
-              님 환영합니다!
-            </li>
             <li className="nav-item" onClick={handleLogout}>
               <Link className="nav-link">로그아웃</Link>
             </li>
+            <li className="nav-item">
+              {username}님 환영합니다!
+            </li>
           </>
         ) : (
-          <li className="nav-item">
-            <Link to="/login" className="nav-link">로그인</Link>
-          </li>
+          <>
+            <li className="nav-item">
+              <Link to="/login" className="nav-link">로그인</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/join" className="nav-link">회원가입</Link>
+            </li>
+          </>
         )}
       </ul>
     </nav>
