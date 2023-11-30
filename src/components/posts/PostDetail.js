@@ -2,28 +2,44 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import '../../style/posts/PostDetail.css';
+import PostCommentForm from '../postComments/PostCommentForm';
+import PostCommentList from '../postComments/PostCommentList';
 
 const PostDetail = () => {
     const { id } = useParams();  // URL 파라미터에서 게시글의 ID를 가져옵니다.
     const [post, setPost] = useState(null);
+    const [comments, setComments] = useState([]);
     const authToken = localStorage.getItem('token');
 
-    useEffect(() => {
-        const fetchPost = async () => {
-            try {
-                const response = await axios.get(`http://localhost:9000/api/v1/post/${id}`, {
-                    headers: {
-                        Authorization: `Bearer ${authToken}`,
-                    },
-                });
-                console.log("response", response);
-                setPost(response.data.data);  // API 응답에서 게시글 데이터를 가져와 상태를 업데이트합니다.
-            } catch (error) {
-                console.error('게시글 불러오는 중 오류 발생:', error.message);
-            }
-        };
+    const fetchPost = async () => {
+        try {
+            const response = await axios.get(`http://localhost:9000/api/v1/post/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${authToken}`,
+                },
+            });
+            setPost(response.data.data);  // API 응답에서 게시글 데이터를 가져와 상태를 업데이트합니다.
+        } catch (error) {
+            console.error('게시글 불러오는 중 오류 발생:', error.message);
+        }
+    };
 
+    const fetchComments = async () => {
+        try {
+            const response = await axios.get(`http://localhost:9000/api/v1/post/comment/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${authToken}`,
+                },
+            });
+            setComments(response.data.data);
+        } catch (error) {
+            console.error('댓글 불러오는 중 오류 발생:', error.message);
+        }
+    };
+
+    useEffect(() => {
         fetchPost();  // 게시글을 불러옵니다.
+        fetchComments();  // 댓글을 불러옵니다.
     }, [id]);  // 게시글의 ID가 바뀔 때마다 게시글을 다시 불러옵니다.
 
     if (!post) {
@@ -38,6 +54,10 @@ const PostDetail = () => {
             <h1>{post.title}</h1>
             <p>{post.content}</p>
             <p>{post.createDate}</p>
+            <div>
+                <PostCommentList postId={id} comments={comments} />
+                <PostCommentForm postId={id} onCommentSubmit={fetchComments} />
+            </div>
         </div>
     );
 };
