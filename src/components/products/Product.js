@@ -8,6 +8,7 @@ function Product() {
         productName: '',
         price: '',
         content: '',
+        count: '',
         category: '',
       });
 
@@ -30,6 +31,7 @@ function Product() {
 formDataForUpload.append('productName', formData.productName);
 formDataForUpload.append('price', formData.price);
 formDataForUpload.append('content', formData.content);
+formDataForUpload.append('count', formData.count);
 formDataForUpload.append('category', formData.category);
 
 // 이미지 파일이 있다면 추가
@@ -92,6 +94,10 @@ if (formData.images) {
                 <label>
                 상품 필수정보:
                 <textarea name="content" value={formData.content} onChange={handleInputChange} />
+                </label>
+                <label>
+                상품 갯수:
+                <textarea name="count" value={formData.count} onChange={handleInputChange} />
                 </label>
                 <label>
                 이미지등록
