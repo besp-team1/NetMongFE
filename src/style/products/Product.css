@@ -2,7 +2,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 100px;  /* 상단 컨테이너에 패딩 추가 */
+  padding-top: 100px;
+}
+
+.product-container h2,
+.product-container h6 {
+  color: #74A3FF;
+  margin: 0;
 }
 
 .product-container h2 {
@@ -64,24 +70,28 @@ border: 1px solid #ddd;
 border-radius: 5px;
 }
 
-.button-group {
+.productButton-group {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
 }
 
-button {
+.productEdit-button {
   padding: 10px;
   background-color: #74A3FF;
   color: white;
   border: none;
   cursor: pointer;
   border-radius: 5px;
-  width: 48%;  /* 버튼 너비 조정 */
+  width: 48%; 
 }
 
-.edit-button {
-  color: #74A3FF;
-  background-color: white;
-  border: 1px solid #74A3FF;
+.productSubmit-button {
+  padding: 10px;
+  background-color: #74A3FF;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 48%; 
 }

@@ -2,42 +2,55 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 200px; /* 상단 컨테이너에 패딩 추가 */
+    padding-top: 100px;
     background-color: #f8f8f8;
   }
   
-  .product-container {
+  .products-container {
+    display: flex;
     flex-direction: row;
     margin-bottom: 10px;
+    list-style-type: none;
+    margin-top: 30px;
   }
   
-  .product-container h2 {
-    margin-bottom: 10px;
+  .productList-container h2,
+  .productList-container h6 {
+    color: #74A3FF;
+    margin: 0;
   }
-  
-  .product-container ul {
+
+  .productList-container h2 {
+  margin-bottom: 10px;
+  }
+
+  .productList-container h6 {
+  margin-bottom: 20px;
+  }
+
+  .products-container ul {
     list-style: none;
     padding: 0;
     display: flex;
-    flex-wrap: wrap; /* 수정: 가로로 나열되면서 넘칠 경우 다음 줄로 내려감 */
-    justify-content: center; /* 가로 중앙 정렬 추가 */
+    flex-wrap: wrap;
+    justify-content: center;
   }
   
-  .product-container li {
+  .products-container li {
     border: 1px solid #ddd;
     border-radius: 8px;
     margin: 10px;
     padding: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 200px; /* 수정: 가로 너비 지정 */
+    width: 200px;
   }
   
-  .product-container h3 {
+  .products-container h3 {
     margin-bottom: 10px;
     color: #555;
   }
   
-  .product-container p {
+  .products-container p {
     margin: 5px 0;
     color: #777;
   }

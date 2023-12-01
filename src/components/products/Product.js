@@ -67,7 +67,6 @@ if (formData.images) {
         <h6>신뢰있는 마켓이 되도록 네트멍에서 검수 후 판매가 이루어집니다.</h6>
         <h6>부당 거래 적발 시, 서비스 이용이 제한됩니다.</h6>
 
-
     <form onSubmit={handleSubmit} className="form-container">
         <div className="form-row">
             <div className="form-left">
@@ -105,9 +104,9 @@ if (formData.images) {
                 </label>
             </div>
         </div>
-        <div className="button-group">
-            <button type="button" className="edit-button">수정하기</button>
-            <button type="submit">상품 등록</button>
+        <div className="productButton-group">
+            <button type="button" className="productEdit-button">수정하기</button>
+            <button type="submit" className="productSubmit-button">상품 등록</button>
         </div>
 
     </form>
