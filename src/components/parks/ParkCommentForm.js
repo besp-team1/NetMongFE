@@ -13,15 +13,15 @@ const ParkCommentForm = ({ parkId, updateComments }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="comment-form">
-            <div className="comment-input-container">
+        <form onSubmit={handleSubmit} className="parkComment-form">
+            <div className="parkComment-input-container">
                 <textarea 
                     value={content} 
                     onChange={(e) => setContent(e.target.value)} 
                     required 
-                    className="comment-input"
+                    className="parkComment-input"
                 />
-                <button type="submit" className="submit-button">작성</button>
+                <button type="submit" className="parkSubmit-button">작성</button>
             </div>
         </form>
     );

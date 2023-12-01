@@ -25,7 +25,7 @@ function ProductList() {
     <div className="productList-container">
       <h2>지갑 두둑히 준비 됐멍?</h2>
       <h6>반려견을 위한 마켓에서 안심하고 구매하세요!</h6>
-      <ul className="product-container">
+      <ul className="products-container">
         {products.map((product, index) => (
           <li key={index}>
             <h3>{product.productName}</h3>

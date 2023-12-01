@@ -44,14 +44,13 @@ export const getParksInCity = (selectedState, selectedCity, setParks) => {
     setParks([]);
   }};  
 
-// POST 선택한 공원의 댓글 작성 기능 
-export const addParkComment = (parkId, comment, setComment) =>
+  export const addParkComment = (parkId, comment, updateComments) =>
   api
     .post(`/comments/${parkId}`, comment)
-    .then((response) => setComment(response.data.data))
+    .then((response) => updateComments(response.data.data))
     .catch((error) => console.error("There was an error!", error));
 
-// GET 선택한 공원의 댓글 조회
+
 export const getCommentsOfPark = (parkId, page, setComments, setPageInfo) =>
   api
     .get(`/comments/${parkId}?page=${page}`)
@@ -64,3 +63,23 @@ export const getCommentsOfPark = (parkId, page, setComments, setPageInfo) =>
     })
     .catch((error) => console.error("There was an error!", error));
 
+export const updateParkComment = async (commentId, content) => {
+  try {
+    const response = await api.patch(`/comments/${commentId}`, { content });
+    return response.data;
+  } catch (error) {
+    console.error('댓글 수정 중 오류 발생:', error.response);
+    throw error;
+  }
+};
+
+// TODO: DELETE 댓글 삭제
+export const deleteParkComment = async (commentId) => {
+  try {
+    const response = await api.delete(`/comments/${commentId}`);
+    return response.data;
+  } catch (error) {
+    console.error('댓글 삭제 중 오류 발생:', error.response);
+    throw error;
+  }
+};
