@@ -1,0 +1,68 @@
+/* 게시글 스타일 */
+.post {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.post img {
+    width: 270px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.post h2 {
+    margin: 10px 0;
+
+    font-size: 2em; /* 글자 크기 */
+    color: #333; /* 글자 색상 */
+    text-align: center; /* 중앙 정렬 */
+}
+
+.post h3 {
+    margin: 10px 0;
+    font-size: 1.2em;
+    color: #777;
+    text-align: center;
+}
+
+.post p {
+    margin: 10px 0;
+    color: #333;
+    text-align: center;
+}
+
+/* 페이지네이션 스타일 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.pagination button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #f1f1f1;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.pagination button:hover {
+    background-color: #ddd;
+}
+
+.pagination .active {
+    background-color: #4caf50;
+    color: white;
+}

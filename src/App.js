@@ -8,6 +8,8 @@ import Main from './components/layout/Main';
 import Navbar from './components/layout/Navbar';
 import Map from './components/parks/Map';
 import Footer from './components/layout/Footer';
+import Product from './components/products/Product';
+import ProductList from './components/products/AllProduct';
 import PostForm from './components/posts/PostForm';
 import PostDetail from './components/posts/PostDetail';
 import Mypage from './components/mypage/Mypage';
@@ -15,6 +17,7 @@ import LoginForm from './components/members/LoginForm';
 import Join from './components/members/Join';
 import Welcome from './components/members/Welcome';
 import PostUpdateForm from './components/posts/PostUpdateForm';
+import ParkComment from './components/parks/ParkComment';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -41,6 +44,8 @@ function App() {
           <div className="content">
             <Routes>
               <Route path="/" element={<Main />} />
+              <Route path="/product" element={<Product />} />
+              <Route path="/api/v1/products" element={<ProductList />} />
               <Route path="/park" element={<Map />} />
               <Route path="/post/upload" element={<PostForm />} />
               <Route path="/post/:id" element={<PostDetail />} />
@@ -49,6 +54,7 @@ function App() {
               <Route path="/login" element={<LoginForm/>} />
               <Route path="/join" element={<Join/>} />
               <Route path="/welcome" element={<Welcome/>} />
+              <Route path="/comments/:parkId" element={<ParkComment />} />
             </Routes>
           </div>
           <Footer />
@@ -59,4 +65,3 @@ function App() {
 }
 
 export default App;
-

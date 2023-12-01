@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../style/layout/Main.css';
 import bannerImage from '../../assets/images/banner.jpg'; 
+import PostBoard from '../posts/PostBoard';
 
 function Main() {
   const getRandomNumber = (min, max) => Math.random() * (max - min) + min;
@@ -22,6 +23,7 @@ function Main() {
     <div className="main-container">
       <img src={bannerImage} alt="Banner" />
       {snowflakes}
+      <PostBoard />
     </div>
   );
 }

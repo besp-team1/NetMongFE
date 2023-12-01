@@ -1,10 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../../style/parks/ParkList.css';
 
 const ParkList = ({ parks, selectedPark, setSelectedPark }) => {
+  
+  const navigate = useNavigate();
 
   const handleParkClick = (park) => {
     setSelectedPark(park); // 공원을 클릭하면 선택된 공원을 업데이트
+    console.log(park.id);
+    navigate(`/comments/${park.id}`);
   }
 
   return (
