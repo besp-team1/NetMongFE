@@ -25,19 +25,20 @@ function ProductList() {
     <div className="productList-container">
       <h2>지갑 두둑히 준비 됐멍?</h2>
       <h6>반려견을 위한 마켓에서 안심하고 구매하세요!</h6>
-      <ul className="product-container"> {/* Change to "product-container" */}
+      <ul className="product-container">
         {products.map((product, index) => (
           <li key={index}>
             <h3>{product.productName}</h3>
+            <img src={product.imageUrl} width="100" height="100" />
             <p>가격: {product.price}</p>
             <p>내용: {product.content}</p>
+            <p>상품 갯수: {product.count}</p>
             <p>카테고리: {product.category}</p>
           </li>
         ))}
       </ul>
     </div>
   );
-  
 }
 
 export default ProductList;
