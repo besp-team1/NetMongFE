@@ -9,6 +9,9 @@ const PostDetail = () => {
     const { id } = useParams();
     const [post, setPost] = useState(null);
     const [comments, setComments] = useState([]);
+    const [likesCount, setLikesCount] = useState(0);
+    const [liked, setLiked] = useState(false);
+
     const authToken = localStorage.getItem('token');
     const navigate = useNavigate();
 
@@ -38,6 +41,19 @@ const PostDetail = () => {
         }
     };
 
+    const fetchLikesCount = async () => {
+        try {
+            const response = await axios.get(`http://localhost:9000/api/v1/post/likes/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${authToken}`,
+                },
+            });
+            setLikesCount(response.data.data.likedCount);
+        } catch (error) {
+            console.error('좋아요 수 불러오는 중 오류 발생:', error.message);
+        }
+    };
+    
     const handleUpdate = async () => {
         const loggedInUsername = localStorage.getItem('username');
 
@@ -71,7 +87,50 @@ const PostDetail = () => {
     useEffect(() => {
         fetchPost();
         fetchComments();
+        fetchLikesCount();
     }, [id]);
+
+    const handleLike = async () => {
+        if (liked) {
+            try {
+                const response = await axios.delete(`http://localhost:9000/api/v1/post/likes/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${authToken}`,
+                    },
+                });
+                setLiked(false);
+                fetchLikesCount();
+            } catch (error) {
+                console.error('좋아요 삭제 중 오류 발생:', error.message);
+            }
+        } else {
+            try {
+                const response = await axios.post(`http://localhost:9000/api/v1/post/likes/${id}`, {}, {
+                    headers: {
+                        Authorization: `Bearer ${authToken}`,
+                    },
+                });
+                setLiked(true);
+                fetchLikesCount();
+            } catch (error) {
+                console.error('좋아요 추가 중 오류 발생:', error.message);
+            }
+        }
+    };
+    
+    const handleUnlike = async () => {
+        try {
+            const response = await axios.delete(`http://localhost:9000/api/v1/post/likes/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${authToken}`,
+                },
+            });
+            fetchLikesCount();
+        } catch (error) {
+            console.error('좋아요 삭제 중 오류 발생:', error.message);
+        }
+    };
+    
 
     if (!post) {
         return <div>게시글을 불러오는 중...</div>;
@@ -87,6 +146,10 @@ const PostDetail = () => {
             </div>
             <div className="post-date">
                 <p>{post.createDate}</p>
+            </div>
+            <div>
+                <button onClick={handleLike}>{liked ? '좋아요 취소' : '좋아요'}</button>
+                <p>{likesCount}명이 이 게시글을 좋아합니다.</p>
             </div>
             <div className="post-actions">
                 <button className="btn-update" onClick={handleUpdate}>수정</button>
