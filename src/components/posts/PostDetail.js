@@ -4,6 +4,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import '../../style/posts/PostDetail.css';
 import PostCommentForm from '../postComments/PostCommentForm';
 import PostCommentList from '../postComments/PostCommentList';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
 
 const PostDetail = () => {
     const { id } = useParams();
@@ -148,10 +151,14 @@ const PostDetail = () => {
             <div className="post-date">
                 <p>{post.createDate}</p>
             </div>
-            <div>
-                <button onClick={handleLike}>{liked ? '좋아요 취소' : '좋아요'}</button>
-                <p>좋아요 {likesCount}</p>
+            
+            <div className="like-container">
+                <button className="btn-like" onClick={handleLike}>
+                    {liked ? <FontAwesomeIcon icon={solidHeart} /> : <FontAwesomeIcon icon={regularHeart} />}
+                </button>
+                <p>{likesCount}</p>
             </div>
+            
             <div className="post-actions">
                 <button className="btn-update" onClick={handleUpdate}>수정</button>
                 <button className="btn-delete" onClick={handleDelete}>삭제</button>
