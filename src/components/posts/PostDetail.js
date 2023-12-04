@@ -4,11 +4,17 @@ import { useParams, useNavigate } from 'react-router-dom';
 import '../../style/posts/PostDetail.css';
 import PostCommentForm from '../postComments/PostCommentForm';
 import PostCommentList from '../postComments/PostCommentList';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
 
 const PostDetail = () => {
     const { id } = useParams();
     const [post, setPost] = useState(null);
     const [comments, setComments] = useState([]);
+    const [likesCount, setLikesCount] = useState(0);
+    const [liked, setLiked] = useState(false);
+
     const authToken = localStorage.getItem('token');
     const navigate = useNavigate();
 
@@ -20,6 +26,7 @@ const PostDetail = () => {
                 },
             });
             setPost(response.data.data);
+            setLiked(response.data.data.isLiked);
         } catch (error) {
             console.error('게시글 불러오는 중 오류 발생:', error.message);
         }
@@ -38,6 +45,19 @@ const PostDetail = () => {
         }
     };
 
+    const fetchLikesCount = async () => {
+        try {
+            const response = await axios.get(`http://localhost:9000/api/v1/post/likes/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${authToken}`,
+                },
+            });
+            setLikesCount(response.data.data.likedCount);
+        } catch (error) {
+            console.error('좋아요 수 불러오는 중 오류 발생:', error.message);
+        }
+    };
+    
     const handleUpdate = async () => {
         const loggedInUsername = localStorage.getItem('username');
 
@@ -71,7 +91,50 @@ const PostDetail = () => {
     useEffect(() => {
         fetchPost();
         fetchComments();
+        fetchLikesCount();
     }, [id]);
+
+    const handleLike = async () => {
+        if (liked) {
+            try {
+                const response = await axios.delete(`http://localhost:9000/api/v1/post/likes/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${authToken}`,
+                    },
+                });
+                setLiked(false);
+                fetchLikesCount();
+            } catch (error) {
+                console.error('좋아요 삭제 중 오류 발생:', error.message);
+            }
+        } else {
+            try {
+                const response = await axios.post(`http://localhost:9000/api/v1/post/likes/${id}`, {}, {
+                    headers: {
+                        Authorization: `Bearer ${authToken}`,
+                    },
+                });
+                setLiked(true);
+                fetchLikesCount();
+            } catch (error) {
+                console.error('좋아요 추가 중 오류 발생:', error.message);
+            }
+        }
+    };
+    
+    const handleUnlike = async () => {
+        try {
+            const response = await axios.delete(`http://localhost:9000/api/v1/post/likes/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${authToken}`,
+                },
+            });
+            fetchLikesCount();
+        } catch (error) {
+            console.error('좋아요 삭제 중 오류 발생:', error.message);
+        }
+    };
+    
 
     if (!post) {
         return <div>게시글을 불러오는 중...</div>;
@@ -88,6 +151,14 @@ const PostDetail = () => {
             <div className="post-date">
                 <p>{post.createDate}</p>
             </div>
+            
+            <div className="like-container">
+                <button className="btn-like" onClick={handleLike}>
+                    {liked ? <FontAwesomeIcon icon={solidHeart} /> : <FontAwesomeIcon icon={regularHeart} />}
+                </button>
+                <p>{likesCount}</p>
+            </div>
+            
             <div className="post-actions">
                 <button className="btn-update" onClick={handleUpdate}>수정</button>
                 <button className="btn-delete" onClick={handleDelete}>삭제</button>
