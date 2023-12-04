@@ -23,6 +23,7 @@ const PostDetail = () => {
                 },
             });
             setPost(response.data.data);
+            setLiked(response.data.data.isLiked);
         } catch (error) {
             console.error('게시글 불러오는 중 오류 발생:', error.message);
         }
@@ -149,7 +150,7 @@ const PostDetail = () => {
             </div>
             <div>
                 <button onClick={handleLike}>{liked ? '좋아요 취소' : '좋아요'}</button>
-                <p>{likesCount}명이 이 게시글을 좋아합니다.</p>
+                <p>좋아요 {likesCount}</p>
             </div>
             <div className="post-actions">
                 <button className="btn-update" onClick={handleUpdate}>수정</button>
