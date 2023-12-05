@@ -4,16 +4,18 @@ import '../../style/parks/ParkCommentForm.css';
 
 const ParkCommentForm = ({ parkId, updateComments }) => {
     const [content, setContent] = useState('');
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        addParkComment(parkId, { content }, updateComments);
-        setContent('');
-        window.location.reload();
+    
+    const handleCommentSubmit = (e) => {
+        e.preventDefault();
+        addParkComment(parkId, content, updateComments)
+            .then(() => {
+                setContent(''); 
+            })
+            .catch((error) => console.error("댓글 등록 중 오류 발생:", error));
     };
-
+    
     return (
-        <form onSubmit={handleSubmit} className="parkComment-form">
+        <form onSubmit={handleCommentSubmit} className="parkComment-form">
             <div className="parkComment-input-container">
                 <textarea 
                     value={content} 

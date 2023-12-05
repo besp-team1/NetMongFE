@@ -44,12 +44,18 @@ export const getParksInCity = (selectedState, selectedCity, setParks) => {
     setParks([]);
   }};  
 
-  export const addParkComment = (parkId, comment, updateComments) =>
+export const addParkComment = (parkId, content, updateComments) =>
   api
-    .post(`/comments/${parkId}`, comment)
-    .then((response) => updateComments(response.data.data))
+    .post(`/comments/${parkId}`, { content }, { 
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then((response) => {
+      updateComments();
+      return response.data.data;
+    })
     .catch((error) => console.error("There was an error!", error));
-
 
 export const getCommentsOfPark = (parkId, page, setComments, setPageInfo) =>
   api
@@ -73,7 +79,6 @@ export const updateParkComment = async (commentId, content) => {
   }
 };
 
-// TODO: DELETE 댓글 삭제
 export const deleteParkComment = async (commentId) => {
   try {
     const response = await api.delete(`/comments/${commentId}`);
@@ -81,5 +86,45 @@ export const deleteParkComment = async (commentId) => {
   } catch (error) {
     console.error('댓글 삭제 중 오류 발생:', error.response);
     throw error;
+  }
+};
+
+export const getPark = async (parkId) => {
+  try {
+    const response = await api.get(`/${parkId}`);
+    return response.data;
+  } catch (error) {
+    console.error('공원 정보 불러오는 중 오류 발생:', error);
+    return null;
+  }
+};
+
+export const getLikesCountByPark = async (parkId) => {
+  try {
+    const response = await api.get(`/likes/${parkId}`);
+    return response.data;
+  } catch (error) {
+    console.error('좋아요 수 불러오는 중 오류 발생:', error);
+    return null;
+  }
+};
+
+export const addLikeToPark = async (parkId) => {
+  try {
+    const response = await api.post(`/likes/${parkId}`);
+    return response.data;
+  } catch (error) {
+    console.error('좋아요 추가 중 오류 발생:', error);
+    return null;
+  }
+};
+
+export const removeLikeFromPark = async (parkId) => {
+  try {
+    const response = await api.delete(`/likes/${parkId}`);
+    return response.data;
+  } catch (error) {
+    console.error('좋아요 삭제 중 오류 발생:', error);
+    return null;
   }
 };

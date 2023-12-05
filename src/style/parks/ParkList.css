@@ -30,3 +30,22 @@
   color: black;
   margin: 0.005em 0;
 }
+
+.btn-likePark {
+  display: flex;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: 1.5em; /* 아이콘 크기 조절 */
+  color: #b42d34; /* 아이콘 색상 조절 */
+}
+
+.likePark-container {
+  display: flex;
+  align-items: center;
+}
+
+.likePark-container p {
+  margin-left: 10px;
+}
