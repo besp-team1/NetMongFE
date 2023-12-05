@@ -153,8 +153,10 @@ const PostDetail = () => {
                 <p>{post.createDate}</p>
             </div>
 
-            <ReportModal postId={id} />
-            
+            <div className="report-container">
+                <ReportModal postId={id} />
+            </div>
+
             <div className="like-container">
                 <button className="btn-like" onClick={handleLike}>
                     {liked ? <FontAwesomeIcon icon={solidHeart} /> : <FontAwesomeIcon icon={regularHeart} />}

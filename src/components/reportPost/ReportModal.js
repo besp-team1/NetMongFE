@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFlag } from '@fortawesome/free-solid-svg-icons';
 
 const ReportModal = ({ postId }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedType, setSelectedType] = useState('');
     const [description, setDescription] = useState('');
     const [reportTypes, setReportTypes] = useState([]);
-
+    
     const authToken = localStorage.getItem('token');
 
     const reportTypeToKorean = (type) => {
@@ -51,7 +53,7 @@ const ReportModal = ({ postId }) => {
             alert('신고 유형을 선택해주세요.');
             return;
         }
-        
+
         try {
             const response = await axios.post(`http://localhost:9000/api/v1/post/reports/${postId}`, {
                 reportType: selectedType,
@@ -62,6 +64,7 @@ const ReportModal = ({ postId }) => {
                 },
             });
             console.log(response.data);
+            alert('신고가 완료되었습니다.');
             handleCloseModal();
         } catch (error) {
             console.error('신고 제출 실패:', error.message);
@@ -70,7 +73,9 @@ const ReportModal = ({ postId }) => {
 
     return (
         <div>
-            <button onClick={handleOpenModal}>신고하기</button>
+            <button onClick={handleOpenModal}>
+                <FontAwesomeIcon icon={faFlag} />
+            </button>
 
             {isOpen && (
                 <div style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', backgroundColor: 'white', padding: '20px' }}>
