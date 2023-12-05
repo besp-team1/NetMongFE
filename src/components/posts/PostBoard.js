@@ -34,19 +34,23 @@ function PostBoard() {
     }
 
     return (
-        <div>
-            {posts.map(post => (
-                <div className="post" key={post.postId}>
-                    <img src={post.imageUrl} alt="post image" />
-                    <Link to={`/post/${post.postId}`}>
-                        <h2>{post.title}</h2>
-                    </Link>
-                    <h3>{post.writer}</h3>
-                    <p>{post.content}</p>
-                    <p>{post.createDate}</p>
-                </div>
-            ))}
-            <div className="pagination">
+    <div>
+        {Array.isArray(posts) && posts.length > 0 ? (
+            posts.map((post) => (
+            <div className="post" key={post.postId}>
+                <img src={post.imageUrl} alt="post image" />
+                <Link to={`/post/${post.postId}`}>
+                    <h2>{post.title}</h2>
+                </Link>
+                <h3>{post.writer}</h3>
+                <p>{post.content}</p>
+                <p>{post.createDate}</p>
+            </div>
+            ))
+            ) : (
+            <p>검색 결과가 없습니다.</p>
+        )}
+        <div className="pagination">
                 <button onClick={() => setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))}>{"<"}</button>
                 {pageNumbers.map((number) => (
                     <button 
