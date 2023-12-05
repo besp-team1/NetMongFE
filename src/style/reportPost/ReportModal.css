@@ -1,0 +1,98 @@
+.btn-report {
+    display: flex;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-size: 1.5em; /* 아이콘 크기 조절 */
+    color: grey;
+}
+
+.report-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.modal-container {
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+}
+
+.submit-button {
+    background-color: #74A3FF;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.close-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.modal-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    width: 300px; /* 너비 설정 */
+}
+
+.modal-container h2 {
+    margin-top: 0;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.modal-content select, .modal-content textarea {
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.submit-button {
+    background-color: #f0f0f0; /* 배경색 변경 */
+    color: #333; /* 글자색 변경 */
+    border: none;
+    padding: 8px 16px; /* 패딩 조절 */
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.9em; /* 글자 크기 조절 */
+}
+
+.close-button {
+    background-color: #f0f0f0; /* 배경색 변경 */
+    color: #333; /* 글자색 변경 */
+    border: none;
+    padding: 8px 16px; /* 패딩 조절 */
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.9em; /* 글자 크기 조절 */
+}

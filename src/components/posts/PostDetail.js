@@ -153,7 +153,7 @@ const PostDetail = () => {
                 <p>{post.createDate}</p>
             </div>
 
-            <div className="report-container">
+            <div className="btn-report">
                 <ReportModal postId={id} />
             </div>
 

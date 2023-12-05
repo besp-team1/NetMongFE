@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFlag } from '@fortawesome/free-solid-svg-icons';
+import '../../style/reportPost/ReportModal.css'
 
 const ReportModal = ({ postId }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -72,22 +73,26 @@ const ReportModal = ({ postId }) => {
     };
 
     return (
-        <div>
-            <button onClick={handleOpenModal}>
+        <div className="report-container">
+            <button className="btn-report" onClick={handleOpenModal}>
                 <FontAwesomeIcon icon={faFlag} />
             </button>
 
             {isOpen && (
-                <div style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', backgroundColor: 'white', padding: '20px' }}>
-                    <h2>신고하기</h2>
-                    <select value={selectedType} onChange={(e) => setSelectedType(e.target.value)}>
-                        {reportTypes.map((type, index) => (
-                            <option key={index} value={type}>{reportTypeToKorean(type)}</option>
-                        ))}
-                    </select>
-                    <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="신고 사유를 입력하세요." />
-                    <button onClick={handleSubmitReport}>신고 제출</button>
-                    <button onClick={handleCloseModal}>닫기</button>
+                <div className="modal-container">
+                    <h2>신고</h2>
+                    <div className="modal-content">
+                        <select value={selectedType} onChange={(e) => setSelectedType(e.target.value)}>
+                            {reportTypes.map((type, index) => (
+                                <option key={index} value={type}>{reportTypeToKorean(type)}</option>
+                            ))}
+                        </select>
+                        <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="신고 사유를 입력하세요." />
+                    </div>
+                    <div className="modal-buttons">
+                        <button className="submit-button" onClick={handleSubmitReport}>신고 제출</button>
+                        <button className="close-button" onClick={handleCloseModal}>닫기</button>
+                    </div>
                 </div>
             )}
         </div>
