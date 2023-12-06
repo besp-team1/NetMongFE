@@ -9,7 +9,8 @@ function SearchPost({ setIsSearching }) {
     const [category, setCategory] = useState('작성자');
     const [searchWord, setSearchWord] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(0);
+    const [loading, setLoading] = useState(false);
+    const [scrollTriggered, setScrollTriggered] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -29,10 +30,17 @@ function SearchPost({ setIsSearching }) {
                 },
             });
             const data = response.data.data;
-            setPosts(data.content);
-            setTotalPages(data.totalPages);
+            if (pageNumber === 1) {
+                setPosts(data.content);
+            } else {
+                setPosts((prevPosts) => [...prevPosts, ...data.content]);
+            }
+            setLoading(false);
+            setScrollTriggered(false);
         } catch (error) {
             console.error('Error:', error);
+            setLoading(false);
+            setScrollTriggered(false);
         }
     };
     
@@ -49,10 +57,20 @@ function SearchPost({ setIsSearching }) {
         navigate(`/post/search?category=${encodeURIComponent(category)}&searchWord=${encodeURIComponent(searchWord)}&page=${pageNumber}`);
     };
 
-    const pageNumbers = [];
-        for (let i = 1; i <= totalPages; i++) {
-        pageNumbers.push(i);
-    }
+    const handleScroll = () => {
+        const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+        if (scrollTop + clientHeight >= scrollHeight - 20 && !loading && !scrollTriggered) {
+            setScrollTriggered(true);
+            setCurrentPage((prevPage) => prevPage + 1);
+        }
+    };
+    
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     return (
     <div>
@@ -75,24 +93,12 @@ function SearchPost({ setIsSearching }) {
                 <p>{post.content}</p>
                 <p>{post.createDate}</p>
             </div>
-        ))
+            ))
         ) : (
-        <p>검색 결과가 없습니다.</p>
-        )}  
-        <div className="pagination">
-            <button onClick={() => setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))}>{"<"}</button>
-            {pageNumbers.map((number) => (
-            <button 
-            key={number} 
-            onClick={() => setCurrentPage(number)}
-            className={currentPage === number ? 'active' : ''}
-            >
-            {number}
-            </button>
-            ))}
-            <button onClick={() => setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages))}>{">"}</button>
-            </div>
-        </div>
+            <p>검색 결과가 없습니다.</p>
+        )}
+        {loading && <p>Loading...</p>}
+    </div>
     );
 }
 
