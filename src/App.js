@@ -18,6 +18,7 @@ import Join from './components/members/Join';
 import Welcome from './components/members/Welcome';
 import PostUpdateForm from './components/posts/PostUpdateForm';
 import ParkComment from './components/parks/ParkComment';
+import MemberDetail from './components/mypage/MemberDetail';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -55,6 +56,7 @@ function App() {
               <Route path="/join" element={<Join/>} />
               <Route path="/welcome" element={<Welcome/>} />
               <Route path="/comments/:parkId" element={<ParkComment />} />
+              <Route path="/members/:username" element={<MemberDetail />} />
             </Routes>
           </div>
           <Footer />
