@@ -3,10 +3,14 @@ import axios from 'axios';
 const authToken = localStorage.getItem('token'); 
 
 const api = axios.create({
-    baseURL: 'http://localhost:9000/api/v1/parks',
-    headers: {
-        Authorization: `Bearer ${authToken}`
-    },
+  baseURL: 'http://localhost:9000/api/v1/parks',
+});
+
+// 매번 요청을 보낼 때 토큰을 새롭게 가져오도록 axios 인터셉터 활용
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  config.headers.Authorization =  token ? `Bearer ${token}` : '';
+  return config;
 });
 
 export const getParksStates = (setStates) =>
@@ -44,48 +48,40 @@ export const getParksInCity = (selectedState, selectedCity, setParks) => {
     setParks([]);
   }};  
 
-export const addParkComment = (parkId, content, updateComments) =>
-  api
-    .post(`/comments/${parkId}`, { content }, { 
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then((response) => {
-      updateComments();
-      return response.data.data;
-    })
-    .catch((error) => console.error("There was an error!", error));
-
-export const getCommentsOfPark = (parkId, page, setComments, setPageInfo) =>
-  api
-    .get(`/comments/${parkId}?page=${page}`)
-    .then((response) => {
-        setComments(response.data.data.content);
-        setPageInfo({
-            totalPages: response.data.data.totalPages,
-            totalElements: response.data.data.totalElements
-        });
-    })
-    .catch((error) => console.error("There was an error!", error));
-
-export const updateParkComment = async (commentId, content) => {
+// 댓글 조회 GET 요청
+export const fetchComments = async (parkId, page) => {
   try {
-    const response = await api.patch(`/comments/${commentId}`, { content });
-    return response.data;
+      const response = await api.get(`/comments/${parkId}?page=${page}`);
+      return response.data;
   } catch (error) {
-    console.error('댓글 수정 중 오류 발생:', error.response);
-    throw error;
+      console.error('댓글 불러오는 중 오류 발생:', error.response.data);
   }
 };
-
-export const deleteParkComment = async (commentId) => {
+// 댓글 수정 PATCH 요청
+export const editComment = async (id, content) => {
   try {
-    const response = await api.delete(`/comments/${commentId}`);
-    return response.data;
+      const response = await api.patch(`/comments/${id}`, { content });
+      return response.data;
   } catch (error) {
-    console.error('댓글 삭제 중 오류 발생:', error.response);
-    throw error;
+      console.error('댓글 수정 중 오류 발생:', error.response.data);
+  }
+};
+// 댓글 삭제 DELETE 요청
+export const deleteComment = async (id) => {
+  try {
+      const response = await api.delete(`/comments/${id}`);
+      return response.data;
+  } catch (error) {
+      console.error('댓글 삭제 중 오류 발생:', error.response.data);
+  }
+};
+// 댓글 작성 POST 요청
+export const postComment = async (parkId, comment) => {
+  try {
+      const response = await api.post(`/comments/${parkId}`, { content: comment });
+      return response.data;
+  } catch (error) {
+      console.error('댓글 작성 중 오류 발생:', error.response.data);
   }
 };
 

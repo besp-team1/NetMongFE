@@ -1,32 +1,38 @@
 import React, { useState } from 'react';
-import { addParkComment } from '../../API/parkApi';
+import { postComment } from '../../API/parkApi';
 import '../../style/parks/ParkCommentForm.css';
 
 const ParkCommentForm = ({ parkId, updateComments }) => {
-    const [content, setContent] = useState('');
+    const [comment, setComment] = useState('');
     
-    const handleCommentSubmit = (e) => {
-        e.preventDefault();
-        addParkComment(parkId, content, updateComments)
-            .then(() => {
-                setContent(''); 
-            })
-            .catch((error) => console.error("댓글 등록 중 오류 발생:", error));
+    const handleCommentChange = (e) => {
+        setComment(e.target.value);
     };
+
+    const handleCommentSubmit = async (e) => {
+        e.preventDefault();
     
+        try {
+            const response = await postComment(parkId, comment);
+            console.log('댓글이 성공적으로 작성되었습니다:', response);
+            setComment('');
+            updateComments();
+            // 페이지 새로 고침
+            window.location.reload();
+        } catch (error) {
+            console.error('댓글 작성 중 오류 발생:', error.message);
+        }
+    };  
+
     return (
         <form onSubmit={handleCommentSubmit} className="parkComment-form">
             <div className="parkComment-input-container">
-                <textarea 
-                    value={content} 
-                    onChange={(e) => setContent(e.target.value)} 
-                    required 
-                    className="parkComment-input"
-                />
+            <textarea className="textarea" value={comment} onChange={handleCommentChange} />
                 <button type="submit" className="parkSubmit-button">작성</button>
             </div>
         </form>
     );
+
 };
 
 export default ParkCommentForm;
