@@ -25,6 +25,13 @@
     height: 50%;
     margin: 40px auto;
     padding: 10px;
-    border: 1px solid #74A3FF;
+    /* border: 1px solid #74A3FF; */
     border-radius: 10px;
 }
+
+.park-info-container {
+    align-self: flex-start;
+    width: 100%;
+    padding-left: 363px;
+}
+

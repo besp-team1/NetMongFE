@@ -66,13 +66,15 @@ const ParkComment = () => {
         <div className="parkComment-container">
             <h2>공원 추천하멍</h2>
             <h6>산책하기 좋은 공원으로 추천합니다!</h6>
-            <p>공원명 : {park ? park.parkNm : 'Loading...'}</p> 
-            <p>주소 : {park ? park.lnmadr : 'Loading...'}</p> 
-            <p>전화번호 : {park ? park.phoneNumber : 'Loading...'}</p> 
+            <div className="park-info-container"> 
+                <p className="park-info">공원명 : {park ? park.parkNm : 'Loading...'}</p> 
+                <p className="park-info">주소 : {park ? park.lnmadr : 'Loading...'}</p> 
+                <p className="park-info">전화번호 : {park ? park.phoneNumber : 'Loading...'}</p>
+            </div> 
             <div id="map" style={{ width: '30%', height: '200px' }}></div>
             <div className="Parkcomment-container">
-                <ParkCommentList parkId={parkId} comments={comments} updateComments={updateComments} pageInfo={pageInfo} setPage={setPage} page={page} />
-                <ParkCommentForm parkId={parkId} register={register} updateComments={updateComments} />
+            <ParkCommentForm parkId={parkId} register={register} updateComments={updateComments} />
+            <ParkCommentList parkId={parkId} comments={comments} updateComments={updateComments} pageInfo={pageInfo} setPage={setPage} page={page} />
             </div>
         </div>
     );
