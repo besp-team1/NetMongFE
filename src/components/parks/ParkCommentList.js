@@ -1,29 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import '../../style/parks/ParkCommentList.css';
 import { fetchComments, editComment, deleteComment } from '../../API/parkApi';
 
-const ParkCommentList = ({ parkId }) => {
-    const [comments, setComments] = useState([]);
+const ParkCommentList = ({ parkId, comments, updateComments, pageInfo, setPage, page }) => {
+
     const [isEditing, setIsEditing] = useState(false);
     const [editContent, setEditContent] = useState('');
     const [editingId, setEditingId] = useState(null);
-    const [page, setPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
-
-    const handleFetchComments = async (page) => {
-        try {
-            const result = await fetchComments(parkId, page);
-            setComments(result.data.content);
-            setTotalPages(result.data.totalPages);
-        } catch (error) {
-            console.error('댓글 불러오는 중 오류 발생:', error);
-        }
-    };
 
     const handleEditComment = async (id, content) => {
         try {
             await editComment(id, content);
-            handleFetchComments(page);
+            updateComments(); // 부모 컴포넌트에서 전달받은 updateComments 함수를 호출
         } catch (error) {
             console.error('댓글 수정 중 오류 발생:', error);
         }
@@ -32,7 +20,7 @@ const ParkCommentList = ({ parkId }) => {
     const handleDeleteComment = async (id) => {
         try {
             await deleteComment(id);
-            handleFetchComments(page);
+            updateComments(); // 부모 컴포넌트에서 전달받은 updateComments 함수를 호출
         } catch (error) {
             console.error('댓글 삭제 중 오류 발생:', error);
         }
@@ -54,15 +42,11 @@ const ParkCommentList = ({ parkId }) => {
         setEditingId(id);
     };
 
-    useEffect(() => {
-        handleFetchComments(page);
-    }, [page]);
-
     const pageNumbers = [];
-    for (let i = 1; i <= totalPages; i++) {
+    for (let i = 1; i <= pageInfo.totalPages; i++) {
         pageNumbers.push(i);
     }
-
+    
     return (
         <div className="parkComment-list-container">
             {comments.map((comment) => (
@@ -104,7 +88,7 @@ const ParkCommentList = ({ parkId }) => {
                         {number}
                     </button>
                 ))}
-                <button onClick={() => setPage((prevPage) => Math.min(prevPage + 1, totalPages))}>{">"}</button>
+                <button onClick={() => setPage((prevPage) => Math.min(prevPage + 1, pageInfo.totalPages))}>{">"}</button>
             </div>
         </div>
     );

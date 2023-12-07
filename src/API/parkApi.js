@@ -57,6 +57,7 @@ export const fetchComments = async (parkId, page) => {
       console.error('댓글 불러오는 중 오류 발생:', error.response.data);
   }
 };
+
 // 댓글 수정 PATCH 요청
 export const editComment = async (id, content) => {
   try {
@@ -66,6 +67,7 @@ export const editComment = async (id, content) => {
       console.error('댓글 수정 중 오류 발생:', error.response.data);
   }
 };
+
 // 댓글 삭제 DELETE 요청
 export const deleteComment = async (id) => {
   try {
@@ -75,6 +77,7 @@ export const deleteComment = async (id) => {
       console.error('댓글 삭제 중 오류 발생:', error.response.data);
   }
 };
+
 // 댓글 작성 POST 요청
 export const postComment = async (parkId, comment) => {
   try {
