@@ -17,8 +17,7 @@ const ParkComment = () => {
 
     useEffect(() => {
          updateComments();
-         console.log("****");
-    }, [flag]);
+    }, [page, flag]);
 
     const register=()=>{
         setFlag(!flag);
@@ -26,7 +25,6 @@ const ParkComment = () => {
 
     const updateComments = async () => {
         const result = await fetchComments(parkId, page);
-        console.log(result);
         setComments(result.data.content);
         setPageInfo({
             totalPages: result.data.totalPages,

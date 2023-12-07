@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import '../../style/parks/ParkCommentList.css';
-import { fetchComments, editComment, deleteComment } from '../../API/parkApi';
+import { editComment, deleteComment } from '../../API/parkApi';
 
-const ParkCommentList = ({ parkId, comments, updateComments, pageInfo, setPage, page }) => {
+const ParkCommentList = ({ comments, updateComments, pageInfo, setPage, page }) => {
 
     const [isEditing, setIsEditing] = useState(false);
     const [editContent, setEditContent] = useState('');
@@ -11,7 +11,7 @@ const ParkCommentList = ({ parkId, comments, updateComments, pageInfo, setPage, 
     const handleEditComment = async (id, content) => {
         try {
             await editComment(id, content);
-            updateComments(); // 부모 컴포넌트에서 전달받은 updateComments 함수를 호출
+            updateComments();
         } catch (error) {
             console.error('댓글 수정 중 오류 발생:', error);
         }
@@ -20,7 +20,7 @@ const ParkCommentList = ({ parkId, comments, updateComments, pageInfo, setPage, 
     const handleDeleteComment = async (id) => {
         try {
             await deleteComment(id);
-            updateComments(); // 부모 컴포넌트에서 전달받은 updateComments 함수를 호출
+            updateComments();
         } catch (error) {
             console.error('댓글 삭제 중 오류 발생:', error);
         }
