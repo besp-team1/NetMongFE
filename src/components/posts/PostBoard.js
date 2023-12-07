@@ -4,63 +4,74 @@ import { Link } from 'react-router-dom';
 import '../../style/posts/PostBoard.css';
 
 function PostBoard() {
-    const [posts, setPosts] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(0);
-    const authToken = localStorage.getItem('token');
+  const [posts, setPosts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [scrollTriggered, setScrollTriggered] = useState(false);
+  const authToken = localStorage.getItem('token');
 
-    useEffect(() => {
-        fetchPosts(currentPage);
-    }, [currentPage]);
+  useEffect(() => {
+    fetchPosts(currentPage);
+  }, [currentPage]);
 
-    const fetchPosts = async (pageNumber) => {
-        try {
-            const response = await axios.get(`http://localhost:9000/api/v1/post/view?page=${pageNumber}`, {
-                headers: {
-                    Authorization: `Bearer ${authToken}`,
-                },
-            });
-            const data = response.data.data;
-            setPosts(data.content);
-            setTotalPages(data.totalPages);
-        } catch (error) {
-            console.error('Error:', error);
-        }
+  const fetchPosts = async (pageNumber) => {
+    try {
+      setLoading(true);
+      const response = await axios.get(`http://localhost:9000/api/v1/post/view?page=${pageNumber}`, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
+      const data = response.data.data;
+      if (pageNumber === 1) {
+        setPosts(data.content);
+      } else {
+        setPosts((prevPosts) => [...prevPosts, ...data.content]);
+      }
+      setLoading(false);
+      setScrollTriggered(false);
+    } catch (error) {
+      console.error('Error:', error);
+      setLoading(false);
+      setScrollTriggered(false);
     }
+  };
 
-    const pageNumbers = [];
-    for (let i = 1; i <= totalPages; i++) {
-        pageNumbers.push(i);
+  const handleScroll = () => {
+    const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+    if (scrollTop + clientHeight >= scrollHeight - 20 && !loading && !scrollTriggered) {
+      setScrollTriggered(true);
+      setCurrentPage((prevPage) => prevPage + 1);
     }
+  };
 
-    return (
-        <div>
-            {posts.map(post => (
-                <div className="post" key={post.postId}>
-                    <img src={post.imageUrl} alt="post image" />
-                    <Link to={`/post/${post.postId}`}>
-                        <h2>{post.title}</h2>
-                    </Link>
-                    <h3>{post.writer}</h3>
-                    <p>{post.content}</p>
-                    <p>{post.createDate}</p>
-                </div>
-            ))}
-            <div className="pagination">
-                <button onClick={() => setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))}>{"<"}</button>
-                {pageNumbers.map((number) => (
-                    <button 
-                        key={number} 
-                        onClick={() => setCurrentPage(number)}
-                        className={currentPage === number ? 'active' : ''}
-                    >
-                        {number}
-                    </button>
-                ))}
-                <button onClick={() => setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages))}>{">"}</button>
-            </div>
-        </div>
-    );
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  return (
+    <div>
+      {Array.isArray(posts) && posts.length > 0 ? (
+        posts.map((post) => (
+          <div className="post" key={post.postId}>
+            <img src={post.imageUrl} alt="post image" />
+            <Link to={`/post/${post.postId}`}>
+              <h2>{post.title}</h2>
+            </Link>
+            <h3>{post.writer}</h3>
+            <p>{post.content}</p>
+            <p>{post.createDate}</p>
+          </div>
+        ))
+      ) : (
+        <p>검색 결과가 없습니다.</p>
+      )}
+      {loading && <p>Loading...</p>}
+    </div>
+  );
 }
 
 export default PostBoard;

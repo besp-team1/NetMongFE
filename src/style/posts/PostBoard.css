@@ -40,29 +40,5 @@
     margin: 10px 0;
     color: #333;
     text-align: center;
-}
-
-/* 페이지네이션 스타일 */
-.pagination {
-    display: flex;
-    justify-content: center;
-    padding: 20px 0;
-}
-
-.pagination button {
-    margin: 0 5px;
-    padding: 5px 10px;
-    border: none;
-    background-color: #f1f1f1;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.pagination button:hover {
-    background-color: #ddd;
-}
-
-.pagination .active {
-    background-color: #4caf50;
-    color: white;
+    margin-bottom: 100px;
 }
