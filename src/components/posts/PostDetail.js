@@ -7,6 +7,7 @@ import PostCommentList from '../postComments/PostCommentList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
+import ReportModal from '../reportPost/ReportModal';
 
 const PostDetail = () => {
     const { id } = useParams();
@@ -151,7 +152,11 @@ const PostDetail = () => {
             <div className="post-date">
                 <p>{post.createDate}</p>
             </div>
-            
+
+            <div className="btn-report">
+                <ReportModal postId={id} />
+            </div>
+
             <div className="like-container">
                 <button className="btn-like" onClick={handleLike}>
                     {liked ? <FontAwesomeIcon icon={solidHeart} /> : <FontAwesomeIcon icon={regularHeart} />}
