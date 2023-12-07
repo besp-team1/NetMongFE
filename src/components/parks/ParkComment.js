@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom'; 
 import { fetchComments, getPark } from '../../API/parkApi';
 import ParkCommentForm from './ParkCommentForm';
@@ -16,10 +16,32 @@ const ParkComment = () => {
         totalElements: 1
     });
 
+    const mapRef = useRef(null);
+
     useEffect(() => {
          updateComments();
          updatePark();
     }, [page, flag]);
+
+    useEffect(() => {
+        const { kakao } = window;
+         if(park) {
+             var container = document.getElementById('map');
+             var options = {
+                 center: new kakao.maps.LatLng(park.latitude, park.longitude),
+                 level: 3
+             };
+
+             mapRef.current = new kakao.maps.Map(container, options); // 지도 객체를 ref에 저장
+
+             var markerPosition = new kakao.maps.LatLng(park.latitude, park.longitude); 
+             var marker = new kakao.maps.Marker({
+                 position: markerPosition
+             });
+             marker.setMap(mapRef.current);
+             mapRef.current.setCenter(markerPosition);
+         }
+     }, [park]); // park가 변경될 때마다 useEffect를 실행
 
     const register=()=>{
         setFlag(!flag);
@@ -47,6 +69,7 @@ const ParkComment = () => {
             <p>공원명 : {park ? park.parkNm : 'Loading...'}</p> 
             <p>주소 : {park ? park.lnmadr : 'Loading...'}</p> 
             <p>전화번호 : {park ? park.phoneNumber : 'Loading...'}</p> 
+            <div id="map" style={{ width: '30%', height: '200px' }}></div>
             <div className="Parkcomment-container">
                 <ParkCommentList parkId={parkId} comments={comments} updateComments={updateComments} pageInfo={pageInfo} setPage={setPage} page={page} />
                 <ParkCommentForm parkId={parkId} register={register} updateComments={updateComments} />
