@@ -40,7 +40,7 @@ const MemberDetail = () => {
       <Profile username={username}  />
       <Statistics followerCount={followerCount} 
           followeeCount={followeeCount} />
-      <FollowButton isFollowing={isFollowing}  />
+      <FollowButton username={username} isFollowing={isFollowing}  />
       <Posts username={username}/>
     </div>
   );
