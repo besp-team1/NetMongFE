@@ -13,6 +13,8 @@ const MemberDetail = () => {
   const [isFollowing, setIsFollowing] = useState(false);
 
   useEffect(() => {
+
+
     const fetchUser = async () => {
       try {
         const data = await showMemberAPI(username);
@@ -39,7 +41,7 @@ const MemberDetail = () => {
       <Statistics followerCount={followerCount} 
           followeeCount={followeeCount} />
       <FollowButton isFollowing={isFollowing}  />
-      <Posts/>
+      <Posts username={username}/>
     </div>
   );
 };

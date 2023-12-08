@@ -8,7 +8,7 @@ const MyPage = ({ user, onImageChange, onPasswordChange, onToggleFollow }) => {
     <div className="MyPage">
       <Profile user={user} onImageChange={onImageChange} onPasswordChange={onPasswordChange} />
       <Statistics user={user} />
-      <Posts/>
+      <Posts username={user}/>
     </div>
   );
 };

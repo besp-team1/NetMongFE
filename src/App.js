@@ -18,6 +18,8 @@ import Join from './components/members/Join';
 import Welcome from './components/members/Welcome';
 import PostUpdateForm from './components/posts/PostUpdateForm';
 import ParkComment from './components/parks/ParkComment';
+import SearchPost from './components/posts/SearchPost';
+import MemberDetail from './components/mypage/MemberDetail';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
