@@ -48,15 +48,16 @@ const ParkCommentList = ({ comments, updateComments, pageInfo, setPage, page }) 
     }
     
     return (
-        
         <div className="parkComment-list-container">
             {comments.map((comment) => (
                 <div key={comment.id} className="parkComment-card">
                     <div className="parkComment-username">{comment.username}</div>
                     <div className="parkComment-item">
                         {!isEditing || comment.id !== editingId ? (
-                            <div className="parkComment-content">
-                                {comment.isDeleted ? '삭제된 게시글입니다.' : comment.content}
+                            <div>
+                                <div className="parkComment-content">
+                                    {comment.isDeleted ? '삭제된 게시글입니다.' : comment.content}
+                                </div>
                             </div>
                         ) : (
                             <form onSubmit={(e) => handleEditSubmit(e, comment.id)}>
@@ -65,19 +66,20 @@ const ParkCommentList = ({ comments, updateComments, pageInfo, setPage, page }) 
                             </form>
                         )}
                         {!comment.isDeleted && comment.username === localStorage.getItem('username') && (
-                            <div className="parkComment-action-buttons">
-                                {!isEditing || comment.id !== editingId ? (
-                                    <button className="editBtn" onClick={() => handleEditClick(comment.content, comment.id)}>수정</button>
-                                ) : (
-                                    <button className="cancelBtn" onClick={() => setIsEditing(false)}>취소</button>
-                                )}
-                                <button className="deleteBtn" onClick={() => handleDeleteComment(comment.id)}>삭제</button>
+                            <div>
+                                <div className="parkComment-action-buttons">
+                                    {!isEditing || comment.id !== editingId ? (
+                                        <button className="editBtn" onClick={() => handleEditClick(comment.content, comment.id)}>수정</button>
+                                    ) : (
+                                        <button className="cancelBtn" onClick={() => setIsEditing(false)}>취소</button>
+                                    )}
+                                    <button className="deleteBtn" onClick={() => handleDeleteComment(comment.id)}>삭제</button>
+                                </div>
                             </div>
                         )}
                     </div>
                 </div>
             ))}
-    
             <div className="ParkPagination">
                 <button onClick={() => setPage((prevPage) => Math.max(prevPage - 1, 1))}>{"<"}</button>
                 {pageNumbers.map((number) => (

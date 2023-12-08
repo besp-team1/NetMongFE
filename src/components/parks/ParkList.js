@@ -14,7 +14,7 @@ const ParkList = ({ parks, selectedPark, setSelectedPark }) => {
 
   const handleParkClick = (park) => {
     setSelectedPark(park);
-    navigate(`/comments/${park.id}`);
+    navigate(`/parks/${park.id}`);
   };
 
   useEffect(() => {

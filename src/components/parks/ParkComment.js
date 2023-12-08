@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom'; 
 import { fetchComments, getPark } from '../../API/parkApi';
-import ParkCommentForm from './ParkCommentForm';
+import { useNavigate } from 'react-router-dom';
 import ParkCommentList from './ParkCommentList';
 import '../../style/parks/ParkComment.css';
 
@@ -17,6 +17,7 @@ const ParkComment = () => {
     });
 
     const mapRef = useRef(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
          updateComments();
@@ -29,7 +30,7 @@ const ParkComment = () => {
              var container = document.getElementById('map');
              var options = {
                  center: new kakao.maps.LatLng(park.latitude, park.longitude),
-                 level: 3
+                 level: 5
              };
 
              mapRef.current = new kakao.maps.Map(container, options); // 지도 객체를 ref에 저장
@@ -48,33 +49,59 @@ const ParkComment = () => {
     }
 
     const updateComments = async () => {
-        const result = await fetchComments(parkId, page);
-        setComments(result.data.content);
-        setPageInfo({
-            totalPages: result.data.totalPages,
-            totalElements: result.data.totalElements
-        });
+        try {
+            const result = await fetchComments(parkId, page);
+            setComments(result.data.content);
+            setPageInfo({
+                totalPages: result.data.totalPages,
+                totalElements: result.data.totalElements
+            });
+        } catch (error) {
+            console.error('댓글 목록 불러오기에 실패했습니다:', error);
+        }
     };
 
     const updatePark = async () => {
-        const result = await getPark(parkId);
-        console.log(result);
-        setPark(result.data);
+        try {
+            const result = await getPark(parkId);
+            console.log(result);
+            setPark(result.data);
+        } catch (error) {
+            console.error('공원 정보 불러오기에 실패했습니다:', error);
+        }
     };
     
     return (
         <div className="parkComment-container">
-            <h2>공원 추천하멍</h2>
-            <h6>산책하기 좋은 공원으로 추천합니다!</h6>
-            <div className="park-info-container"> 
-                <p className="park-info">공원명 : {park ? park.parkNm : 'Loading...'}</p> 
-                <p className="park-info">주소 : {park ? park.lnmadr : 'Loading...'}</p> 
-                <p className="park-info">전화번호 : {park ? park.phoneNumber : 'Loading...'}</p>
-            </div> 
-            <div id="map" style={{ width: '30%', height: '200px' }}></div>
-            <div className="Parkcomment-container">
-            <ParkCommentForm parkId={parkId} register={register} updateComments={updateComments} />
-            <ParkCommentList parkId={parkId} comments={comments} updateComments={updateComments} pageInfo={pageInfo} setPage={setPage} page={page} />
+            <div>
+                <h2>{park ? park.parkNm : 'Loading...'} 소개합니다</h2>
+            </div>
+            <h6>목줄, 배변봉투 지참! 펫티켓을 잘 지켜주세요:)</h6>
+            <div className="main-content">
+                <div className="left-section">
+                <div className="park-info-container">
+                    <p className="park-info1">기본 정보</p>
+                    <div className="park-info-row">
+                        <span className="park-info-label">공원명 </span>
+                        <span className="park-info-value">{park ? park.parkNm : 'Loading...'}</span>
+                    </div>
+                    <div className="park-info-row">
+                        <span className="park-info-label">주소 </span>
+                        <span className="park-info-value">{park ? park.lnmadr : 'Loading...'}</span>
+                    </div>
+                    <div className="park-info-row">
+                        <span className="park-info-label">전화번호 </span>
+                        <span className="park-info-value">{park ? park.phoneNumber : 'Loading...'}</span>
+                    </div>
+                </div>
+                    <div id="map" style={{ width: '100%', height: '300px' }}></div>
+                </div>
+                <div className="right-section">
+                    <button className="myButton" onClick={() => navigate(`/parks/${parkId}/comment`)}>
+                        후기쓰기
+                    </button>
+                    <ParkCommentList parkId={parkId} comments={comments} updateComments={updateComments} pageInfo={pageInfo} setPage={setPage} page={page} />
+                </div>
             </div>
         </div>
     );

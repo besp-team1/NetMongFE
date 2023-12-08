@@ -18,6 +18,7 @@ import Join from './components/members/Join';
 import Welcome from './components/members/Welcome';
 import PostUpdateForm from './components/posts/PostUpdateForm';
 import ParkComment from './components/parks/ParkComment';
+import ParkCommentForm from './components/parks/ParkCommentForm';
 import SearchPost from './components/posts/SearchPost';
 
 const GlobalStyle = createGlobalStyle`
@@ -47,7 +48,7 @@ function App() {
               <Route path="/" element={<Main />} />
               <Route path="/product" element={<Product />} />
               <Route path="/api/v1/products" element={<ProductList />} />
-              <Route path="/park" element={<Map />} />
+              <Route path="/parks" element={<Map />} />
               <Route path="/post/upload" element={<PostForm />} />
               <Route path="/post/:id" element={<PostDetail />} />
               <Route path="/post/update/:id" element={<PostUpdateForm />} />
@@ -55,7 +56,8 @@ function App() {
               <Route path="/login" element={<LoginForm/>} />
               <Route path="/join" element={<Join/>} />
               <Route path="/welcome" element={<Welcome/>} />
-              <Route path="/comments/:parkId" element={<ParkComment />} />
+              <Route path="/parks/:parkId" element={<ParkComment />} />
+              <Route path="/parks/:parkId/comment" element={<ParkCommentForm />} /> 
               <Route path="/post/search" element={<SearchPost />} />
             </Routes>
           </div>
