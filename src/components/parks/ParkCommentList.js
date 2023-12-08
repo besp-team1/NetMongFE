@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import '../../style/parks/ParkCommentList.css';
-import { fetchComments, editComment, deleteComment } from '../../API/parkApi';
+import { editComment, deleteComment } from '../../API/parkApi';
 
-const ParkCommentList = ({ parkId, comments, updateComments, pageInfo, setPage, page }) => {
+const ParkCommentList = ({ comments, updateComments, pageInfo, setPage, page }) => {
 
     const [isEditing, setIsEditing] = useState(false);
     const [editContent, setEditContent] = useState('');
@@ -11,7 +11,7 @@ const ParkCommentList = ({ parkId, comments, updateComments, pageInfo, setPage, 
     const handleEditComment = async (id, content) => {
         try {
             await editComment(id, content);
-            updateComments(); // 부모 컴포넌트에서 전달받은 updateComments 함수를 호출
+            updateComments();
         } catch (error) {
             console.error('댓글 수정 중 오류 발생:', error);
         }
@@ -20,7 +20,7 @@ const ParkCommentList = ({ parkId, comments, updateComments, pageInfo, setPage, 
     const handleDeleteComment = async (id) => {
         try {
             await deleteComment(id);
-            updateComments(); // 부모 컴포넌트에서 전달받은 updateComments 함수를 호출
+            updateComments();
         } catch (error) {
             console.error('댓글 삭제 중 오류 발생:', error);
         }
@@ -50,12 +50,14 @@ const ParkCommentList = ({ parkId, comments, updateComments, pageInfo, setPage, 
     return (
         <div className="parkComment-list-container">
             {comments.map((comment) => (
-                <div key={comment.id}>
+                <div key={comment.id} className="parkComment-card">
                     <div className="parkComment-username">{comment.username}</div>
                     <div className="parkComment-item">
                         {!isEditing || comment.id !== editingId ? (
-                            <div className="parkComment-content">
-                                {comment.isDeleted ? '삭제된 게시글입니다.' : comment.content}
+                            <div>
+                                <div className="parkComment-content">
+                                    {comment.isDeleted ? '삭제된 게시글입니다.' : comment.content}
+                                </div>
                             </div>
                         ) : (
                             <form onSubmit={(e) => handleEditSubmit(e, comment.id)}>
@@ -65,13 +67,14 @@ const ParkCommentList = ({ parkId, comments, updateComments, pageInfo, setPage, 
                         )}
                         {!comment.isDeleted && comment.username === localStorage.getItem('username') && (
                             <div>
-                                {!isEditing || comment.id !== editingId ? (
-                                    <button className="editBtn" onClick={() => handleEditClick(comment.content, comment.id)}>수정</button>
-                                ) : (
-                                    <button className="cancelBtn" onClick={() => setIsEditing(false)}>취소</button>
-                                )}
-                                <button className="deleteBtn" onClick={() => handleDeleteComment(comment.id)}>삭제</button>
-
+                                <div className="parkComment-action-buttons">
+                                    {!isEditing || comment.id !== editingId ? (
+                                        <button className="editBtn" onClick={() => handleEditClick(comment.content, comment.id)}>수정</button>
+                                    ) : (
+                                        <button className="cancelBtn" onClick={() => setIsEditing(false)}>취소</button>
+                                    )}
+                                    <button className="deleteBtn" onClick={() => handleDeleteComment(comment.id)}>삭제</button>
+                                </div>
                             </div>
                         )}
                     </div>
