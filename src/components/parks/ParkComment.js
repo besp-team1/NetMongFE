@@ -100,7 +100,14 @@ const ParkComment = () => {
                     <button className="myButton" onClick={() => navigate(`/parks/${parkId}/comment`)}>
                         후기쓰기
                     </button>
-                    <ParkCommentList parkId={parkId} comments={comments} updateComments={updateComments} pageInfo={pageInfo} setPage={setPage} page={page} />
+                    {
+                        comments && comments.length > 0 ?
+                        <ParkCommentList parkId={parkId} comments={comments} updateComments={updateComments} pageInfo={pageInfo} setPage={setPage} page={page} />
+                        :
+                        <div className="message-box">
+                            <p className="p3">아직 작성된 후기가 없어요!</p>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

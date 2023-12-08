@@ -79,3 +79,17 @@
 .park-info-row:last-child {
     margin-bottom: 20px;
 }
+
+.message-box {
+    padding: 30px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    margin-right: 20%;
+    margin-top: 50px;
+    margin-left: 15%;
+    height: 90%;
+}
+
+.p3 {
+    font-size: 15px;
+}
