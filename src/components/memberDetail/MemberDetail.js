@@ -12,6 +12,7 @@ const MemberDetail = () => {
   const [followerCount, setFollowerCount] = useState(0);
   const [followeeCount, setFolloweeCount] = useState(0);
   const [isFollowing, setIsFollowing] = useState(false);
+  const [postCount, setPostCount] = useState(0);
 
   const fetchUser = async () => {
     try {
@@ -19,6 +20,7 @@ const MemberDetail = () => {
       setFollowerCount(data.followerCount);
       setFolloweeCount(data.followeeCount);
       setIsFollowing(data.following);
+      setPostCount(data.postCount);
       return data;
     } catch (error) {
       console.error('회원 정보 조회 에러:', error);
@@ -39,7 +41,8 @@ const MemberDetail = () => {
         </div>
         <div className="right-side">
           <Statistics followerCount={followerCount} 
-            followeeCount={followeeCount} />
+            followeeCount={followeeCount}
+            postCount = {postCount} />
         </div>
       </div>
       <Posts username={username}/>

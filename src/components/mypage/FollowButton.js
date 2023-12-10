@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Alert, Button } from 'react-bootstrap';
 import followAPI from '../../API/followAPI';
 import unfollowAPI from '../../API/unfollowAPI';
 
 const FollowButton = ({ username, isFollowing, onFollowChange}) => {
-  
-  const isf = isFollowing;
+
   const follow = (async () =>{
     try {
       const followResponse = await followAPI(username);
-      if(followResponse === "follow 성공"){
-        console.log("follow sungong");
-      }
+      if(followResponse.resultCode === "S-1"){
+      } else if (followResponse.resultCode === "F-1") {
+      } 
       onFollowChange();
     } catch (error) {
       console.error('팔로우 에러:', error);
@@ -35,9 +34,11 @@ const FollowButton = ({ username, isFollowing, onFollowChange}) => {
   };
 
   return (
-    <Button className="followButton" onClick={onToggleFollow}>
-      {isFollowing ? 'UnFollow' : 'Follow'}
-    </Button>
+    //TODO: 토스트ui적용
+      <Button className="followButton" onClick={onToggleFollow}>
+        {isFollowing ? 'UnFollow' : 'Follow'}
+      </Button>
+   
   );
 };
 

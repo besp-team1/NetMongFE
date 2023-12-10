@@ -19,7 +19,7 @@ async function followAPI(username) {
         Authorization: `Bearer ${authToken}`
       },
     });
-    return response.data.data;
+    return response.data;
   } catch (error) {
     console.error('팔로우 에러:', error);
     throw error;
