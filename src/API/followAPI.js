@@ -1,6 +1,7 @@
 import axios from 'axios';
+const url = process.env.REACT_APP_HOST_URL;
 
-const API_BASE_URL = 'http://localhost:9000/api/v1/members'; 
+const API_BASE_URL = `${url}/api/v1/members`; 
 const authToken = localStorage.getItem('token'); 
 
 const api = axios.create({

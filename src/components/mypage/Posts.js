@@ -23,8 +23,8 @@ const Posts = ({username}) => {
       setLoading(false);
       const res = await getPostsByUsernameAPI(name, pageNumber);
       
-      if (res.totalElements != totalCnt || res.totalPages != page){
-        setPosts([...posts, ...res.content]);
+      if (res.totalElements != totalCnt || res.totalPages > page){
+        setPosts((prevPosts) => [...prevPosts, ...res.content]);
         setPage((page) => page + 1);
       }
       setTotalCnt(res.totalElements);
@@ -40,7 +40,7 @@ const Posts = ({username}) => {
       <h2>내 글 목록</h2>
       <Row>
         {posts.map((post) => (
-          <Col md={4} key={post.id}>
+          <Col key={post.postId} md={4} >
             <Card>
               <Card.Img variant="top" src={post.imageUrl} />
               <Card.Body>
@@ -53,7 +53,7 @@ const Posts = ({username}) => {
           </Col>
         ))}
       </Row>
-      <div ref={ref} style={{"marginTop":"100px"}}></div>
+      <div ref={ref} style={{"marginTop":"500px"}}></div>
       {loading && <p>포스트를 불러오는 중...</p>}
     </Container>
   );

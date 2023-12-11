@@ -37,7 +37,7 @@ const PostForm = () => {
 
             const authToken = localStorage.getItem('token'); 
         
-            const response = await axios.post('http://localhost:9000/api/v1/post/upload', formData, {
+            const response = await axios.post(`${process.env.REACT_APP_HOST_URL}/api/v1/post/upload`, formData, {
                 headers: {
                 'Content-Type': 'multipart/form-data',
                 Authorization: `Bearer ${authToken}`,
