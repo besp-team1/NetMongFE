@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import '../../style/posts/PostDetail.css';
 import PostCommentForm from '../postComments/PostCommentForm';
 import PostCommentList from '../postComments/PostCommentList';
@@ -141,13 +141,34 @@ const PostDetail = () => {
         return <div>게시글을 불러오는 중...</div>;
     }
 
+    const content = post.content;
+const regex = /#[^\s#]+/g;
+const hashtags = content.match(regex);
+const splitContent = content.split(regex);
+
     return (
         <div className="post-container">
             <h1>{post.title}</h1>
             <img src={`${post.imageUrl}`} alt="게시물 이미지" style={{ maxWidth: '100%', height: 'auto' }} />
             <div className="post-sub">
                 <p>{post.writer}</p>
-                <p>{post.content}</p>
+                <p>
+                    {splitContent.map((part, index) => {
+                        return (
+                            <React.Fragment key={index}>
+                                {part}
+                                {hashtags[index] && (
+                                    <a
+                                        href={`/posts?tag=${encodeURIComponent(hashtags[index])}`}
+                                        className="hashtag-link"
+                                    >
+                                        {hashtags[index]}
+                                    </a>
+                                )}
+                            </React.Fragment>
+                        );
+                    })}
+                </p>
             </div>
             <div className="post-date">
                 <p>{post.createDate}</p>
