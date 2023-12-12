@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../style/mypage/statistics.css';
 
 const statistics = ({ followerCount, followeeCount, postCount }) => {
   return (

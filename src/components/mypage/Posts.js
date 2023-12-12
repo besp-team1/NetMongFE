@@ -23,8 +23,8 @@ const Posts = ({username}) => {
       setLoading(false);
       const res = await getPostsByUsernameAPI(name, pageNumber);
       
-      if (res.totalElements != totalCnt || res.totalPages > page){
-        setPosts((prevPosts) => [...prevPosts, ...res.content]);
+      if (res.totalElements != totalCnt || res.totalPages >= page){
+        setPosts([...posts, ...res.content]);
         setPage((page) => page + 1);
       }
       setTotalCnt(res.totalElements);
@@ -53,7 +53,7 @@ const Posts = ({username}) => {
           </Col>
         ))}
       </Row>
-      <div ref={ref} style={{"marginTop":"500px"}}></div>
+      <div ref={ref} style={{"marginTop":"200px"}}></div>
       {loading && <p>포스트를 불러오는 중...</p>}
     </Container>
   );
