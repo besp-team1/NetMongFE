@@ -142,9 +142,9 @@ const PostDetail = () => {
     }
 
     const content = post.content;
-const regex = /#[^\s#]+/g;
-const hashtags = content.match(regex);
-const splitContent = content.split(regex);
+    const regex = /#[^\s#]+/g;
+    const hashtags = content.match(regex);
+    const splitContent = content.split(regex);
 
     return (
         <div className="post-container">
@@ -159,8 +159,12 @@ const splitContent = content.split(regex);
                                 {part}
                                 {hashtags[index] && (
                                     <a
-                                        href={`/posts?tag=${encodeURIComponent(hashtags[index])}`}
+                                        href={`/post/hashtagSearch?hashtag=${hashtags[index].substring(1)}`}
                                         className="hashtag-link"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            navigate(`/post/hashtagSearch?hashtag=${hashtags[index].substring(1)}`);
+                                        }}
                                     >
                                         {hashtags[index]}
                                     </a>

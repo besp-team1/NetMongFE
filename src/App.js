@@ -19,6 +19,7 @@ import Welcome from './components/members/Welcome';
 import PostUpdateForm from './components/posts/PostUpdateForm';
 import ParkComment from './components/parks/ParkComment';
 import SearchPost from './components/posts/SearchPost';
+import HashtagSearch from './components/posts/HashtagSearch';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -57,6 +58,7 @@ function App() {
               <Route path="/welcome" element={<Welcome/>} />
               <Route path="/comments/:parkId" element={<ParkComment />} />
               <Route path="/post/search" element={<SearchPost />} />
+              <Route path="/post/hashtagSearch" element={<HashtagSearch />} />
             </Routes>
           </div>
           <Footer />
