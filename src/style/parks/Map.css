@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 100px;  /* 상단 컨테이너에 패딩 추가 */
+  padding-top: 100px;
 }
 
 .map-park-container {
@@ -27,10 +27,10 @@
 .park-list {
   max-height: 400px;
   overflow-y: auto;
-  transform: translateX(-100%);  /* 왼쪽에서 시작 */
+  transform: translateX(-100%);
   transition: all 0.5s ease-in-out;
 }
 
 .map-park-container.with-list .park-list {
-  transform: translateX(0);  /* 오른쪽으로 이동 */
+  transform: translateX(0);
 }

@@ -49,7 +49,6 @@ const Park = ({ setParks }) => {
             <option key={index} value={state}>{state}</option>
           ))}
         </select>
-  
         <select value={selectedCity} onChange={handleCityChange}>
           <option>구군 선택</option>
           {cities.map((city, index) => (

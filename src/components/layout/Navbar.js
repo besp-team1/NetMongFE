@@ -42,7 +42,7 @@ function Navbar() {
           <Link to="/product" className="nav-link">마켓</Link>
         </li>
         <li className="nav-item">
-          <Link to="/park" className="nav-link">내근처</Link>
+          <Link to="/parks" className="nav-link">내근처</Link>
         </li>
         <li className="nav-item">
           <Link to="/mypage" className="nav-link">마이페이지</Link>
