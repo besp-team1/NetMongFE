@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFlag } from '@fortawesome/free-solid-svg-icons';
-import '../../style/reportPost/ReportModal.css'
+import '../../style/reports/ReportModal.css'
 
 const ReportCommentModal = ({ commentId }) => {
     const [isOpen, setIsOpen] = useState(false);
