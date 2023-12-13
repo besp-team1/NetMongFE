@@ -1,6 +1,7 @@
 // ReportedComments.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import '../../style/reports/Reported.css'
 
 function ReportedComments() {
@@ -41,11 +42,11 @@ function ReportedComments() {
             <tbody>
             {comments.map((comment, index) => (
                 <tr key={index}>
-                <td>{comment.reportedPostId}</td>
+                <td><Link to={`/post/${comment.reportedPostId}`}>{comment.reportedPostId}</Link></td>
                 <td>{comment.reportType}</td>
                 <td>{comment.content}</td>
                 <td>{comment.reportCount}</td>
-                <td>{comment.isBlinded ? '블라인드 처리 완료' : '블라인드 되지 않음'}</td>
+                <td>{comment.isBlinded ? '블라인드 처리 완료' : 'X'}</td>
                 </tr>
             ))}
             </tbody>

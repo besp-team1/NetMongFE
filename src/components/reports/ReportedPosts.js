@@ -1,6 +1,7 @@
 // ReportedPosts.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import '../../style/reports/Reported.css'
 
 function ReportedPosts() {
@@ -39,7 +40,7 @@ function ReportedPosts() {
             <tbody>
             {posts.map((post, index) => (
                 <tr key={index}>
-                <td>{post.reportedPostId}</td>
+                <td><Link to={`/post/${post.reportedPostId}`}>{post.reportedPostId}</Link></td>
                 <td>{post.reportType}</td>
                 <td>{post.content}</td>
                 </tr>
