@@ -7,7 +7,7 @@ import PostCommentList from '../postComments/PostCommentList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
-import ReportModal from '../reportPost/ReportModal';
+import ReportModal from '../reports/ReportPostModal';
 
 const PostDetail = () => {
     const { id } = useParams();

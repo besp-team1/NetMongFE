@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../../style/postComments/PostCommentList.css';
+import ReportCommentModal from '../reports/ReportCommentModal';
 
 const PostCommentList = ({ postId }) => {
     const [comments, setComments] = useState([]);
@@ -101,6 +102,7 @@ const PostCommentList = ({ postId }) => {
                             <button onClick={() => deleteComment(comment.id)}>삭제</button>
                         </div>
                     )}
+                    <ReportCommentModal commentId={comment.id} />
                 </div>
             ))}
             <div className="pagination">
