@@ -1,27 +1,18 @@
-.reports-page {
+  .reports-page .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 80%;
-    margin: 0 auto;
-    padding: 20px;
+    margin: 20px auto;
     box-sizing: border-box;
-}  
-
-.title {
-    text-align: center;
-    font-size: 2em;
-}
-
-.subtitle {
-    font-size: 1.5em;
-    margin-top: 20px;
-}
-
-.report-card {
-    background-color: #f0f0f0;
-    border-radius: 10px;
-    padding: 10px;
-    margin-top: 10px;
-}
-
-.report-detail {
-    margin: 5px 0;
-}
+    margin-top: 100px;
+  }
+  
+  .reports-page h1 {
+    margin: 0;
+  }
+  
+  .reports-page nav {
+    margin-left: auto;
+  }
+  
