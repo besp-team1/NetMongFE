@@ -1,11 +1,16 @@
 .Profile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .Profile button {
-    margin-top: 1rem;
-  }
-  .Profile img {
-    width: 100px;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 200px;
+  width: 80%;
+  margin: auto;
+}
+.Profile button {
+  margin-top: 1rem;
+  background-color: #74A3FF;
+  width: 30%
+}
+.Profile img {
+  width: 100px;
+}

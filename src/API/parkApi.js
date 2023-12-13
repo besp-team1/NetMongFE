@@ -3,7 +3,7 @@ import axios from 'axios';
 const authToken = localStorage.getItem('token'); 
 
 const api = axios.create({
-  baseURL: 'http://localhost:9000/api/v1/parks',
+    baseURL: `${process.env.REACT_APP_HOST_URL}/api/v1/parks`,
 });
 
 // 매번 요청을 보낼 때 토큰을 새롭게 가져오도록 axios 인터셉터 활용

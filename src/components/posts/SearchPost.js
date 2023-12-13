@@ -24,7 +24,7 @@ function SearchPost({ setIsSearching }) {
             const categoryParam = params.get('category');
             const searchWordParam = params.get('searchWord');
             
-            const response = await axios.get(`http://localhost:9000/api/v1/post/search?category=${categoryParam}&searchWord=${searchWordParam}&page=${pageNumber}`, {
+            const response = await axios.get(`${process.env.REACT_APP_HOST_URL}/api/v1/post/search?category=${categoryParam}&searchWord=${searchWordParam}&page=${pageNumber}`, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                 },
