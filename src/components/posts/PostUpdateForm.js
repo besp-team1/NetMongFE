@@ -15,7 +15,7 @@ const PostUpdateForm = () => {
     useEffect(() => {
         const fetchPost = async () => {
             try {
-                const response = await axios.get(`http://localhost:9000/api/v1/post/${id}`, {
+                const response = await axios.get(`${process.env.REACT_APP_HOST_URL}/api/v1/post/${id}`, {
                     headers: {
                         Authorization: `Bearer ${authToken}`,
                     },

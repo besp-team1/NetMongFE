@@ -20,6 +20,12 @@ import Join from './components/members/Join';
 import Welcome from './components/members/Welcome';
 import PostUpdateForm from './components/posts/PostUpdateForm';
 import ParkComment from './components/parks/ParkComment';
+import ParkCommentForm from './components/parks/ParkCommentForm';
+import SearchPost from './components/posts/SearchPost';
+import ReportsPage from './components/reports/ReportsPage';
+import ReportedComments from './components/reports/ReportedComments';
+import ReportedPosts from './components/reports/ReportedPosts';
+import MemberDetail from './components/memberDetail/MemberDetail';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -52,6 +58,7 @@ function App() {
               <Route path="/api/v1/products/:productId/edit" element={<ProductEdit />} />
               <Route path="/products/update" element={<Product />} />
               <Route path="/park" element={<Map />} />
+              <Route path="/parks" element={<Map />} />
               <Route path="/post/upload" element={<PostForm />} />
               <Route path="/post/:id" element={<PostDetail />} />
               <Route path="/post/update/:id" element={<PostUpdateForm />} />
@@ -59,7 +66,14 @@ function App() {
               <Route path="/login" element={<LoginForm/>} />
               <Route path="/join" element={<Join/>} />
               <Route path="/welcome" element={<Welcome/>} />
-              <Route path="/comments/:parkId" element={<ParkComment />} />
+              <Route path="/parks/:parkId" element={<ParkComment />} />
+              <Route path="/parks/:parkId/comment" element={<ParkCommentForm />} /> 
+              <Route path="/post/search" element={<SearchPost />} />
+              <Route path="/admin/reports" element={<ReportsPage />}>
+                <Route path="posts" element={<ReportedPosts />} />
+                <Route path="comments" element={<ReportedComments />} />
+              </Route>              
+              <Route path="/members/:username" element={<MemberDetail />} />
             </Routes>
           </div>
           <Footer />

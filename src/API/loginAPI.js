@@ -1,7 +1,7 @@
 import axios from "axios";
 
 async function loginAPI(username, password) {
-  const login = await axios.post('http://localhost:9000/api/v1/members/login', {
+  const login = await axios.post(`${process.env.REACT_APP_HOST_URL}/api/v1/members/login`, {
     username: username,
     password: password
   })
