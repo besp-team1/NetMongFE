@@ -17,7 +17,7 @@ function PostBoard() {
   const fetchPosts = async (pageNumber) => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:9000/api/v1/post/view?page=${pageNumber}`, {
+      const response = await axios.get(`${process.env.REACT_APP_HOST_URL}/api/v1/post/view?page=${pageNumber}`, {
         headers: {
           Authorization: `Bearer ${authToken}`,
         },

@@ -23,6 +23,7 @@ import SearchPost from './components/posts/SearchPost';
 import ReportsPage from './components/reports/ReportsPage';
 import ReportedComments from './components/reports/ReportedComments';
 import ReportedPosts from './components/reports/ReportedPosts';
+import MemberDetail from './components/memberDetail/MemberDetail';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -66,6 +67,7 @@ function App() {
                 <Route path="posts" element={<ReportedPosts />} />
                 <Route path="comments" element={<ReportedComments />} />
               </Route>              
+              <Route path="/members/:username" element={<MemberDetail />} />
             </Routes>
           </div>
           <Footer />
