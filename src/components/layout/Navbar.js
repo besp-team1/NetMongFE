@@ -51,9 +51,15 @@ function Navbar() {
           <Link to="/parks" className="nav-link">내근처</Link>
         </li>
         <li className="nav-item">
-          <Link to={isAdmin ? "/admin/reports/posts" : "/mypage"} className="nav-link">
-            {isAdmin ? '신고 관리' : '마이페이지'}
-          </Link>        
+          {isAdmin ? (
+            <Link to="/admin/reports" className="nav-link">
+              신고 관리
+            </Link>
+          ) : (
+            <Link to="/mypage" className="nav-link">
+              마이페이지
+            </Link>
+          )}       
         </li>
         {isLoggedIn ? (
           <>

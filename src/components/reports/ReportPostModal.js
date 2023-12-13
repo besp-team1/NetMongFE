@@ -31,7 +31,7 @@ const ReportPostModal = ({ postId }) => {
                     Authorization: `Bearer ${authToken}`,
                 },
             });
-            setReportTypes(response.data.data); // Here we get the 'data' field from the response object
+            setReportTypes(response.data.data);
         } catch (error) {
             console.error('신고 유형 불러오기 실패:', error.message);
         }

@@ -20,6 +20,7 @@ import PostUpdateForm from './components/posts/PostUpdateForm';
 import ParkComment from './components/parks/ParkComment';
 import ParkCommentForm from './components/parks/ParkCommentForm';
 import SearchPost from './components/posts/SearchPost';
+import ReportsPage from './components/reports/ReportsPage';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -59,6 +60,7 @@ function App() {
               <Route path="/parks/:parkId" element={<ParkComment />} />
               <Route path="/parks/:parkId/comment" element={<ParkCommentForm />} /> 
               <Route path="/post/search" element={<SearchPost />} />
+              <Route path="/admin/reports" element={<ReportsPage />} />
             </Routes>
           </div>
           <Footer />
