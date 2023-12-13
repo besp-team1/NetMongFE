@@ -102,8 +102,9 @@ const PostCommentList = ({ postId }) => {
                             <button onClick={() => deleteComment(comment.id)}>삭제</button>
                         </div>
                     )}
-                    <ReportCommentModal commentId={comment.id} />
-                </div>
+                    {comment.username !== localStorage.getItem('username') &&  // 현재 사용자가 댓글 작성자와 다른 경우에만 신고 버튼을 렌더링합니다.
+                        <ReportCommentModal commentId={comment.id} />
+                    }                </div>
             ))}
             <div className="pagination">
                 <button onClick={() => setPage((prevPage) => Math.max(prevPage - 1, 1))}>{"<"}</button>
