@@ -41,7 +41,7 @@ if (formData.images) {
 
     // 서버로 폼 데이터 전송
     try {
-      await axios.post(`${process.env.REACT_APP_HOST_URL}/api/v1/products`, formDataForUpload);
+      await axios.post(`http://localhost:9000/api/v1/products`, formDataForUpload);
     
       // 페이지 이동
       navigate('/api/v1/products', { replace: true });
