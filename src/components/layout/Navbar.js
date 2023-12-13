@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import '../../style/layout/Navbar.css';
 import logoImage from '../../assets/images/logo.png';
@@ -14,7 +14,13 @@ function Navbar() {
   let username = '';
 
   if (isLoggedIn) {username = localStorage.getItem('username');}
-    
+  
+  const [isAdmin, setIsAdmin] = useState(username === 'admin');
+
+  useEffect(() => {
+    setIsAdmin(username === 'admin');
+  }, [isLoggedIn]);
+
   function checkLoggedInStatus() {
     const token = localStorage.getItem('token');
     if (token) {let username = localStorage.getItem('username');}
@@ -45,9 +51,10 @@ function Navbar() {
           <Link to="/parks" className="nav-link">내근처</Link>
         </li>
         <li className="nav-item">
-          <Link to="/mypage" className="nav-link">마이페이지</Link>
+          <Link to={isAdmin ? "/admin/reports/posts" : "/mypage"} className="nav-link">
+            {isAdmin ? '신고 관리' : '마이페이지'}
+          </Link>        
         </li>
-        {/* 로그인 상태에 따라 다른 메뉴를 보여줍니다. */}
         {isLoggedIn ? (
           <>
             <li className="nav-item" onClick={handleLogout}>
