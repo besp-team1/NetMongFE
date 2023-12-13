@@ -45,7 +45,7 @@ function Navbar() {
           <Link to="/post/upload" className="nav-link">포스트</Link>
         </li>
         <li className="nav-item">
-          <Link to="/product" className="nav-link">마켓</Link>
+          <Link to="/api/v1/products" className="nav-link">마켓</Link>
         </li>
         <li className="nav-item">
           <Link to="/parks" className="nav-link">내근처</Link>

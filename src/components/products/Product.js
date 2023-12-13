@@ -105,7 +105,6 @@ if (formData.images) {
             </div>
         </div>
         <div className="productButton-group">
-            <button type="button" className="productEdit-button">수정하기</button>
             <button type="submit" className="productSubmit-button">상품 등록</button>
         </div>
 

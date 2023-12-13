@@ -10,6 +10,8 @@ import Map from './components/parks/Map';
 import Footer from './components/layout/Footer';
 import Product from './components/products/Product';
 import ProductList from './components/products/AllProduct';
+import ProductDetail from './components/products/ProductDetails';
+import ProductEdit from './components/products/ProductEdit';
 import PostForm from './components/posts/PostForm';
 import PostDetail from './components/posts/PostDetail';
 import Mypage from './components/mypage/Mypage';
@@ -52,6 +54,10 @@ function App() {
               <Route path="/" element={<Main />} />
               <Route path="/product" element={<Product />} />
               <Route path="/api/v1/products" element={<ProductList />} />
+              <Route path="/products/:productId" element={<ProductDetail />} />
+              <Route path="/api/v1/products/:productId/edit" element={<ProductEdit />} />
+              <Route path="/products/update" element={<Product />} />
+              <Route path="/park" element={<Map />} />
               <Route path="/parks" element={<Map />} />
               <Route path="/post/upload" element={<PostForm />} />
               <Route path="/post/:id" element={<PostDetail />} />
