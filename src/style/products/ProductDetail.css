@@ -1,0 +1,30 @@
+.product-detail-container {
+  width: 80%;
+  margin: 200px auto;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-detail-container h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.product-detail-container p {
+  margin-bottom: 10px;
+  color: #666;
+}
+
+.product-detail-container button {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.product-detail-container button:hover {
+  background-color: #0056b3;
+}

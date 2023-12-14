@@ -69,6 +69,9 @@ function Navbar() {
             <li className="nav-item">
               {username}님 환영합니다!
             </li>
+            <li className="nav-item">
+              <Link to="/api/v1/products/cart" className="nav-link"> 장바구니 </Link>
+            </li>
           </>
         ) : (
           <>
