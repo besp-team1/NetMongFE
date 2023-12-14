@@ -3,7 +3,6 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    margin-top: 100px;
     padding: 50px;
     background-color: #fbfbfb;
     border-radius: 20px;
@@ -14,7 +13,7 @@
     flex-direction: column;
     margin-top: 50px;
     align-items: center;
-    min-height: 500px;  /* 최소 높이를 설정 */
+    min-height: 500px;
 }
 
 .post-sub {
@@ -48,7 +47,7 @@
     justify-content: flex-end;
     align-items: center;
     flex-wrap: wrap;
-    width: 100%; /* 너비를 100%로 설정 */
+    width: 100%;
     margin-top: 25px;
 }
 
