@@ -10,6 +10,7 @@ function Product() {
         content: '',
         count: '',
         category: '',
+        images:null 
       });
 
       const navigate = useNavigate();
@@ -55,11 +56,11 @@ if (formData.images) {
 
       const handleFileChange = (e) => {
         const file = e.target.files[0];
-        // 여기에서 파일을 처리하는 로직을 추가하세요.
-        // 예를 들어, 파일을 상태에 저장하거나, 
-        // 파일을 바로 업로드하기 위한 API를 호출할 수 있습니다.
-        console.log('File:', file);
-      };
+        setFormData({
+          ...formData,
+          images: file,
+        });
+    };
 
   return (
     <div className="product-container">
