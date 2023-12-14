@@ -54,7 +54,7 @@ function ProductList() {
         {products.map((product, index) => (
           <li key={index}>
             <h3>{product.productName}</h3>
-            <img src={product.imageUrl} alt={product.productName} width="100" height="100" />
+            <img src={`http://localhost:9000/images/기본사진1.png`} width="100" height="100" />
             <p>가격: {product.price}</p>
             <p>내용: {product.content}</p>
             <p>상품 갯수: {product.count}</p>
