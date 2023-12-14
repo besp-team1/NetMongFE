@@ -5,8 +5,12 @@ import '../../style/products/ProductList.css';
 
 function ProductList() {
   const [products, setProducts] = useState([]);
-  const [pageNumber, setPageNumber] = useState(1); // Track the current page number
-  const [totalPages, setTotalPages] = useState(1); // Track the total number of pages
+  const [page, setPage] = useState(1);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [searchTerm, setSearchTerm] = useState(''); // 상품 검색
+  const [selectedCategory, setSelectedCategory] = useState(''); // 카테고리 검색
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,7 +31,7 @@ function ProductList() {
     };
 
     fetchData();
-  }, [pageNumber]); // Re-run the effect when the pageNumber changes
+  }, [pageNumber]);
 
   const handleProductRegistration = () => {
     console.log('상품 등록 버튼이 클릭되었습니다.');
@@ -39,40 +43,89 @@ function ProductList() {
   };
 
   const handlePageChange = (newPageNumber) => {
-    // Update the page number and trigger a new data fetch
     setPageNumber(newPageNumber);
+  };
+
+  // 이름 검색
+  const fetchProducts = async (url, isSearch = false) => {
+    try {
+      const response = await axios.get(url);
+      const { data } = response.data;
+  
+      if (isSearch) {
+        setProducts(data);
+      } else {
+        setProducts(data.content);
+        setTotalPages(data.totalPages);
+      }
+    } catch (error) {
+      console.error('상품 목록 불러오기 중 오류 발생:', error.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts(`http://localhost:9000/api/v1/products/all?pageNumber=${pageNumber}`);
+  }, [pageNumber]);
+  
+  const handleSearch = () => {
+    fetchProducts(`http://localhost:9000/api/v1/products/name/${searchTerm}`, true);
+  };
+
+  // 카테고리 변경
+  const handleInputChange = (event) => {
+    setSelectedCategory(event.target.value);
   };
 
   return (
     <div className="productList-container">
       <h2>지갑 두둑히 준비 됐멍?</h2>
       <h6>반려견을 위한 마켓에서 안심하고 구매하세요!</h6>
-
-      <button onClick={handleProductRegistration}>상품 등록</button>
-
+      <button className="ProductRegistBtn" onClick={handleProductRegistration}>상품 등록</button>
+      <div className="ProductSearch-container">
+        <label className="ProductCategory">
+          <select name="category" value={selectedCategory} onChange={handleInputChange}>
+            <option value="">카테고리 선택</option>
+            <option value="PET_SUPPLIES">반려동물 용품</option>
+            <option value="PET_FEED">반려동물 사료</option>
+            <option value="PET_CLOTHES">반려동물 의류</option>
+            <option value="ETC">기타</option>
+          </select>
+        </label>
+        <input
+          type="text"
+          placeholder="상품명을 입력하세요"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button className="ProductNameBtn" onClick={handleSearch}>검색</button>
+      </div>
       <ul className="products-container">
-        {products.map((product, index) => (
-          <li key={index}>
-            <h3>{product.productName}</h3>
-            <img src={`http://localhost:9000/images/기본사진1.png`} width="100" height="100" />
-            <p>가격: {product.price}</p>
-            <p>내용: {product.content}</p>
-            <p>상품 갯수: {product.count}</p>
-            <p>카테고리: {product.category}</p>
-            <button onClick={() => handleProductDetails(product.productId)}>상세 보기</button>
-          </li>
-        ))}
+        {products
+          .filter(product => selectedCategory ? product.category === selectedCategory : true)
+          .map((product, index) => (
+            <li key={index}>
+              <h3>{product.productName}</h3>
+              <img src={product.imageUrl} alt={product.productName} width="100" height="100" />
+              <p>가격: {product.price}</p>
+              <p>내용: {product.content}</p>
+              <p>상품 갯수: {product.count}</p>
+              <p>카테고리: {product.category}</p>
+              <button className="productDetailBtn" onClick={() => handleProductDetails(product.productId)}>상세 보기</button>
+            </li>
+          ))}
       </ul>
-
-      {/* Basic pagination controls */}
-      <div>
-        <button onClick={() => handlePageChange(pageNumber - 1)} disabled={pageNumber === 1}>
-          이전 페이지
-        </button>
-        <span> Page {pageNumber} of {totalPages} </span>
-        <button onClick={() => handlePageChange(pageNumber + 1)} disabled={pageNumber === totalPages}>
-          다음 페이지
-        </button>
+      <div className="ProductPagination-container">
+        <button onClick={() => setPage((prevPage) => Math.max(prevPage - 1, 1))}>{"<"}</button>
+        {Array.from({length: totalPages}, (_, i) => i + 1).map((number) => (
+          <button 
+            key={number} 
+            onClick={() => handlePageChange(number)}
+            className={pageNumber === number ? 'active' : ''}
+          >
+            {number}
+          </button>
+        ))}
+        <button onClick={() => setPage((prevPage) => Math.min(prevPage + 1, totalPages))}>{">"}</button>
       </div>
     </div>
   );
