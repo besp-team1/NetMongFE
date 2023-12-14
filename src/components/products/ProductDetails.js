@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import AddToCart from '../carts/AddToCart';
 
 function ProductDetail() {
   const [product, setProduct] = useState(null);
@@ -53,12 +54,14 @@ function ProductDetail() {
   }
 
   return (
-    <div>
+    <div className="product-detail-container">
       <h2>상품 상세 정보</h2>
       <p>상품 이름: {product.productName}</p>
       <p>가격: {product.price}</p>
       <p>상세 내용: {product.content}</p>
       <p>카테고리: {product.category}</p>
+
+      <AddToCart productId={productId} />
 
       <Link to={`/api/v1/products/${productId}/edit`}>
       <button>수정하기</button>
