@@ -53,4 +53,17 @@
     margin: 5px 0;
     color: #777;
   }
+
+  .ProductSearch-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  .ProductNameBtn {
+    background-color: #74A3FF;
+    color: white;
+    font-size: 13px;
+    border: none;
+  }
+  
   

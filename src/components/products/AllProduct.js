@@ -5,8 +5,10 @@ import '../../style/products/ProductList.css';
 
 function ProductList() {
   const [products, setProducts] = useState([]);
-  const [pageNumber, setPageNumber] = useState(1); // Track the current page number
-  const [totalPages, setTotalPages] = useState(1); // Track the total number of pages
+  const [pageNumber, setPageNumber] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [searchTerm, setSearchTerm] = useState(''); // 상품 검색
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,7 +29,7 @@ function ProductList() {
     };
 
     fetchData();
-  }, [pageNumber]); // Re-run the effect when the pageNumber changes
+  }, [pageNumber]);
 
   const handleProductRegistration = () => {
     console.log('상품 등록 버튼이 클릭되었습니다.');
@@ -39,8 +41,32 @@ function ProductList() {
   };
 
   const handlePageChange = (newPageNumber) => {
-    // Update the page number and trigger a new data fetch
     setPageNumber(newPageNumber);
+  };
+
+  // 이름 검색 추가
+  const fetchProducts = async (url, isSearch = false) => {
+    try {
+      const response = await axios.get(url);
+      const { data } = response.data;
+  
+      if (isSearch) {
+        setProducts(data);
+      } else {
+        setProducts(data.content);
+        setTotalPages(data.totalPages);
+      }
+    } catch (error) {
+      console.error('상품 목록 불러오기 중 오류 발생:', error.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts(`http://localhost:9000/api/v1/products/all?pageNumber=${pageNumber}`);
+  }, [pageNumber]);
+  
+  const handleSearch = () => {
+    fetchProducts(`http://localhost:9000/api/v1/products/name/${searchTerm}`, true);
   };
 
   return (
@@ -49,6 +75,16 @@ function ProductList() {
       <h6>반려견을 위한 마켓에서 안심하고 구매하세요!</h6>
 
       <button onClick={handleProductRegistration}>상품 등록</button>
+
+      <div className="ProductSearch-container">
+        <input
+          type="text"
+          placeholder="상품명을 입력하세요"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button className="ProductNameBtn" onClick={handleSearch}>검색</button>
+      </div>
 
       <ul className="products-container">
         {products.map((product, index) => (
