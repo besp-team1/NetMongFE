@@ -66,4 +66,76 @@
     border: none;
   }
   
+  /* 상품 카테고리 셀렉트 */
+  .ProductCategory {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  .ProductCategory select {
+    border-color: #c8c6c6;
+    border-radius: 5px;
+    width: 150px;
+    padding-left: 10px;
+  }
+  .ProductSearch-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  .ProductNameBtn {
+    background-color: #74A3FF;
+    color: white;
+    font-size: 13px;
+    border: none;
+  }
+
+  /* 상품 등록 버튼 */
+  .ProductRegistBtn {
+    background-color: #74A3FF;
+    color: white;
+    font-size: 17px;
+    border: none;
+    margin-bottom: 10px;
+  }
+
+  /* 상세보기 버튼 */
+  .productDetailBtn {
+    background-color: #74A3FF;
+    color: white;
+    font-size: 15px;
+    border: none;
+    margin-bottom: 10px;
+  }
+
+  /* 페이징 */
+  .ProductPagination-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  .ProductPagination-container button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #7e7e7e;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .ProductPagination-container button:hover {
+    background-color: #adadad;
+  }
+  
+  .ProductPagination-container button:active {
+    background-color: #918e8e;
+    color: white;
+  }
+  
+  .ProductPagination-container span {
+    align-self: center;
+    padding: 0 10px;
+  }
+  
   
