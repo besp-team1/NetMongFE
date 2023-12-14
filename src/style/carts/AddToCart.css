@@ -1,34 +1,36 @@
 .addToCartForm-container {
-    margin-top: 20px;
-  }
-  
-  .addToCartForm-container .form-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .addToCartForm-container .form-container .input-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 200px;
-  }
-  
-  .addToCartForm-container .form-container .input-container input {
-    width: 60px;
-    padding: 5px;
-  }
-  
-  .addToCartForm-container .form-container .input-container button {
-    padding: 10px 20px;
-    background-color: #0056b3;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .addToCartForm-container .form-container .input-container button:hover {
-    background-color: #0056b3;
-  }
+  margin-top: 20px;
+}
+
+.addToCartForm-container .form-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.addToCartForm-container .form-container .input-container {
+  justify-content: space-between;
+  align-items: center;
+  width: auto;
+}
+
+.addToCartForm-container .form-container .input-container input {
+  width: 60px;
+  padding: 5px;
+}
+
+.addToCartForm-container .form-container .input-container button {
+  margin-left: 20px;
+  background-color: #E2CDBA;
+  color: #8B4513;
+  width: auto; 
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+
+.addToCartForm-container .form-container .input-container button:hover {
+  background-color: #c59b7a;
+}

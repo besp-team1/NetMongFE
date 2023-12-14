@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import AddToCart from '../carts/AddToCart';
+import '../../style/products/ProductDetail.css';
 
 function ProductDetail() {
   const [product, setProduct] = useState(null);
@@ -63,11 +64,14 @@ function ProductDetail() {
 
       <AddToCart productId={productId} />
 
-      <Link to={`/api/v1/products/${productId}/edit`}>
-      <button>수정하기</button>
-      </Link>
+      <div className="button-container">
+        <Link to={`/api/v1/products/${productId}/edit`}>
+          <button>수정하기</button>
+        </Link>
 
-      <button onClick={handleDelete}>삭제하기</button>
+        <button onClick={handleDelete}>삭제하기</button>
+      </div>
+
     </div>
   );
 }
