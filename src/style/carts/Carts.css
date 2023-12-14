@@ -1,0 +1,27 @@
+.cartPage-container {
+    width: 80%;
+    margin: 200px auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cartPage-container h1 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .cartPage-container div {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .cartPage-container div h2 {
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .cartPage-container div p {
+    color: #666;
+  }
