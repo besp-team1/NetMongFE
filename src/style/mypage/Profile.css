@@ -2,16 +2,34 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 100px;
-  padding-top: 200px;
   width: 80%;
   margin: auto;
 }
-.Profile button {
+/* .Profile button {
   margin-top: 1rem;
   background-color: #74A3FF;
   width: 30%
-}
+} */
 .Profile img {
   width: 100px;
+}
+.Profile-username {
+  font-size: 20px; 
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+.profileButtonContainer {
+  display: flex;
+}
+.profileImageBtn, .profilePasswordBtn {
+  background-color: #f4f4f4;
+  color: black;
+  width: 50%;
+  font-size: 12px;
+  border: none;
+  margin-left: 5px;
+  margin-top: 20px;
+}
+.profileImageBtn {
+  margin-right: 10px;
 }

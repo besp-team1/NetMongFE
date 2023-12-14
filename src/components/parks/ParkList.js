@@ -44,30 +44,30 @@ const ParkList = ({ parks, selectedPark, setSelectedPark }) => {
     }
   };
 
-  const handleLike = async (parkId, event) => { 
+  const handleLike = async (parkId, event) => {
     event.stopPropagation();
-
-    if (likedParks[parkId]) { 
+  
+    if (likedParks[parkId]) {
       const response = await removeLikeFromPark(parkId);
-      if (response) {
-          setLikedParks(prev => ({
-            ...prev,
-            [parkId]: false,
-          }));
-          fetchLikesCount(parkId);
+      if (response !== null) {
+        setLikedParks(prev => ({
+          ...prev,
+          [parkId]: false,
+        }));
+        fetchLikesCount(parkId);
       }
     } else {
       const response = await addLikeToPark(parkId);
-      if (response) {
-          setLikedParks(prev => ({
-            ...prev,
-            [parkId]: true,
-          }));
-          fetchLikesCount(parkId);
+      if (response !== null) {
+        setLikedParks(prev => ({
+          ...prev,
+          [parkId]: true,
+        }));
+        fetchLikesCount(parkId);
       }
     }
   };
-
+  
   const sortedParks = [...parks].sort((a, b) => {
     if (selectedPark && selectedPark.parkNm === a.parkNm) {
       return -1;

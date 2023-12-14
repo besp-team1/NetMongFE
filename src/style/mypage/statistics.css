@@ -2,3 +2,12 @@
   display: flex;
   justify-content: space-around;
 }
+
+.Statistics-p {
+  font-weight: lighter;
+}
+
+.Statistics-count {
+  font-weight: bolder;
+  margin-right: 10px;
+}

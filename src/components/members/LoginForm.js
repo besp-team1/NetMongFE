@@ -30,7 +30,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="container">
+    <div className="LoginForm-container">
       <form className="form-signin" onSubmit={handleSubmit}>
         <h2 className="form-signin-heading">로그인</h2>
         <label for="inputUsername" className="label">Username</label>
