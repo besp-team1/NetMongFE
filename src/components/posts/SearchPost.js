@@ -63,29 +63,34 @@ function SearchPost({ setIsSearching }) {
     };
 
     return (
-    <div>
-        <div className="search-container">
-            <select value={category} onChange={handleCategoryChange}>
-                <option value="작성자">작성자</option>
-                <option value="내용">내용</option>
-            </select>
-            <input type="text" placeholder="검색어를 입력하세요" value={searchWord} onChange={handleSearchInputChange} />
-            <button onClick={handleSearch}>검색</button>
+        <div>
+            <div className="search-container">
+                <select value={category} onChange={handleCategoryChange}>
+                    <option value="작성자">작성자</option>
+                    <option value="내용">내용</option>
+                </select>
+                <input type="text" placeholder="검색어를 입력하세요" value={searchWord} onChange={handleSearchInputChange} />
+                <button onClick={handleSearch}>검색</button>
+            </div>
+            {posts.map((post) => (
+            <div className="post" key={post.postId}>
+                <img src={post.imageUrl} alt="post image" />
+                <Link to={`/post/${post.postId}`}>
+                    <h2>{post.title}</h2>
+                </Link>
+                <h3>{post.writer}</h3>
+                <p>{post.content.split(/(#[^\s]+)/g).map((v, i) => {
+                    if (v.match(/#[^\s]+/)) {
+                        return <Link key={i} to={`/post/hashtagSearch?hashtag=${v.slice(1)}`}>{v}</Link>;
+                    }
+                    return v;
+                })}</p>
+                <p>{post.createDate}</p>
+            </div>
+            ))}
+            <div ref={ref} style={{"marginTop":"200px"}}>포스트를 불러오는 중...</div>
+            {loading && <p></p>}
         </div>
-        {posts.map((post) => (
-        <div className="post" key={post.postId}>
-            <img src={post.imageUrl} alt="post image" />
-            <Link to={`/post/${post.postId}`}>
-                <h2>{post.title}</h2>
-            </Link>
-            <h3>{post.writer}</h3>
-            <p>{post.content}</p>
-            <p>{post.createDate}</p>
-        </div>
-        ))}
-        <div ref={ref} style={{"marginTop":"200px"}}>포스트를 불러오는 중...</div>
-        {loading && <p></p>}
-    </div>
     );
 }
 

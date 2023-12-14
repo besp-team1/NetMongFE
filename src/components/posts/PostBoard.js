@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../../style/posts/PostBoard.css';
 import { useInView } from 'react-intersection-observer';
 
@@ -11,6 +11,8 @@ function PostBoard() {
   const [totalCnt, setTotalCnt] = useState(0);
   const [loading, setLoading] = useState(false);
   const [ref, inView] = useInView();
+  
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (inView) {
@@ -43,21 +45,26 @@ function PostBoard() {
 
   return (
     <div>
-      {posts.map((post) => (
-        <div className="post" key={post.postId}>
-          <img src={post.imageUrl} alt="post image" />
-          <Link to={`/post/${post.postId}`}>
-            <h2>{post.title}</h2>
-          </Link>
-          <h3>{post.writer}</h3>
-          <p>{post.content}</p>
-          <p>{post.createDate}</p>
-        </div>
-      ))}
+        {posts.map((post) => (
+          <div className="post" key={post.postId}>
+            <img src={post.imageUrl} alt="post image" />
+            <Link to={`/post/${post.postId}`}>
+              <h2>{post.title}</h2>
+            </Link>
+            <h3>{post.writer}</h3>
+            <p>{post.content.split(/(#[^\s]+)/g).map((v, i) => {
+                if (v.match(/#[^\s]+/)) {
+                    return <Link key={i} to={`/post/hashtagSearch?hashtag=${v.slice(1)}`}>{v}</Link>;
+                }
+                return v;
+              })}</p>
+            <p>{post.createDate}</p>
+          </div>
+        ))}
       <div ref={ref} style={{"marginTop":"200px"}}>포스트를 불러오는 중...</div>
       {loading && <p></p>}
     </div>
-  );
-}
+    );
+  }
 
 export default PostBoard;

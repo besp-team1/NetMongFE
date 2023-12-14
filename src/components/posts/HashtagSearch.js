@@ -16,13 +16,18 @@ function HashtagSearch() {
     const location = useLocation();
 
     useEffect(() => {
-        const params = new URLSearchParams(location.search);
-        const hashtagParam = params.get('hashtag');
-        setHashtag(hashtagParam);
-        if (inView) {
-            fetchSearchResults(currentPage);
-        }
-    }, [inView, hashtag]);
+      const params = new URLSearchParams(location.search);
+      const hashtagParam = params.get('hashtag');
+      if (hashtag !== hashtagParam) {
+          setHashtag(hashtagParam);
+          setPosts([]);
+          setCurrentPage(1);
+          setTotalCnt(0);
+      }
+      if (inView) {
+          fetchSearchResults(currentPage);
+      }
+  }, [inView, location]);
 
     const fetchSearchResults = async (pageNumber) => {
         try {
@@ -55,7 +60,12 @@ function HashtagSearch() {
                 <h2>{post.title}</h2>
               </Link>
               <h3>{post.writer}</h3>
-              <p>{post.content}</p>
+              <p>{post.content.split(/(#[^\s]+)/g).map((v, i) => {
+                  if (v.match(/#[^\s]+/)) {
+                    return <Link key={i} to={`/post/hashtagSearch?hashtag=${v.slice(1)}`}>{v}</Link>;
+                  }
+                  return v;
+                })}</p>
               <p>{post.createDate}</p>
             </div>
           ))}
