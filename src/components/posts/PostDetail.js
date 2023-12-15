@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import '../../style/posts/PostDetail.css';
 import PostCommentForm from '../postComments/PostCommentForm';
 import PostCommentList from '../postComments/PostCommentList';
@@ -147,7 +147,12 @@ const PostDetail = () => {
             <img src={`${post.imageUrl}`} alt="게시물 이미지" style={{ maxWidth: '100%', height: 'auto' }} />
             <div className="post-sub">
                 <p>{post.writer}</p>
-                <p>{post.content}</p>
+                <p>{post.content.split(/(#[^\s]+)/g).map((v, i) => {
+                    if (v.match(/#[^\s]+/)) {
+                        return <Link key={i} to={`/post/hashtagSearch?hashtag=${v.slice(1)}`}>{v}</Link>;
+                    }
+                    return v;
+                  })}</p>
             </div>
             <div className="post-date">
                 <p>{post.createDate}</p>

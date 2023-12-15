@@ -22,6 +22,7 @@ import PostUpdateForm from './components/posts/PostUpdateForm';
 import ParkComment from './components/parks/ParkComment';
 import ParkCommentForm from './components/parks/ParkCommentForm';
 import SearchPost from './components/posts/SearchPost';
+import HashtagSearch from './components/posts/HashtagSearch';
 import ReportsPage from './components/reports/ReportsPage';
 import ReportedComments from './components/reports/ReportedComments';
 import ReportedPosts from './components/reports/ReportedPosts';
@@ -71,6 +72,7 @@ function App() {
               <Route path="/parks/:parkId" element={<ParkComment />} />
               <Route path="/parks/:parkId/comment" element={<ParkCommentForm />} /> 
               <Route path="/post/search" element={<SearchPost />} />
+              <Route path="/post/hashtagSearch" element={<HashtagSearch />} />
               <Route path="/admin/reports" element={<ReportsPage />}>
                 <Route path="posts" element={<ReportedPosts />} />
                 <Route path="comments" element={<ReportedComments />} />
