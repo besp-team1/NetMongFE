@@ -10,6 +10,7 @@ function Product() {
         content: '',
         count: '',
         category: '',
+        images:null 
       });
 
       const navigate = useNavigate();
@@ -41,7 +42,7 @@ if (formData.images) {
 
     // 서버로 폼 데이터 전송
     try {
-      await axios.post('http://localhost:9000/api/v1/products', formDataForUpload);
+      await axios.post(`http://localhost:9000/api/v1/products`, formDataForUpload);
     
       // 페이지 이동
       navigate('/api/v1/products', { replace: true });
@@ -55,11 +56,11 @@ if (formData.images) {
 
       const handleFileChange = (e) => {
         const file = e.target.files[0];
-        // 여기에서 파일을 처리하는 로직을 추가하세요.
-        // 예를 들어, 파일을 상태에 저장하거나, 
-        // 파일을 바로 업로드하기 위한 API를 호출할 수 있습니다.
-        console.log('File:', file);
-      };
+        setFormData({
+          ...formData,
+          images: file,
+        });
+    };
 
   return (
     <div className="product-container">
@@ -84,9 +85,15 @@ if (formData.images) {
                 <input type="text" name="price" value={formData.price} onChange={handleInputChange} />
                 </label>
                 <label>
-                카테고리:
-                <input type="text" name="category" value={formData.category} onChange={handleInputChange} />
-                </label>
+                    카테고리:
+                    <select name="category" value={formData.category} onChange={handleInputChange}>
+                      <option value="">카테고리 선택</option>
+                      <option value="PET_SUPPLIES">반려동물 용품</option>
+                      <option value="PET_FEED">반려동물 사료</option>
+                      <option value="PET_CLOTHES">반려동물 의류</option>
+                      <option value="ETC">기타</option>
+                    </select>
+                  </label>
             </div>
 
             <div className="form-right">
@@ -105,7 +112,6 @@ if (formData.images) {
             </div>
         </div>
         <div className="productButton-group">
-            <button type="button" className="productEdit-button">수정하기</button>
             <button type="submit" className="productSubmit-button">상품 등록</button>
         </div>
 

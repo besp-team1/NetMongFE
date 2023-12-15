@@ -7,3 +7,33 @@
   .Post {
     width: 100%;
   }
+
+  /* Posts.js */
+  .Posts-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    max-width: 60%;
+    margin-top: 48px;
+  }
+  .Posts-h2 {
+    font-size: large;
+    font-weight: bold;
+  }
+  .line-Title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    width: 100%;
+  }
+  .line-Title:before,
+  .line-Title:after {
+      content: '';
+      flex-grow: 1;
+      background: rgba(0, 0, 0, 0.1);
+      height: 1px;
+      margin: 0 20px;
+  }

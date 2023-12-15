@@ -2,7 +2,7 @@ import axios from "axios";
 
 async function loginAPI(username, token) {
     try {
-        const logout = await axios.post('http://localhost:9000/api/v1/members/logout', {
+        const logout = await axios.post(`${process.env.REACT_APP_HOST_URL}/api/v1/members/logout`, {
             username: username,
             token: token
         })

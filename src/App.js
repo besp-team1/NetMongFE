@@ -10,6 +10,8 @@ import Map from './components/parks/Map';
 import Footer from './components/layout/Footer';
 import Product from './components/products/Product';
 import ProductList from './components/products/AllProduct';
+import ProductDetail from './components/products/ProductDetails';
+import ProductEdit from './components/products/ProductEdit';
 import PostForm from './components/posts/PostForm';
 import PostDetail from './components/posts/PostDetail';
 import Mypage from './components/mypage/Mypage';
@@ -18,8 +20,15 @@ import Join from './components/members/Join';
 import Welcome from './components/members/Welcome';
 import PostUpdateForm from './components/posts/PostUpdateForm';
 import ParkComment from './components/parks/ParkComment';
+import ParkCommentForm from './components/parks/ParkCommentForm';
 import SearchPost from './components/posts/SearchPost';
 import HashtagSearch from './components/posts/HashtagSearch';
+import ReportsPage from './components/reports/ReportsPage';
+import ReportedComments from './components/reports/ReportedComments';
+import ReportedPosts from './components/reports/ReportedPosts';
+import MemberDetail from './components/memberDetail/MemberDetail';
+import Carts from './components/carts/Carts';
+import AddToCart from './components/carts/AddToCart';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -48,7 +57,11 @@ function App() {
               <Route path="/" element={<Main />} />
               <Route path="/product" element={<Product />} />
               <Route path="/api/v1/products" element={<ProductList />} />
+              <Route path="/products/:productId" element={<ProductDetail />} />
+              <Route path="/api/v1/products/:productId/edit" element={<ProductEdit />} />
+              <Route path="/products/update" element={<Product />} />
               <Route path="/park" element={<Map />} />
+              <Route path="/parks" element={<Map />} />
               <Route path="/post/upload" element={<PostForm />} />
               <Route path="/post/:id" element={<PostDetail />} />
               <Route path="/post/update/:id" element={<PostUpdateForm />} />
@@ -56,9 +69,18 @@ function App() {
               <Route path="/login" element={<LoginForm/>} />
               <Route path="/join" element={<Join/>} />
               <Route path="/welcome" element={<Welcome/>} />
-              <Route path="/comments/:parkId" element={<ParkComment />} />
+              <Route path="/parks/:parkId" element={<ParkComment />} />
+              <Route path="/parks/:parkId/comment" element={<ParkCommentForm />} /> 
               <Route path="/post/search" element={<SearchPost />} />
               <Route path="/post/hashtagSearch" element={<HashtagSearch />} />
+              <Route path="/admin/reports" element={<ReportsPage />}>
+                <Route path="posts" element={<ReportedPosts />} />
+                <Route path="comments" element={<ReportedComments />} />
+              </Route>              
+              <Route path="/members/:username" element={<MemberDetail />} />
+              <Route path="/members/:username" element={<MemberDetail />} />
+              <Route path="/api/v1/products/cart" element={<Carts />} />
+              <Route path="/api/v1/products/cart/:productId" element={<AddToCart />} />
             </Routes>
           </div>
           <Footer />

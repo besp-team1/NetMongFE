@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFlag } from '@fortawesome/free-solid-svg-icons';
-import '../../style/reportPost/ReportModal.css'
+import '../../style/reports/ReportModal.css'
 
-const ReportModal = ({ postId }) => {
+const ReportPostModal = ({ postId }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedType, setSelectedType] = useState('');
     const [description, setDescription] = useState('');
@@ -26,12 +26,12 @@ const ReportModal = ({ postId }) => {
 
     const fetchReportTypes = async () => {
         try {
-            const response = await axios.get('http://localhost:9000/api/v1/post/reports/types', {
+            const response = await axios.get('http://localhost:9000/api/v1/reports/types', {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                 },
             });
-            setReportTypes(response.data.data); // Here we get the 'data' field from the response object
+            setReportTypes(response.data.data);
         } catch (error) {
             console.error('신고 유형 불러오기 실패:', error.message);
         }
@@ -56,7 +56,7 @@ const ReportModal = ({ postId }) => {
         }
 
         try {
-            const response = await axios.post(`http://localhost:9000/api/v1/post/reports/${postId}`, {
+            const response = await axios.post(`http://localhost:9000/api/v1/reports/post/${postId}`, {
                 reportType: selectedType,
                 content: description,
             }, {
@@ -99,4 +99,4 @@ const ReportModal = ({ postId }) => {
     );
 };
 
-export default ReportModal;
+export default ReportPostModal;

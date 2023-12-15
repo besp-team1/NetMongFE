@@ -1,5 +1,5 @@
 .navbar {
-    position: fixed;
+    /* position: fixed; */
     z-index: 100;
     width: 100%;
     display: flex;
@@ -30,7 +30,7 @@
   
   .nav-link {
     text-decoration: none;
-    color: #ffffff;
+    color: #000000;
   }
   
   .nav-link:hover {
