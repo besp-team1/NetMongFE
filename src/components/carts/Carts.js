@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../../style/carts/Carts.css';
 
 const Carts = () => {
@@ -31,7 +32,9 @@ const Carts = () => {
             <h1>장바구니</h1>
             {cartItems.map((item, index) => (
                 <div key={index}>
-                <h2>{item.productName}</h2>
+                <h2>
+                    <Link to={`/products/${item.productId}`}>{item.productName}</Link>
+                </h2>                
                 <p>가격: {item.price}</p>
                 <p>수량: {item.count}</p>
                 </div>
