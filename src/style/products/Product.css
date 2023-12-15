@@ -37,7 +37,6 @@ background-color: #fbfbfb;
 border-radius: 20px;
 }
 
-
 .form-row {
 display: flex;
 justify-content: space-between;
@@ -52,11 +51,13 @@ width: 48%;
 
 .form-left {
 margin-right: 4%;
+align-items: flex-start;
 }
 
 .form-left label,
 .form-right label {
 margin-bottom: 15px;
+width: 90%;
 }
 
 .form-left input,
