@@ -53,6 +53,7 @@ function HashtagSearch() {
 
     return (
         <div>
+          <h1>"#{hashtag}" 검색 결과</h1>
           {posts.map((post) => (
             <div className="post" key={post.postId}>
               <img src={post.imageUrl} alt="post image" />
