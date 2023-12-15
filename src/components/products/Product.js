@@ -85,9 +85,15 @@ if (formData.images) {
                 <input type="text" name="price" value={formData.price} onChange={handleInputChange} />
                 </label>
                 <label>
-                카테고리:
-                <input type="text" name="category" value={formData.category} onChange={handleInputChange} />
-                </label>
+                    카테고리:
+                    <select name="category" value={formData.category} onChange={handleInputChange}>
+                      <option value="">카테고리 선택</option>
+                      <option value="PET_SUPPLIES">반려동물 용품</option>
+                      <option value="PET_FEED">반려동물 사료</option>
+                      <option value="PET_CLOTHES">반려동물 의류</option>
+                      <option value="ETC">기타</option>
+                    </select>
+                  </label>
             </div>
 
             <div className="form-right">
