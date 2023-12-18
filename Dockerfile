@@ -6,10 +6,8 @@ FROM nginx
 # work dir
 WORKDIR /
 
-CMD ["pwd"]
-
 # host pc의 현재경로의 build 폴더를 workdir 의 build 폴더로 복사
-COPY /var/jenkins_home/workspace/nm_FE/build usr/share/nginx/html
+COPY ./build usr/share/nginx/html
 
 # nginx 의 default.conf 를 삭제
 RUN rm /etc/nginx/conf.d/default.conf
