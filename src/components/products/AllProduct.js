@@ -16,11 +16,9 @@ function ProductList() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch data for the specified page
         const response = await axios.get(`http://localhost:9000/api/v1/products/all?pageNumber=${pageNumber}`);
         const { data } = response.data;
 
-        // Update the state with the fetched data
         setProducts(data.content);
         setTotalPages(data.totalPages);
 
@@ -103,17 +101,19 @@ function ProductList() {
         {products
           .filter(product => selectedCategory ? product.category === selectedCategory : true)
           .map((product, index) => (
-            <li key={index}>
-              <h3>{product.productName}</h3>
-              <img src={product.imageUrl} alt={product.productName} width="100" height="100" />
-              <p>가격: {product.price}</p>
-              <p>내용: {product.content}</p>
-              <p>상품 갯수: {product.count}</p>
-              <p>카테고리: {product.category}</p>
-              <button className="productDetailBtn" onClick={() => handleProductDetails(product.productId)}>상세 보기</button>
+            <li key={index} onClick={() => handleProductDetails(product.productId)} style={{cursor: 'pointer'}}>
+              {/* <img className="productItem-image" src={product.imageUrl} alt={product.productName} width="100" height="100" /> */}
+              <img className="productItem-image" src={product.imageUrl} alt="상품 이미지" width="100" height="100" />
+              <h3 className="productItem-productName">{product.productName}</h3>
+              <p className="productItem-price"><span className="label">가격:</span> {product.price}</p>
+              <p className="productItem-content"><span className="label">내용:</span> {product.content}</p>
+              <p className="productItem-count"><span className="label">상품 갯수:</span> {product.count}</p>
+              <p className={`productItem-category productItem-category-${product.category}`}>{product.category}</p>
+
             </li>
           ))}
       </ul>
+
       <div className="ProductPagination-container">
         <button onClick={() => setPage((prevPage) => Math.max(prevPage - 1, 1))}>{"<"}</button>
         {Array.from({length: totalPages}, (_, i) => i + 1).map((number) => (

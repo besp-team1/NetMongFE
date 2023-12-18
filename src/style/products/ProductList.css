@@ -1,141 +1,167 @@
 .productList-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #f8f8f8;
-  }
-  
-  .products-container {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 10px;
-    list-style-type: none;
-    margin-top: 30px;
-  }
-  
-  .productList-container h2,
-  .productList-container h6 {
-    color: #74A3FF;
-    margin: 0;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f8f8f8;
+  padding: 20px;
+}
 
-  .productList-container h2 {
+.products-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style-type: none;
+  margin-top: 30px;
+}
+
+.productList-container h2,
+.productList-container h6 {
+  color: #74A3FF;
+  margin: 0;
+}
+
+.productList-container h2 {
   margin-bottom: 10px;
-  }
+}
 
-  .productList-container h6 {
+.productList-container h6 {
   margin-bottom: 20px;
-  }
+}
 
-  .products-container ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  
-  .products-container li {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    margin: 10px;
-    padding: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 200px;
-  }
-  
-  .products-container h3 {
-    margin-bottom: 10px;
-    color: #555;
-  }
-  
-  .products-container p {
-    margin: 5px 0;
-    color: #777;
-  }
+.products-container li {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 10px;
+  padding: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  text-align: left; 
+}
 
-  .ProductSearch-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-  }
-  .ProductNameBtn {
-    background-color: #74A3FF;
-    color: white;
-    font-size: 13px;
-    border: none;
-  }
-  
-  /* 상품 카테고리 셀렉트 */
-  .ProductCategory {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-  }
-  .ProductCategory select {
-    border-color: #c8c6c6;
-    border-radius: 5px;
-    width: 150px;
-    padding-left: 10px;
-  }
-  .ProductSearch-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-  }
-  .ProductNameBtn {
-    background-color: #74A3FF;
-    color: white;
-    font-size: 13px;
-    border: none;
-  }
+.products-container .productItem-productName {
+  margin-bottom: 10px;
+  color: #555;
+  font-size: 20px;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  display: inline-block;
+}
 
-  /* 상품 등록 버튼 */
-  .ProductRegistBtn {
-    background-color: #74A3FF;
-    color: white;
-    font-size: 17px;
-    border: none;
-    margin-bottom: 10px;
-  }
+.products-container .label {
+  color: #aaa;
+}
 
-  /* 상세보기 버튼 */
-  .productDetailBtn {
-    background-color: #74A3FF;
-    color: white;
-    font-size: 15px;
-    border: none;
-    margin-bottom: 10px;
-  }
+.products-container .productItem-price,
+.products-container .productItem-content,
+.products-container .productItem-count {
+  margin: 5px 0;
+  color: #777;
+}
 
-  /* 페이징 */
-  .ProductPagination-container {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
-  }
-  
-  .ProductPagination-container button {
-    margin: 0 5px;
-    padding: 5px 10px;
-    border: none;
-    background-color: #7e7e7e;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .ProductPagination-container button:hover {
-    background-color: #adadad;
-  }
-  
-  .ProductPagination-container button:active {
-    background-color: #918e8e;
-    color: white;
-  }
-  
-  .ProductPagination-container span {
-    align-self: center;
-    padding: 0 10px;
-  }
-  
-  
+.ProductSearch-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.ProductNameBtn {
+  background-color: #74A3FF;
+  color: white;
+  font-size: 13px;
+  border: none;
+  padding: 5px 10px;
+}
+/* 카테고리 */
+.ProductCategory {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.ProductCategory select {
+  border-color: #c8c6c6;
+  border-radius: 5px;
+  width: 150px;
+  padding-left: 10px;
+}
+.products-container .productItem-category {
+  font-size: 13px;
+  margin-top: 10px; 
+  padding: 3px 8px;
+  border-radius: 8px; 
+  display: inline-block; 
+}
+
+.productItem-category-PET_SUPPLIES {
+  color: #8B4513;
+  background-color: #E2CDBA; 
+}
+
+.productItem-category-PET_FEED {
+  color: #6b8b34; 
+  background-color: #d8e6b8; 
+}
+
+.productItem-category-PET_CLOTHES {
+  color: #6a0dad;
+  background-color: #d8b8e6;
+}
+
+
+.productItem-category-ETC {
+  color: #003153;
+  background-color: #b9c7eb;
+}
+
+.ProductRegistBtn {
+  background-color: #74A3FF;
+  color: white;
+  font-size: 17px;
+  border: none;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+}
+
+.productDetailBtn {
+  background-color: #74A3FF;
+  color: white;
+  font-size: 15px;
+  border: none;
+  margin-top: 10px;
+  padding: 5px 10px;
+}
+
+/* 페이징 */
+.ProductPagination-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.ProductPagination-container button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: none;
+  background-color: #7e7e7e;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ProductPagination-container button:hover {
+  background-color: #adadad;
+}
+
+.ProductPagination-container button:active {
+  background-color: #918e8e;
+  color: white;
+}
+
+.ProductPagination-container span {
+  align-self: center;
+  padding: 0 10px;
+}

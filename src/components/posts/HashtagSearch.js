@@ -37,10 +37,19 @@ function HashtagSearch() {
                     Authorization: `Bearer ${authToken}`,
                 },
             });
-            
+
             const data = res.data.data;
             if (data.totalElements !== totalCnt || data.totalPages >= currentPage){
-                setPosts([...posts, ...data.content]);
+                const updatedPosts = await Promise.all(data.content.map(async (post) => {
+                  const likesCount = await fetchLikesCount(post.postId);
+                  
+                  return {
+                    ...post,
+                    likesCount,
+                  };
+                }));
+                
+                setPosts([...posts, ...updatedPosts]);
                 setCurrentPage((currentPage) => currentPage + 1);
             }
             setTotalCnt(data.totalElements);
@@ -51,29 +60,42 @@ function HashtagSearch() {
         }
     };
 
+    const fetchLikesCount = async (postId) => {
+        const res = await axios.get(`${process.env.REACT_APP_HOST_URL}/api/v1/post/likes/${postId}`, {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        });
+
+        return res.data.data.likedCount;
+      };
+
     return (
-        <div>
-          <h1>"#{hashtag}" 검색 결과</h1>
-          {posts.map((post) => (
-            <div className="post" key={post.postId}>
-              <img src={post.imageUrl} alt="post image" />
-              <Link to={`/post/${post.postId}`}>
-                <h2>{post.title}</h2>
-              </Link>
-              <h3>{post.writer}</h3>
-              <p>{post.content.split(/(#[^\s]+)/g).map((v, i) => {
-                  if (v.match(/#[^\s]+/)) {
-                    return <Link key={i} to={`/post/hashtagSearch?hashtag=${v.slice(1)}`}>{v}</Link>;
-                  }
-                  return v;
-                })}</p>
-              <p>{post.createDate}</p>
-            </div>
-          ))}
-          <div ref={ref} style={{"marginTop":"200px"}}>포스트를 불러오는 중...</div>
-          {loading && <p></p>}
-        </div>
-      );
+      <div className="hashtag-search-page">
+        <h1 className="search-title">"#{hashtag}" 검색 결과</h1>
+        {posts.map((post) => (
+
+          <div className="postItem" key={post.postId}>
+            <h3 className="postItem-username">{post.writer}</h3>
+            <img className="postItem-image" src={post.imageUrl} alt="post image" />
+            <p className="postItem-likesCount">{post.likesCount}명이 좋아합니다.</p>
+            <Link to={`/post/${post.postId}`} className="postItem-title">
+              <h2 className="postItem-title-text">{post.title}</h2>
+            </Link>
+            <p className="postItem-content">{post.content.split(/(#[^\s]+)/g).map((v, i) => {
+                if (v.match(/#[^\s]+/)) {
+                  return <Link key={i} to={`/post/hashtagSearch?hashtag=${v.slice(1)}`}>{v}</Link>;
+                }
+                return v;
+              })}</p>
+            <p className="postItem-date">{post.createDate}</p>
+          </div>
+        ))}
+        <div ref={ref} style={{"marginTop":"200px"}} className="loading-message">포스트를 불러오는 중...</div>
+        {loading && <p className="loading-indicator"></p>}
+      </div>
+  );
+  
 }
 
 export default HashtagSearch;

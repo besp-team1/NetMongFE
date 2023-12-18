@@ -36,14 +36,14 @@ const PostCommentForm = ({ postId, onCommentSubmit }) => {
 
     return (
         <div className="postCommemntForm-container">
-            <div className="chat-container">
-                <form onSubmit={handleCommentSubmit} className="form-container">
-                    <div className="textarea-container">
-                        <textarea className="textarea" value={comment} onChange={handleCommentChange} />
-                        <button type="submit">작성</button>
+            {/* <div className="chat-container"> */}
+                <form onSubmit={handleCommentSubmit} className="PostCommentForm-container">
+                    <div className="PostCommentFormtextarea-container">
+                        <textarea className="PostCommentFormtextarea" value={comment} onChange={handleCommentChange} />
+                        <button className="submitBtn" type="submit">작성</button>
                     </div>
                 </form>
-            </div>
+            {/* </div> */}
         </div>
     );
 };

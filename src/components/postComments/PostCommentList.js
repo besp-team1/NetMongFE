@@ -78,34 +78,43 @@ const PostCommentList = ({ postId }) => {
     }
 
     return (
-        <div className="comment-list-container">
-            {comments.map((comment) => (
-                <div key={comment.id} className="comment-item">
-                    <p className="comment-username">{comment.username}</p>
-                    {!isEditing || comment.id !== editingId ? (
-                        <div className="comment-content">
-                            {comment.isDeleted ? '삭제된 게시글입니다.' : comment.content}
+        <div>
+            <div className="comment-list-container">
+                {comments.length > 0 ? (
+                    comments.map((comment) => (
+                        <div key={comment.id}>
+                            <p className="comment-username">{comment.username}</p>
+                            <div className="comment-item">
+                                {!isEditing || comment.id !== editingId ? (
+                                    <div className="comment-content">
+                                        {comment.isDeleted ? '삭제된 댓글입니다.' : comment.content}
+                                    </div>
+                                ) : (
+                                    <form onSubmit={(e) => handleEditSubmit(e, comment.id)}>
+                                        <input type="text" value={editContent} onChange={handleEditChange} />
+                                        <button type="submit">저장</button>
+                                    </form>
+                                )}
+                                {!comment.isDeleted && comment.username === localStorage.getItem('username') && (
+                                    <div className="postCommentButton-container">
+                                        {!isEditing || comment.id !== editingId ? (
+                                            <button onClick={() => handleEditClick(comment.content, comment.id)}>수정</button>
+                                        ) : (
+                                            <button onClick={() => setIsEditing(false)}>취소</button>
+                                        )}
+                                        <button onClick={() => deleteComment(comment.id)}>삭제</button>
+                                    </div>
+                                )}
+                                {comment.username !== localStorage.getItem('username') &&  // 현재 사용자가 댓글 작성자와 다른 경우에만 신고 버튼을 렌더링합니다.
+                                    <ReportCommentModal commentId={comment.id} />
+                                }
+                            </div>
                         </div>
-                    ) : (
-                        <form onSubmit={(e) => handleEditSubmit(e, comment.id)}>
-                            <input type="text" value={editContent} onChange={handleEditChange} />
-                            <button type="submit">저장</button>
-                        </form>
-                    )}
-                    {!comment.isDeleted && comment.username === localStorage.getItem('username') && (
-                        <div>
-                            {!isEditing || comment.id !== editingId ? (
-                                <button onClick={() => handleEditClick(comment.content, comment.id)}>수정</button>
-                            ) : (
-                                <button onClick={() => setIsEditing(false)}>취소</button>
-                            )}
-                            <button onClick={() => deleteComment(comment.id)}>삭제</button>
-                        </div>
-                    )}
-                    {comment.username !== localStorage.getItem('username') &&  // 현재 사용자가 댓글 작성자와 다른 경우에만 신고 버튼을 렌더링합니다.
-                        <ReportCommentModal commentId={comment.id} />
-                    }                </div>
-            ))}
+                    ))
+                ) : (
+                    <p>아직 아무도 댓글을 달지 않았어요. <br></br>반려동물에 대한 사랑을 나눠주세요!</p>
+                )}
+            </div>
             <div className="pagination">
                 <button onClick={() => setPage((prevPage) => Math.max(prevPage - 1, 1))}>{"<"}</button>
                 {pageNumbers.map((number) => (
@@ -121,6 +130,7 @@ const PostCommentList = ({ postId }) => {
             </div>
         </div>
     );
+    
 };
 
 export default PostCommentList;

@@ -2,24 +2,20 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 100px;
-}  
-
-.chat-container {
-    width: 80%; 
-    margin: 20px auto;
-    padding: 20px;
 }
 
-.form-container {
+.PostCommentForm-container {
     width: 100%;
-    position: relative; 
-    flex-direction: column;
+    margin-top: 10%;
 }
 
-.textarea {
+.PostCommentFormtextarea-container {
+    display: flex; 
+    align-items: center;
+}
+
+.PostCommentFormtextarea {
     flex-grow: 1;
-    width: 100%;
     padding: 10px;
     font-size: 14px;
     line-height: 1.5;
@@ -28,66 +24,19 @@
     border-radius: 20px;
     resize: none;
     margin-right: 10px;
+    width: auto; /* 가로 길이를 부모 요소의 120%로 설정 */
 }
 
-.button {
-    position: absolute;
-    bottom: 18px;
-    right: 20px;
+.submitBtn {
     padding: 10px;
     background-color: #74A3FF;
     color: white;
     border: none;
     cursor: pointer;
     border-radius: 5px;
+    width: auto;
 }
 
-.button:hover {
-    background-color: #74A3FF;.postCommemntForm-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding-top: 100px;
-    }
-    
-    .chat-container {
-        width: 80%;
-        margin: 20px auto;
-        padding: 20px;
-    }
-    
-    .form-container {
-        width: 100%;
-    }
-    
-    .textarea-container {
-        display: flex; /* 추가 */
-    }
-    
-    .textarea {
-        flex-grow: 1; /* 추가 */
-        width: 100%;
-        padding: 10px;
-        font-size: 14px;
-        line-height: 1.5;
-        background-color: #F9F9F9;
-        border: 1px solid #ddd;
-        border-radius: 20px;
-        resize: none;
-        margin-right: 10px;
-    }
-    
-    .button {
-        padding: 10px;
-        background-color: #74A3FF;
-        color: white;
-        border: none;
-        cursor: pointer;
-        border-radius: 5px;
-    }
-    
-    .button:hover {
-        background-color: #74A3FF;
-    }
-    
+.submitBtn:hover {
+    background-color: #74A3FF;
 }
