@@ -32,7 +32,7 @@ function HashtagSearch() {
     const fetchSearchResults = async (pageNumber) => {
         try {
             setLoading(false);
-            const res = await axios.get(`http://localhost:9000/api/v1/post/hashtagSearch?hashtag=${hashtag}&page=${pageNumber}`, {
+            const res = await axios.get(`${process.env.REACT_APP_HOST_URL}/api/v1/post/hashtagSearch?hashtag=${hashtag}&page=${pageNumber}`, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                 },

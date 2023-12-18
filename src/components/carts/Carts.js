@@ -6,10 +6,11 @@ import '../../style/carts/Carts.css';
 const Carts = () => {
     const [cartItems, setCartItems] = useState([]);
     const authToken = localStorage.getItem('token');
+    const API_BASE_URL = `${process.env.REACT_APP_HOST_URL}/api/v1/products/cart`; 
 
     const fetchCartItems = async () => {
-        const url = 'http://localhost:9000/api/v1/products/cart';
-
+        const url = `${API_BASE_URL}`;
+        
         try {
         const response = await axios.get(url, {
             headers: {

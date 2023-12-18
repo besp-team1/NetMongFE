@@ -18,10 +18,12 @@ function ProductDetail() {
     category: product ? product.category : null
   });
 
+  const API_BASE_URL = `${process.env.REACT_APP_HOST_URL}/api/v1/products`;
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`http://localhost:9000/api/v1/products/${productId}`);
+        const response = await axios.get(`${API_BASE_URL}/${productId}`);
         setProduct(response.data.data);
       } catch (error) {
         console.error('상품 정보 불러오기 중 오류 발생:', error.message);
@@ -33,7 +35,7 @@ function ProductDetail() {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:9000/api/v1/products/${productId}`);
+      await axios.delete(`${API_BASE_URL}/${productId}`);
       alert('삭제되었습니다.');
       navigate('/api/v1/products'); 
     } catch (error) {
@@ -43,7 +45,7 @@ function ProductDetail() {
 
   const handleEdit = async () => {
     try {
-      await axios.patch(`http://localhost:9000/api/v1/products/${productId}`, updateData);
+      await axios.patch(`${API_BASE_URL}/${productId}`, updateData);
     } catch (error) {
       console.error('상품 수정 중 오류 발생:', error.message);
     }

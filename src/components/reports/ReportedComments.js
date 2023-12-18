@@ -9,7 +9,7 @@ function ReportedComments() {
     const authToken = localStorage.getItem('token');
 
     useEffect(() => {
-        axios.get('http://localhost:9000/api/v1/admin/reports/comments', {
+        axios.get(`${process.env.REACT_APP_HOST_URL}/api/v1/admin/reports/comments`, {
             headers: {
                 Authorization: `Bearer ${authToken}`,
             },

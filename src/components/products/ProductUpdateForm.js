@@ -5,6 +5,7 @@ import axios from 'axios';
 function ProductUpdateForm() {
   const { productId } = useParams();
   const navigate = useNavigate();
+  const API_BASE_URL = `${process.env.REACT_APP_HOST_URL}/api/v1/products`; 
 
   const [product, setProduct] = useState({
     productName: '',
@@ -17,7 +18,7 @@ function ProductUpdateForm() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`http://localhost:9000/api/v1/products/${productId}`);
+        const response = await axios.get(`${API_BASE_URL}/${productId}`);
         setProduct(response.data.data);
       } catch (error) {
         console.error('Error fetching product information:', error.message);
@@ -43,15 +44,13 @@ function ProductUpdateForm() {
         productName: product.productName,
         price: product.price,
         content: product.content,
-        count: parseInt(product.count), // Convert count to integer
+        count: parseInt(product.count),
         category: product.category,
-        // Add other fields as needed
       };
 
-      await axios.patch(`http://localhost:9000/api/v1/products/${productId}`, updateData);
+      await axios.patch(`${API_BASE_URL}/${productId}`, updateData);
 
-      // Redirect or handle the updated state as needed
-      navigate(`/products/${productId}`, { replace: true });
+      navigate(`/${productId}`, { replace: true });
     } catch (error) {
       console.error('Error updating product:', error.message);
     }

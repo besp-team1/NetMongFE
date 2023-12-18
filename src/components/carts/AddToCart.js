@@ -7,6 +7,7 @@ const AddToCart = ({ productId, onProductAdd }) => {
   const [count, setCount] = useState(1);
   const authToken = localStorage.getItem('token');
   const navigate = useNavigate();
+  const API_BASE_URL = `${process.env.REACT_APP_HOST_URL}/api/v1/products/cart`; 
 
   const handleCountChange = (e) => {
     setCount(e.target.value);
@@ -15,7 +16,7 @@ const AddToCart = ({ productId, onProductAdd }) => {
   const handleAddToCart = async (e) => {
     e.preventDefault();
 
-    const url = `http://localhost:9000/api/v1/products/cart/${productId}`;
+    const url = `${API_BASE_URL}/${productId}`;
     const data = { count: count };
 
     try {

@@ -49,7 +49,7 @@ function ProductEdit() {
       updatedFormData.append('count', formData.count);
       updatedFormData.append('category', formData.category);
 
-      await axios.patch(`http://localhost:9000/api/v1/products/${productId}`, updatedFormData);
+      await axios.patch(`${process.env.REACT_APP_HOST_URL}/api/v1/products/${productId}`, updatedFormData);
       navigate('/api/v1/products');
     } catch (error) {
       console.error('상품 수정 중 오류 발생:', error.message);
