@@ -21,6 +21,7 @@ import ParkComment from './components/parks/ParkComment';
 import ParkCommentForm from './components/parks/ParkCommentForm';
 import SearchPost from './components/posts/SearchPost';
 import MemberDetail from './components/memberDetail/MemberDetail';
+import GoogleLoginRedirect from './components/members/GoogleLogin';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -61,6 +62,7 @@ function App() {
               <Route path="/parks/:parkId/comment" element={<ParkCommentForm />} /> 
               <Route path="/post/search" element={<SearchPost />} />
               <Route path="/members/:username" element={<MemberDetail />} />
+              <Route path="/login/google/token/:token" element={<GoogleLoginRedirect />} />
             </Routes>
           </div>
           <Footer />
