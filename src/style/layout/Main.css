@@ -6,6 +6,27 @@
   overflow: hidden; /* 내용이 넘칠 때 숨김 처리 */
 }
 
+.mainSearch-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+.mainSearch-container .mainCategory {
+  padding: 5px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.mainSearchBtn {
+  background-color: #74A3FF;
+  color: white;
+  border-radius: 3px;
+}
+
 .snowflake {
   position: absolute;
   width: 8px; /* 눈송이 크기 조절 */

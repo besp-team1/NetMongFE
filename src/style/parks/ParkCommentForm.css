@@ -14,7 +14,7 @@
     position: relative;
 }
 
-.textarea {
+.ParkCommentTextarea {
     flex-grow: 1; 
     padding: 30px;
     font-size: 16px;

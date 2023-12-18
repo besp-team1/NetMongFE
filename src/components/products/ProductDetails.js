@@ -7,7 +7,7 @@ import '../../style/products/ProductDetail.css';
 
 function ProductDetail() {
   const [product, setProduct] = useState(null);
-  const { productId } = useParams(); // URL에서 productId 추출
+  const { productId } = useParams();
   const navigate = useNavigate();
 
   const [updateData, setUpdateData] = useState({
@@ -34,8 +34,8 @@ function ProductDetail() {
   const handleDelete = async () => {
     try {
       await axios.delete(`http://localhost:9000/api/v1/products/${productId}`);
-      alert('삭제되었습니다.'); // 팝업을 띄웁니다.
-      navigate('/api/v1/products'); // 상품 목록 페이지로 이동합니다.
+      alert('삭제되었습니다.');
+      navigate('/api/v1/products'); 
     } catch (error) {
       console.error('상품 삭제 중 오류 발생:', error.message);
     }
@@ -44,7 +44,6 @@ function ProductDetail() {
   const handleEdit = async () => {
     try {
       await axios.patch(`http://localhost:9000/api/v1/products/${productId}`, updateData);
-      // Redirect or handle the updated state as needed
     } catch (error) {
       console.error('상품 수정 중 오류 발생:', error.message);
     }
@@ -68,10 +67,8 @@ function ProductDetail() {
         <Link to={`/api/v1/products/${productId}/edit`}>
           <button>수정하기</button>
         </Link>
-
         <button onClick={handleDelete}>삭제하기</button>
       </div>
-
     </div>
   );
 }

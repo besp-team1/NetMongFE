@@ -140,46 +140,62 @@ const PostDetail = () => {
     if (!post) {
         return <div>게시글을 불러오는 중...</div>;
     }
-
     return (
-        <div className="post-container">
-            <h1>{post.title}</h1>
-            <img src={`${post.imageUrl}`} alt="게시물 이미지" style={{ maxWidth: '100%', height: 'auto' }} />
-            <div className="post-sub">
-                <p>{post.writer}</p>
-                <p>{post.content.split(/(#[^\s]+)/g).map((v, i) => {
-                    if (v.match(/#[^\s]+/)) {
-                        return <Link key={i} to={`/post/hashtagSearch?hashtag=${v.slice(1)}`}>{v}</Link>;
-                    }
-                    return v;
-                  })}</p>
+        <div className="Post-container">
+            <div className="post-left">
+                <img src={`${post.imageUrl}`} alt="게시물 이미지" style={{ maxWidth: '100%', height: 'auto' }} />
             </div>
-            <div className="post-date">
-                <p>{post.createDate}</p>
+            <div className="post-right">
+                <div className="title-actions">
+                    <h1 className="post-title">{post.title}</h1>
+                    <div className="post-actions">
+                        {localStorage.getItem('username') === post.writer && (
+                            <>
+                                <button className="btn-update" onClick={handleUpdate}>수정</button>
+                                <button className="btn-delete" onClick={handleDelete}>삭제</button>
+                            </>
+                        )}
+                    </div>
+                </div>
+    
+                <div className="post-sub">
+                    <p>{post.writer}</p>
+                </div>
+    
+                <div className="post-content">
+                    <p>{post.content.split(/(#[^\s]+)/g).map((v, i) => {
+                        if (v.match(/#[^\s]+/)) {
+                            return <Link key={i} to={`/post/hashtagSearch?hashtag=${v.slice(1)}`}>{v}</Link>;
+                        }
+                        return v;
+                    })}</p>
+                </div>
+    
+                <div className="post-date">
+                    <p>{post.createDate}</p>
+                </div>
+    
+                <div className="button-container">
+                    <div className="btn-report">
+                        <ReportModal postId={id} />
+                    </div>
+    
+                    <div className="like-container">
+                        <button className="btn-like" onClick={handleLike}>
+                            {liked ? <FontAwesomeIcon icon={solidHeart} /> : <FontAwesomeIcon icon={regularHeart} />}
+                        </button>
+                        <p>{likesCount}</p>
+                    </div>
+                </div>
+                
+                <div className="chat-container">
+                    <PostCommentList postId={id} comments={comments} />
+                    <PostCommentForm postId={id} onCommentSubmit={fetchComments} />
+                </div>
             </div>
-
-            <div className="btn-report">
-                <ReportModal postId={id} />
-            </div>
-
-            <div className="like-container">
-                <button className="btn-like" onClick={handleLike}>
-                    {liked ? <FontAwesomeIcon icon={solidHeart} /> : <FontAwesomeIcon icon={regularHeart} />}
-                </button>
-                <p>{likesCount}</p>
-            </div>
-            
-            <div className="post-actions">
-                <button className="btn-update" onClick={handleUpdate}>수정</button>
-                <button className="btn-delete" onClick={handleDelete}>삭제</button>
-            </div>
-            <div>
-                <PostCommentList postId={id} comments={comments} />
-                <PostCommentForm postId={id} onCommentSubmit={fetchComments} />
-            </div>
-            
         </div>
     );
+    
 };
 
 export default PostDetail;

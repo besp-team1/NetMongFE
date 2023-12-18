@@ -42,8 +42,8 @@ function Main() {
     <div className="main-container">
       <img src={bannerImage} alt="Banner" />
       {snowflakes}
-      <div className="search-container">
-        <select value={category} onChange={handleCategoryChange}>
+      <div className="mainSearch-container">
+        <select className="mainCategory" value={category} onChange={handleCategoryChange}>
           <option value="작성자">작성자</option>
           <option value="내용">내용</option>
         </select>
@@ -53,7 +53,7 @@ function Main() {
           value={searchWord}
           onChange={handleSearchInputChange}
         />
-        <button onClick={handleSearch}>검색</button>
+        <button className="mainSearchBtn" onClick={handleSearch}>검색</button>
       </div>
       {!isSearching && <PostBoard category={category} searchWord={searchWord} />}
       {isSearching && <SearchPost category={category} searchWord={searchWord} setIsSearching={setIsSearching} />}
