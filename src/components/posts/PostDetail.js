@@ -144,7 +144,7 @@ const PostDetail = () => {
     return (
         <div className="Post-container">
             <div className="post-left">
-                <img src={`${post.imageUrl}`} alt="게시물 이미지" style={{ maxWidth: '100%', height: 'auto' }} />
+                <img src={`http://localhost:9000/${post.imageUrl}`} alt="게시물 이미지" style={{ maxWidth: '100%', height: 'auto' }} />
             </div>
             <div className="post-right">
                 <div className="title-actions">
