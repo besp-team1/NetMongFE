@@ -22,7 +22,7 @@ function Main() {
 
   const handleSearch = () => {
     setIsSearching(true);
-    navigate(`/post/search?category=${encodeURIComponent(category)}&searchWord=${encodeURIComponent(searchWord)}`); // 검색 결과 페이지로 이동
+    navigate(`/post/categorySearch?category=${encodeURIComponent(category)}&searchWord=${encodeURIComponent(searchWord)}`); // 검색 결과 페이지로 이동
   };
 
   const snowflakes = Array.from({ length: 100 }).map((_, index) => (

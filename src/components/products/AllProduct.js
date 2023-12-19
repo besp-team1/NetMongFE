@@ -11,12 +11,13 @@ function ProductList() {
   const [searchTerm, setSearchTerm] = useState(''); // 상품 검색
   const [selectedCategory, setSelectedCategory] = useState(''); // 카테고리 검색
 
+  const API_BASE_URL = `${process.env.REACT_APP_HOST_URL}/api/v1/products`; 
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:9000/api/v1/products/all?pageNumber=${pageNumber}`);
+        const response = await axios.get(`${API_BASE_URL}/all?pageNumber=${pageNumber}`);
         const { data } = response.data;
 
         setProducts(data.content);
@@ -62,11 +63,11 @@ function ProductList() {
   };
 
   useEffect(() => {
-    fetchProducts(`http://localhost:9000/api/v1/products/all?pageNumber=${pageNumber}`);
+    fetchProducts(`${API_BASE_URL}/all?pageNumber=${pageNumber}`);
   }, [pageNumber]);
   
   const handleSearch = () => {
-    fetchProducts(`http://localhost:9000/api/v1/products/name/${searchTerm}`, true);
+    fetchProducts(`${API_BASE_URL}/name/${searchTerm}`, true);
   };
 
   // 카테고리 변경
@@ -110,9 +111,10 @@ function ProductList() {
               <h3 className="productItem-productName">{product.productName}</h3>
               <p className="productItem-price"><span className="label">가격:</span> {product.price}</p>
               <p className="productItem-content"><span className="label">내용:</span> {product.content}</p>
-              <p className="productItem-count"><span className="label">상품 갯수:</span> {product.count}</p>
+              <p className="productItem-count">
+                <span className="label">수량:</span> {product.count > 0 ? product.count : <span className="sold-out">품절</span>}
+              </p>
               <p className={`productItem-category productItem-category-${product.category}`}>{product.category}</p>
-
             </li>
           ))}
       </ul>

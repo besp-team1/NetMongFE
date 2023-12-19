@@ -27,12 +27,12 @@ function HashtagSearch() {
       if (inView) {
           fetchSearchResults(currentPage);
       }
-  }, [inView, location]);
+  }, [inView, location, currentPage]);
 
     const fetchSearchResults = async (pageNumber) => {
         try {
             setLoading(false);
-            const res = await axios.get(`http://localhost:9000/api/v1/post/hashtagSearch?hashtag=${hashtag}&page=${pageNumber}`, {
+            const res = await axios.get(`${process.env.REACT_APP_HOST_URL}/api/v1/post/hashtagSearch?hashtag=${hashtag}&page=${pageNumber}`, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                 },
@@ -74,7 +74,6 @@ function HashtagSearch() {
       <div className="hashtag-search-page">
         <h1 className="search-title">"#{hashtag}" 검색 결과</h1>
         {posts.map((post) => (
-
           <div className="postItem" key={post.postId}>
             <h3 className="postItem-username">{post.writer}</h3>
             <img className="postItem-image" src={post.imageUrl} alt="post image" />

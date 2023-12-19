@@ -26,7 +26,7 @@ const ReportPostModal = ({ postId }) => {
 
     const fetchReportTypes = async () => {
         try {
-            const response = await axios.get('http://localhost:9000/api/v1/reports/types', {
+            const response = await axios.get(`${process.env.REACT_APP_HOST_URL}/api/v1/reports/types`, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                 },
@@ -56,7 +56,7 @@ const ReportPostModal = ({ postId }) => {
         }
 
         try {
-            const response = await axios.post(`http://localhost:9000/api/v1/reports/post/${postId}`, {
+            const response = await axios.post(`${process.env.REACT_APP_HOST_URL}/api/v1/reports/post/${postId}`, {
                 reportType: selectedType,
                 content: description,
             }, {

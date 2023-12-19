@@ -9,7 +9,7 @@ function ReportedPosts() {
     const authToken = localStorage.getItem('token');
 
     useEffect(() => {
-        axios.get('http://localhost:9000/api/v1/admin/reports/posts', {
+        axios.get(`${process.env.REACT_APP_HOST_URL}/api/v1/admin/reports/posts`, {
             headers: {
                 Authorization: `Bearer ${authToken}`,
             },

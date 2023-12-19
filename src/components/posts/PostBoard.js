@@ -65,7 +65,9 @@ function PostBoard() {
         <div>
             {posts.map((post) => (
                 <div className="postItem" key={post.postId}>
-                    <h3 className="postItem-username">{post.writer}</h3>
+                    <Link to={`/members/${post.writer}`} className="postItem-username">
+                        <h3>{post.writer}</h3>
+                    </Link>                    
                     <img className="postItem-image" src={post.imageUrl} alt="post image" />
                     <p className="postItem-likesCount">{post.likedCount}명이 좋아합니다.</p>
                     <Link to={`/post/${post.postId}`} className="postItem-title">

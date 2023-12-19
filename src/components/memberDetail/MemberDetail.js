@@ -40,7 +40,7 @@ const MemberDetail = () => {
         <div className="left-side">
           <ImageProfile />
           <FollowButton
-           className="followButton" username={username} isFollowing={isFollowing} onFollowChange={fetchUser} />
+            className="followButton" username={username} isFollowing={isFollowing} onFollowChange={fetchUser} />
         </div>
         <div className="right-side">
           <Username username={username} />
