@@ -21,7 +21,6 @@ const Profile = ({onImageChange }) => {
 
   return (
     <div className="Profile">
-      <h2>{username}</h2>
       <Image src={sprite1} roundedCircle />
       <div className="profileButtonContainer">
         <Button className="profileImageBtn" onClick={onImageChange}>프로필 이미지 변경</Button>
