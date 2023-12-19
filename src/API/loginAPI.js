@@ -2,7 +2,7 @@ import axios from "axios";
 
 async function loginAPI(username, password) {
   const login = await axios.post(`${process.env.REACT_APP_HOST_URL}/api/v1/members/login`, {
-    username: username,
+    email: username,
     password: password
   })
     .then((response) => {
