@@ -11,10 +11,12 @@ const PostCommentList = ({ postId }) => {
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const authToken = localStorage.getItem('token');
+    const API_BASE_URL = `${process.env.REACT_APP_HOST_URL}/api/v1/post/comment`; 
+
 
     const fetchComments = async (page) => {
         try {
-            const response = await axios.get(`http://localhost:9000/api/v1/post/comment/${postId}?page=${page}`, {
+            const response = await axios.get(`${API_BASE_URL}/${postId}?page=${page}`, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                 },
@@ -28,7 +30,7 @@ const PostCommentList = ({ postId }) => {
 
     const editComment = async (id, content) => {
         try {
-            const response = await axios.patch(`http://localhost:9000/api/v1/post/comment/${id}`, { content }, {
+            const response = await axios.patch(`${API_BASE_URL}/${id}`, { content }, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                 },
@@ -41,7 +43,7 @@ const PostCommentList = ({ postId }) => {
 
     const deleteComment = async (id) => {
         try {
-            const response = await axios.delete(`http://localhost:9000/api/v1/post/comment/${id}`, {
+            const response = await axios.delete(`${API_BASE_URL}/${id}`, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                 },

@@ -165,3 +165,7 @@
   align-self: center;
   padding: 0 10px;
 }
+
+.sold-out {
+  color: red;
+}
