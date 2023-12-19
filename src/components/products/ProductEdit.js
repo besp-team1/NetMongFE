@@ -99,7 +99,7 @@ function ProductEdit() {
               {error.content && <div style={{color: 'red'}}>{error.content}</div>}
             </label>
             <label>
-                  상품 갯수:
+                  수량:
                   <input 
                     type="number" 
                     name="count" 

@@ -103,14 +103,14 @@ function ProductList() {
           .filter(product => selectedCategory ? product.category === selectedCategory : true)
           .map((product, index) => (
             <li key={index} onClick={() => handleProductDetails(product.productId)} style={{cursor: 'pointer'}}>
-              {/* <img className="productItem-image" src={product.imageUrl} alt={product.productName} width="100" height="100" /> */}
               <img className="productItem-image" src={product.imageUrl} alt="상품 이미지" width="100" height="100" />
               <h3 className="productItem-productName">{product.productName}</h3>
               <p className="productItem-price"><span className="label">가격:</span> {product.price}</p>
               <p className="productItem-content"><span className="label">내용:</span> {product.content}</p>
-              <p className="productItem-count"><span className="label">상품 갯수:</span> {product.count}</p>
+              <p className="productItem-count">
+                <span className="label">수량:</span> {product.count > 0 ? product.count : <span className="sold-out">품절</span>}
+              </p>
               <p className={`productItem-category productItem-category-${product.category}`}>{product.category}</p>
-
             </li>
           ))}
       </ul>

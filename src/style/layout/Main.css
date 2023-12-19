@@ -21,10 +21,19 @@
   border-radius: 5px;
 }
 
-.mainSearchBtn {
+.mainSearch-container input[type="text"] {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.mainSearch-container .mainSearchBtn {
+  padding: 5px 10px;
   background-color: #74A3FF;
   color: white;
+  border: none;
   border-radius: 3px;
+  cursor: pointer;
 }
 
 .snowflake {
