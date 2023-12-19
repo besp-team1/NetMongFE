@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import '../../style/postComments/ReplyForm.css';
 
-const ReplyForm = ({ commentId }) => {
+const ReplyForm = ({ commentId, postId }) => {
   const [reply, setReply] = useState('');
   const authToken = localStorage.getItem('token');
 
@@ -26,7 +26,8 @@ const ReplyForm = ({ commentId }) => {
       });
       console.log('대댓글이 성공적으로 작성되었습니다.');
       setReply('');
-    } catch (error) {
+      window.location.reload();
+          } catch (error) {
       console.error('대댓글 작성 중 오류 발생:', error.message);
     }
   };
