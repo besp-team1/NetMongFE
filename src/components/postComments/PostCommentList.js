@@ -140,7 +140,7 @@ const PostCommentList = ({ postId }) => {
                             ) : (
                                 <button className="reply-button" onClick={handleHideRepliesClick}>답글 숨기기</button>
                             )}
-                            {comment.childCommentsIds.map((childComment) => (
+                            {showingRepliesId === comment.id && comment.childCommentsIds.map((childComment) => (
                                     <div key={childComment.id} className="comment-reply-item">
                                         <p className="comment-username">{childComment.username}</p>
                                         <p className="comment-content">{childComment.content}</p>
