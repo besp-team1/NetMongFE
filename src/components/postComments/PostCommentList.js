@@ -140,12 +140,16 @@ const PostCommentList = ({ postId }) => {
                             ) : (
                                 <button className="reply-button" onClick={handleHideRepliesClick}>답글 숨기기</button>
                             )}
-                            {showingRepliesId === comment.id && comment.childCommentsIds.map((childComment) => (
-                                <div key={childComment.id} style={{ marginLeft: '20px' }}>
-                                    <p className="comment-username">{childComment.username}</p>
-                                    <div className="comment-content">{childComment.content}</div>
+                            {comment.childCommentsIds.map((childComment) => (
+                                    <div key={childComment.id} className="comment-reply-item">
+                                        <p className="comment-username">{childComment.username}</p>
+                                        <p className="comment-content">{childComment.content}</p>
+                                        <button className="reply-button" onClick={() => handleReplyClick(childComment.id)}>
+                                            {replyingCommentId === childComment.id ? '답글 닫기' : '답글 달기'}
+                                        </button>
+                                        {replyingCommentId === childComment.id && <ReplyForm commentId={childComment.id} />}
                                     </div>
-                            ))}
+                                ))}
                             
                         </div>
                     ))
