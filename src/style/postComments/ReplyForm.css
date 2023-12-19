@@ -1,0 +1,38 @@
+.replyForm-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 10%;
+}
+
+.replyForm-form {
+  display: flex;
+  align-items: baseline;
+  width: 100%;
+}
+
+.replyFormtextarea {
+  flex-grow: 1;
+  font-size: 12px;
+  line-height: 1.5;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  resize: none;
+  margin-right: 10px;
+  align-self: flex-start; /* 입력창을 위로 정렬하도록 추가 */
+}
+
+.replySubmitBtn {
+  background-color: #74a3ff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  width: auto;
+}
+
+.replySubmitBtn:hover {
+  background-color: #74a3ff;
+}

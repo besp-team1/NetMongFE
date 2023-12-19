@@ -48,7 +48,7 @@ function Product() {
       if (formData.images) {
         formDataForUpload.append('images', formData.images);
       }
-      await axios.post(`http://localhost:9000/api/v1/products`, formDataForUpload);
+      await axios.post(`${process.env.REACT_APP_HOST_URL}/api/v1/products`, formDataForUpload);
       navigate('/api/v1/products', { replace: true });
     } catch (error) {
       console.error('상품 등록 중 오류 발생:', error.message);
@@ -106,7 +106,7 @@ function Product() {
                 {error.content && <div style={{color: 'red'}}>{error.content}</div>}
                 </label>
                 <label>
-                  상품 갯수:
+                  수량:
                   <input 
                     type="number" 
                     name="count" 
