@@ -87,3 +87,25 @@
     background-color: #bbb;
     color: white;
 }
+
+.reply-button {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 0.8em;
+    cursor: pointer;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edit-delete-button {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 0.8em;
+    cursor: pointer;
+}
