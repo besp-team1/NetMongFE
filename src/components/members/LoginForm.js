@@ -6,12 +6,12 @@ import axios from 'axios';
 import GoogleLoginRedirect from "./GoogleLogin";
 
 const LoginForm = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
+    setEmail(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
@@ -20,12 +20,11 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await loginAPI(username, password).then((res) => {
+    await loginAPI(email, password).then((res) => {
       if (res === 'fail') {
         navigate('/login');
       } else {
         localStorage.setItem('token', res);
-        localStorage.setItem('username', username);
         navigate('/');
       }
     });
@@ -40,8 +39,8 @@ const LoginForm = () => {
     <div className="LoginForm-container">
       <form className="form-signin" onSubmit={handleSubmit}>
         <h2 className="form-signin-heading">로그인</h2>
-        <label for="inputUsername" className="label">Username</label>
-        <input type="text" id="inputUsername" className="form-control" placeholder="Username" value={username} onChange={handleUsernameChange} required autofocus />
+        <label for="inputUsername" className="label">Email</label>
+        <input type="text" id="inputUsername" className="form-control" placeholder="Email" value={email} onChange={handleUsernameChange} required autofocus />
         <label for="inputPassword" className="label">Password</label>
         <input type="password" id="inputPassword" className="form-control" placeholder="Password" value={password} onChange={handlePasswordChange} required />
         <button className="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
