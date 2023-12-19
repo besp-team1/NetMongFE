@@ -141,16 +141,25 @@ const PostCommentList = ({ postId }) => {
                                 <button className="reply-button" onClick={handleHideRepliesClick}>답글 숨기기</button>
                             )}
                             {showingRepliesId === comment.id && comment.childCommentsIds.map((childComment) => (
-                                    <div key={childComment.id} className="comment-reply-item">
-                                        <p className="comment-username">{childComment.username}</p>
-                                        <p className="comment-content">{childComment.content}</p>
-                                        <button className="reply-button" onClick={() => handleReplyClick(childComment.id)}>
-                                            {replyingCommentId === childComment.id ? '답글 닫기' : '답글 달기'}
+                                <div key={childComment.id} className="comment-reply-item">
+                                    <p className="comment-username">{childComment.username}</p>
+                                    <p className="comment-content">{childComment.content}</p>
+                                    <button className="reply-button" onClick={() => handleReplyClick(childComment.id)}>
+                                    {replyingCommentId === childComment.id ? '답글 닫기' : '답글 달기'}
+                                    </button>
+                                    {replyingCommentId === childComment.id && <ReplyForm commentId={childComment.id} />}
+                                    {childComment.childCommentsIds && childComment.childCommentsIds.map((grandChildComment) => (  // 대댓글의 대댓글을 렌더링합니다.
+                                    <div key={grandChildComment.id} className="comment-reply-item">
+                                        <p className="comment-username">{grandChildComment.username}</p>
+                                        <p className="comment-content">{grandChildComment.content}</p>
+                                        <button className="reply-button" onClick={() => handleReplyClick(grandChildComment.id)}>
+                                        {replyingCommentId === grandChildComment.id ? '답글 닫기' : '답글 달기'}
                                         </button>
-                                        {replyingCommentId === childComment.id && <ReplyForm commentId={childComment.id} />}
+                                        {replyingCommentId === grandChildComment.id && <ReplyForm commentId={grandChildComment.id} />}
                                     </div>
+                                    ))}
+                                </div>
                                 ))}
-                            
                         </div>
                     ))
                 ) : (

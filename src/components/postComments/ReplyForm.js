@@ -4,6 +4,7 @@ import '../../style/postComments/ReplyForm.css';
 
 const ReplyForm = ({ commentId }) => {
   const [reply, setReply] = useState('');
+  const authToken = localStorage.getItem('token');
 
   const handleReplyChange = (e) => {
     setReply(e.target.value);
@@ -17,7 +18,12 @@ const ReplyForm = ({ commentId }) => {
     };
 
     try {
-      await axios.post(url, data);
+      await axios.post(url, data, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
       console.log('대댓글이 성공적으로 작성되었습니다.');
       setReply('');
     } catch (error) {
