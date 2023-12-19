@@ -1,0 +1,78 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.product-edit-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product-edit-title {
+  color: #74A3FF;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.product-edit-form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  margin-top: 30px;
+  padding: 30px;
+  background-color: #fbfbfb;
+  border-radius: 20px;
+  width: 800px;
+}
+
+.product-edit-container .form-row {
+  display: flex;
+  justify-content: space-between;
+}
+  
+.product-edit-container .form-left,
+.product-edit-container .form-right {
+  display: flex;
+  flex-direction: column;
+  width: 48%;
+}
+  
+.product-edit-container .form-left {
+  margin-right: 4%;
+  align-items: flex-start;
+}
+  
+.product-edit-container .form-left label,
+.product-edit-container .form-right label {
+  margin-bottom: 15px;
+  width: 90%;
+}
+  
+.product-edit-container .form-left label .edit-input,
+.product-edit-container .form-right label .edit-input,
+.product-edit-container .form-right label .edit-textarea {
+  width: 100%;
+  padding: 5px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.productEditButton-group {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.product-edit-submit-button {
+  padding: 10px;
+  background-color: #74A3FF;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 48%; 
+}

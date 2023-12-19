@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { Button, Image } from 'react-bootstrap';
 import Statistics from '../mypage/Statistics';
 import Posts from '../mypage/Posts';
 import FollowButton from '../mypage/FollowButton';
 import showMemberAPI from '../../API/showMemberAPI';
-import MemberProfile from './MemberProfile';
+import ImageProfile from './ImageProfile';
+import Username from './Username';
 import '../../style/memberDetail/MemberDetail.css';
+import '../../style/mypage/Profile.css';
 
 const MemberDetail = () => {
   const { username } = useParams();
@@ -35,12 +38,14 @@ const MemberDetail = () => {
     <div className="MemberDetail">
       <div className="leftRight">
         <div className="left-side">
-          <MemberProfile username={username} />
+          <ImageProfile />
           <FollowButton
            className="followButton" username={username} isFollowing={isFollowing} onFollowChange={fetchUser} />
         </div>
         <div className="right-side">
-          <Statistics followerCount={followerCount} 
+          <Username username={username} />
+          <Statistics 
+            followerCount={followerCount} 
             followeeCount={followeeCount}
             postCount = {postCount} />
         </div>

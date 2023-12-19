@@ -1,0 +1,52 @@
+.post {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.post img {
+    width: 270px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.post h2 {
+    margin: 10px 0;
+    font-size: 2em;
+    color: #333;
+    text-align: center; 
+}
+
+.post h3 {
+    margin: 10px 0;
+    font-size: 1.2em;
+    color: #777;
+    text-align: center;
+}
+
+.post p {
+    margin: 10px 0;
+    color: #333;
+    text-align: center;
+}
+  
+p.no-results {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.search-title {
+    font-size: 2em;
+    color: #74A3FF;
+    text-align: center;
+}

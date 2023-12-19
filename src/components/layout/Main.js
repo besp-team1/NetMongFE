@@ -22,7 +22,7 @@ function Main() {
 
   const handleSearch = () => {
     setIsSearching(true);
-    navigate(`/post/search?category=${encodeURIComponent(category)}&searchWord=${encodeURIComponent(searchWord)}`); // 검색 결과 페이지로 이동
+    navigate(`/post/categorySearch?category=${encodeURIComponent(category)}&searchWord=${encodeURIComponent(searchWord)}`); // 검색 결과 페이지로 이동
   };
 
   const snowflakes = Array.from({ length: 100 }).map((_, index) => (
@@ -42,8 +42,8 @@ function Main() {
     <div className="main-container">
       <img src={bannerImage} alt="Banner" />
       {snowflakes}
-      <div className="search-container">
-        <select value={category} onChange={handleCategoryChange}>
+      <div className="mainSearch-container">
+        <select className="mainCategory" value={category} onChange={handleCategoryChange}>
           <option value="작성자">작성자</option>
           <option value="내용">내용</option>
         </select>
@@ -53,7 +53,7 @@ function Main() {
           value={searchWord}
           onChange={handleSearchInputChange}
         />
-        <button onClick={handleSearch}>검색</button>
+        <button className="mainSearchBtn" onClick={handleSearch}>검색</button>
       </div>
       {!isSearching && <PostBoard category={category} searchWord={searchWord} />}
       {isSearching && <SearchPost category={category} searchWord={searchWord} setIsSearching={setIsSearching} />}

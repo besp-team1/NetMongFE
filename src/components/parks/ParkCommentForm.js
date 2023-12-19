@@ -45,7 +45,7 @@ const ParkCommentForm = () => {
             <h6>공원 산책 후, 경험을 공유해 주세요!</h6>
             <form onSubmit={handleCommentSubmit} className="parkComment-form">
                 <div className="parkComment-input-container">
-                    <textarea id="comment" className="textarea" placeholder="소중한 공원 후기를 댓글로 남겨주세요." value={comment} onChange={handleCommentChange} />
+                    <textarea id="comment" className="ParkCommentTextarea" placeholder="소중한 공원 후기를 댓글로 남겨주세요." value={comment} onChange={handleCommentChange} />
                 </div>
                 <button type="submit" className="parkSubmit-button">전송</button>
             </form>

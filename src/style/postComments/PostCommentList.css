@@ -1,35 +1,61 @@
 .comment-list-container {
     display: flex;
     flex-direction: column;
-    margin-top: 50px;
-    align-items: center;
+    align-items: flex-start;
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border-radius: 20px;
+    padding: 30px;
 }
 
 .comment-item {
-    padding: 15px;
-    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 15px;
 }
 
 .comment-username {
     font-weight: bold;
     color: #666;
-    margin-bottom: 8px;
-    font-size: 14px;
+    margin-bottom: 10px;
+    font-size: 12px;
 }
 
 .comment-content {
-    border-radius: 8px;
-    padding: 20px;
-    color: white;
-    background-color: #74A3FF;
-    font-size: 16px;
+    font-size: 12px;
+    margin-bottom: 10px;
 }
 
-.comment-list-container {
+.postCommentButton-container {
     display: flex;
-    flex-direction: column;
-    margin-top: 50px;
-    align-items: center;
+    justify-content: flex-end;
+}
+
+.postCommentButton-container button {
+    margin-right: 10px;
+    border: none;
+    font-size: 12px;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.postCommentButton-container button:hover {
+    background-color: #ddd;
+}
+
+.postCommentButton-container button:active {
+    background-color: #bbb;
+    color: white;
+}
+
+/* 페이징 */
+.pagination {
+    display: flex;
+    justify-content: center;
 }
 
 .pagination button {
@@ -45,6 +71,49 @@
 }
 
 .pagination button.active {
-    background-color: #4CAF50;
+    background-color: #bbb;
     color: white;
+}
+
+.reply-button {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 0.8em;
+    cursor: pointer;
+    text-align: left;
+    padding: 0;
+    margin-right: 30px;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edit-delete-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-right: 30px;
+    margin-bottom: 10px;
+}
+
+.comment-reply-item {
+    margin-left: 40px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: none;
+}
+
+.comment-reply-button {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 0.8em;
+    cursor: pointer;
+    padding: 0;
 }

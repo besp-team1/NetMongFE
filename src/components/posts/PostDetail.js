@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import '../../style/posts/PostDetail.css';
 import PostCommentForm from '../postComments/PostCommentForm';
 import PostCommentList from '../postComments/PostCommentList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
-import ReportModal from '../reportPost/ReportModal';
+import ReportModal from '../reports/ReportPostModal';
 
 const PostDetail = () => {
     const { id } = useParams();
@@ -17,11 +17,12 @@ const PostDetail = () => {
     const [liked, setLiked] = useState(false);
 
     const authToken = localStorage.getItem('token');
+    const API_BASE_URL = `${process.env.REACT_APP_HOST_URL}/api/v1/post`; 
     const navigate = useNavigate();
 
     const fetchPost = async () => {
         try {
-            const response = await axios.get(`${process.env.REACT_APP_HOST_URL}/api/v1/post/${id}`, {
+            const response = await axios.get(`${API_BASE_URL}/${id}`, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                 },
@@ -35,7 +36,7 @@ const PostDetail = () => {
 
     const fetchComments = async () => {
         try {
-            const response = await axios.get(`http://localhost:9000/api/v1/post/comment/${id}`, {
+            const response = await axios.get(`${API_BASE_URL}/comment/${id}`, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                 },
@@ -48,7 +49,7 @@ const PostDetail = () => {
 
     const fetchLikesCount = async () => {
         try {
-            const response = await axios.get(`http://localhost:9000/api/v1/post/likes/${id}`, {
+            const response = await axios.get(`${API_BASE_URL}/likes/${id}`, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                 },
@@ -74,7 +75,7 @@ const PostDetail = () => {
         
         if (loggedInUsername && loggedInUsername === post.writer) { 
             try {
-                await axios.delete(`http://localhost:9000/api/v1/post/${id}`, {
+                await axios.delete(`${API_BASE_URL}/${id}`, {
                     headers: {
                         Authorization: `Bearer ${authToken}`,
                     },
@@ -98,7 +99,7 @@ const PostDetail = () => {
     const handleLike = async () => {
         if (liked) {
             try {
-                const response = await axios.delete(`http://localhost:9000/api/v1/post/likes/${id}`, {
+                const response = await axios.delete(`${API_BASE_URL}/likes/${id}`, {
                     headers: {
                         Authorization: `Bearer ${authToken}`,
                     },
@@ -110,7 +111,7 @@ const PostDetail = () => {
             }
         } else {
             try {
-                const response = await axios.post(`http://localhost:9000/api/v1/post/likes/${id}`, {}, {
+                const response = await axios.post(`${API_BASE_URL}/likes/${id}`, {}, {
                     headers: {
                         Authorization: `Bearer ${authToken}`,
                     },
@@ -125,7 +126,7 @@ const PostDetail = () => {
     
     const handleUnlike = async () => {
         try {
-            const response = await axios.delete(`http://localhost:9000/api/v1/post/likes/${id}`, {
+            const response = await axios.delete(`${API_BASE_URL}/likes/${id}`, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                 },
@@ -140,41 +141,62 @@ const PostDetail = () => {
     if (!post) {
         return <div>게시글을 불러오는 중...</div>;
     }
-
     return (
-        <div className="post-container">
-            <h1>{post.title}</h1>
-            <img src={`${post.imageUrl}`} alt="게시물 이미지" style={{ maxWidth: '100%', height: 'auto' }} />
-            <div className="post-sub">
-                <p>{post.writer}</p>
-                <p>{post.content}</p>
+        <div className="Post-container">
+            <div className="post-left">
+                <img src={`${post.imageUrl}`} alt="게시물 이미지" style={{ maxWidth: '100%', height: 'auto' }} />
             </div>
-            <div className="post-date">
-                <p>{post.createDate}</p>
+            <div className="post-right">
+                <div className="title-actions">
+                    <h1 className="post-title">{post.title}</h1>
+                    <div className="post-actions">
+                        {localStorage.getItem('username') === post.writer && (
+                            <>
+                                <button className="btn-update" onClick={handleUpdate}>수정</button>
+                                <button className="btn-delete" onClick={handleDelete}>삭제</button>
+                            </>
+                        )}
+                    </div>
+                </div>
+    
+                <div className="post-sub">
+                    <p>{post.writer}</p>
+                </div>
+    
+                <div className="post-content">
+                    <p>{post.content.split(/(#[^\s]+)/g).map((v, i) => {
+                        if (v.match(/#[^\s]+/)) {
+                            return <Link key={i} to={`/post/hashtagSearch?hashtag=${v.slice(1)}`}>{v}</Link>;
+                        }
+                        return v;
+                    })}</p>
+                </div>
+    
+                <div className="post-date">
+                    <p>{post.createDate}</p>
+                </div>
+    
+                <div className="button-container">
+                    <div className="btn-report">
+                        <ReportModal postId={id} />
+                    </div>
+    
+                    <div className="like-container">
+                        <button className="btn-like" onClick={handleLike}>
+                            {liked ? <FontAwesomeIcon icon={solidHeart} /> : <FontAwesomeIcon icon={regularHeart} />}
+                        </button>
+                        <p>{likesCount}</p>
+                    </div>
+                </div>
+                
+                <div className="chat-container">
+                    <PostCommentList postId={id} comments={comments} />
+                    <PostCommentForm postId={id} onCommentSubmit={fetchComments} />
+                </div>
             </div>
-
-            <div className="btn-report">
-                <ReportModal postId={id} />
-            </div>
-
-            <div className="like-container">
-                <button className="btn-like" onClick={handleLike}>
-                    {liked ? <FontAwesomeIcon icon={solidHeart} /> : <FontAwesomeIcon icon={regularHeart} />}
-                </button>
-                <p>{likesCount}</p>
-            </div>
-            
-            <div className="post-actions">
-                <button className="btn-update" onClick={handleUpdate}>수정</button>
-                <button className="btn-delete" onClick={handleDelete}>삭제</button>
-            </div>
-            <div>
-                <PostCommentList postId={id} comments={comments} />
-                <PostCommentForm postId={id} onCommentSubmit={fetchComments} />
-            </div>
-            
         </div>
     );
+    
 };
 
 export default PostDetail;

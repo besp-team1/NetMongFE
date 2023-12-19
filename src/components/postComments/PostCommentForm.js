@@ -5,6 +5,7 @@ import '../../style/postComments/PostCommentForm.css'
 const PostCommentForm = ({ postId, onCommentSubmit }) => {
     const [comment, setComment] = useState('');
     const authToken = localStorage.getItem('token');
+    const API_BASE_URL = `${process.env.REACT_APP_HOST_URL}/api/v1/post/comment`; 
 
     const handleCommentChange = (e) => {
         setComment(e.target.value);
@@ -15,7 +16,7 @@ const PostCommentForm = ({ postId, onCommentSubmit }) => {
     
         try {
             const response = await axios.post(
-                `http://localhost:9000/api/v1/post/comment/${postId}`,
+                `${API_BASE_URL}/${postId}`,
                 { content: comment },
                 {
                     headers: {
@@ -36,14 +37,14 @@ const PostCommentForm = ({ postId, onCommentSubmit }) => {
 
     return (
         <div className="postCommemntForm-container">
-            <div className="chat-container">
-                <form onSubmit={handleCommentSubmit} className="form-container">
-                    <div className="textarea-container">
-                        <textarea className="textarea" value={comment} onChange={handleCommentChange} />
-                        <button type="submit">작성</button>
+            {/* <div className="chat-container"> */}
+                <form onSubmit={handleCommentSubmit} className="PostCommentForm-container">
+                    <div className="PostCommentFormtextarea-container">
+                        <textarea className="PostCommentFormtextarea" value={comment} onChange={handleCommentChange} />
+                        <button className="submitBtn" type="submit">작성</button>
                     </div>
                 </form>
-            </div>
+            {/* </div> */}
         </div>
     );
 };

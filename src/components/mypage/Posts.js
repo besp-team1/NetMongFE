@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import getPostsByUsernameAPI from '../../API/getPostsByUsernameAPI';
 import { useInView } from 'react-intersection-observer';
+import '../../style/mypage/Posts.css';
 
 const Posts = ({username}) => {
   const [posts, setPosts] = useState([]); // 상태를 추가하여 포스트를 관리합니다.
@@ -36,8 +37,10 @@ const Posts = ({username}) => {
   };
 
   return (
-    <Container>
-      <h2>내 글 목록</h2>
+    <Container className="Posts-container">
+      <div className="line-Title">
+        <h2 className="Posts-h2">내 글 목록</h2>
+      </div>
       <Row>
         {posts.map((post) => (
           <Col key={post.postId} md={4} >

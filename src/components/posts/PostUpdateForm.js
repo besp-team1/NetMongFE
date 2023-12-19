@@ -4,13 +4,22 @@ import axios from 'axios';
 import '../../style/posts/PostUpdateForm.css';
 
 const PostUpdateForm = () => {
+    const MAX_TITLE_LENGTH = 100;
+    const MAX_CONTENT_LENGTH = 100;
+
     const { id } = useParams();
     const [title, setTitle] = useState('');
+    const [titleError, setTitleError] = useState('');
+    const [titleLength, setTitleLength] = useState(0);
     const [content, setContent] = useState('');
+    const [contentError, setContentError] = useState('');
+    const [contentLength, setContentLength] = useState(0);
     const [image, setImage] = useState(null);
+    const [imageError, setImageError] = useState('');
     const [imagePreview, setImagePreview] = useState(null);
-    const authToken = localStorage.getItem('token');
+
     const navigate = useNavigate();
+    const authToken = localStorage.getItem('token');
 
     useEffect(() => {
         const fetchPost = async () => {
@@ -33,23 +42,42 @@ const PostUpdateForm = () => {
         fetchPost();
     }, [id, authToken]);
 
+    const handleTitleChange = (e) => {
+        setTitle(e.target.value);
+        setTitleLength(e.target.value.length);
+        if (e.target.value.length) setTitleError('');
+    };
+
+    const handleContentChange = (e) => {
+        setContent(e.target.value);
+        setContentLength(e.target.value.length);
+        if (e.target.value.length) setContentError('');
+    };
+
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0];
         setImage(selectedFile);
-
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            setImagePreview(reader.result);
-        };
         if (selectedFile) {
-            reader.readAsDataURL(selectedFile);
+          setImageError('');
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            setImagePreview(reader.result);
+          };
+          reader.readAsDataURL(selectedFile);
         } else {
-            setImagePreview(null);
+          setImagePreview(null);
+          setImageError('이미지를 업로드해주세요.');
         }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        let hasError = false;
+        if (!title) { setTitleError('제목을 입력해주세요.'); hasError = true;}
+        if (!content) { setContentError('내용을 입력해주세요.'); hasError = true;}
+        if (!image) { setImageError('이미지를 업로드해주세요.'); hasError = true;}
+        if (hasError) return;
 
         try {
             const formData = new FormData();
@@ -57,7 +85,7 @@ const PostUpdateForm = () => {
             formData.append('content', content);
             formData.append('image', image);
 
-            await axios.patch(`http://localhost:9000/api/v1/post/${id}`, formData, {
+            await axios.patch(`${process.env.REACT_APP_HOST_URL}/api/v1/post/${id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: `Bearer ${authToken}`,
@@ -89,21 +117,37 @@ const PostUpdateForm = () => {
                             <p>이미지 미리보기</p>
                         )}
                     </div>
-
+    
                     <div className="form-right">
                         <label className="title-label">
                             제목:
-                            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+                            <input
+                                type="text"
+                                value={title}
+                                onChange={handleTitleChange}
+                                maxLength={MAX_TITLE_LENGTH}
+                            />
+                            {titleError && <div style={{color: 'red'}}>{titleError}</div>}
+                            <div style={{textAlign: 'right'}}>{titleLength}/{MAX_TITLE_LENGTH}</div>
+                            {titleLength > MAX_TITLE_LENGTH && <div style={{color: 'red'}}>100글자까지만 작성 가능합니다.</div>}
                         </label>
                         <label className="content-label">
                             내용:
-                            <textarea value={content} onChange={(e) => setContent(e.target.value)} />
+                            <textarea
+                                value={content}
+                                onChange={handleContentChange}
+                                maxLength={MAX_CONTENT_LENGTH}
+                            />
+                            {contentError && <div style={{color: 'red'}}>{contentError}</div>}
+                            <div style={{textAlign: 'right'}}>{contentLength}/{MAX_CONTENT_LENGTH}</div>
+                            {contentLength > MAX_CONTENT_LENGTH && <div style={{color: 'red'}}>100글자까지만 작성 가능합니다.</div>}
                         </label>
                         <label className="upload-label">
                             이미지 업로드:
                             <input type="file" accept="image/*" onChange={handleFileChange} />
+                            {imageError && <div style={{color: 'red'}}>{imageError}</div>}
                         </label>
-
+    
                         <div className="button-container">
                             <button type="submit">UPDATE</button>
                         </div>
@@ -112,6 +156,7 @@ const PostUpdateForm = () => {
             </form>
         </div>
     );
+    
 };
 
 export default PostUpdateForm;

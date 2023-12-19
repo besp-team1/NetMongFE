@@ -113,7 +113,16 @@ export const addLikeToPark = async (parkId) => {
     const response = await api.post(`/likes/${parkId}`);
     return response.data;
   } catch (error) {
-    console.error('좋아요 추가 중 오류 발생:', error);
+    if (error.response) {
+      if (error.response.status === 400) {
+        alert('이미 좋아요를 누른 공원입니다.');
+      } else if (error.response.status === 409) {
+        alert('다른 사용자가 동시에 좋아요를 눌렀습니다. 다시 시도해주세요.');
+      }
+      window.location.reload();
+    } else {
+      console.error('좋아요 추가 중 오류 발생:', error);
+    }
     return null;
   }
 };
@@ -123,7 +132,12 @@ export const removeLikeFromPark = async (parkId) => {
     const response = await api.delete(`/likes/${parkId}`);
     return response.data;
   } catch (error) {
-    console.error('좋아요 삭제 중 오류 발생:', error);
+    if (error.response && error.response.status === 409) {
+      alert('다른 사용자가 동시에 좋아요를 삭제했습니다. 다시 시도해주세요.');
+      window.location.reload();
+    } else {
+      console.error('좋아요 삭제 중 오류 발생:', error);
+    }
     return null;
   }
 };

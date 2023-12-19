@@ -1,44 +1,71 @@
-/* 게시글 스타일 */
-.post {
-    border: 1px solid #ddd;
-    border-radius: 10px;
+.postItem {
+    width: 30%;
+    margin: 0 auto; 
+    border-bottom: 1px solid #ddd;
     margin-bottom: 20px;
     padding: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: transparent;
 }
 
-.post img {
-    width: 270px;
-    height: auto;
+.postItem:not(:last-child) {
+    border-bottom: 1px solid #ddd;
+}
+
+
+.postItem .postItem-image {
+    width: 100%;
+    height: 300px;
     object-fit: cover;
-    border-radius: 10px;
-
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd; 
 }
 
-.post h2 {
+.postItem .postItem-likesCount {
+    font-size: 0.8em;
+    color: #E85B81;
+    text-align: right;
+    align-self: flex-end;
+}
+  
+.postItem .postItem-username {
     margin: 10px 0;
-
-    font-size: 2em; /* 글자 크기 */
-    color: #333; /* 글자 색상 */
-    text-align: center; /* 중앙 정렬 */
+    font-size: 1em;
+    color: #262626;
+    width: 100%;
+    font-weight: 600;
+    text-decoration: none;
+}
+.postItem .postItem-username:hover {
+    color: red;
 }
 
-.post h3 {
-    margin: 10px 0;
-    font-size: 1.2em;
-    color: #777;
-    text-align: center;
+.postItem .postItem-title {
+    color: #262626;
+    width: 100%;
+    text-decoration: none;
+}
+.postItem .postItem-title-text {
+    font-size: 1.1em; 
+    font-weight: bold;
+}
+.postItem .postItem-title:hover {
+    color: #8B4513;
 }
 
-.post p {
+.postItem .postItem-content {
+    color: #262626;
+    width: 100%;
+    font-size: small;
+}
+
+.postItem .postItem-date {
     margin: 10px 0;
-    color: #333;
-    text-align: center;
-    margin-bottom: 100px;
+    color: darkgray;
+    font-size: 0.6em; 
+    width: 100%;
+    text-align: right;
 }
