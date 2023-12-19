@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../../style/parks/ParkCommentForm.css';
+import '../../style/postComments/ReplyForm.css';
 
 const ReplyForm = ({ commentId }) => {
   const [reply, setReply] = useState('');
@@ -26,20 +26,19 @@ const ReplyForm = ({ commentId }) => {
   };
 
   return (
-    <div className="parkComment-container">
-      <form onSubmit={handleReplySubmit} className="parkComment-form">
-        <div className="parkComment-input-container">
+    <div className="replyForm-container">
+      <form onSubmit={handleReplySubmit} className="postCommentForm-form">
           <textarea 
             id="comment" 
-            className="ParkCommentTextarea" 
-            placeholder="대댓글을 작성하세요." 
+            className="replyFormtextarea" 
+            placeholder="댓글을 작성하세요." 
             value={reply} 
             onChange={handleReplyChange} 
           />
-        </div>
-        <button type="submit" className="parkSubmit-button">전송</button>
+        <button type="submit" className="replySubmitBtn">작성</button>
       </form>
     </div>
+
   );
 };
 
