@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import loginAPI from "../../API/loginAPI";
 import "../../style/members/LoginForm.css"
 import { redirect, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import GoogleLoginRedirect from "./GoogleLogin";
+import getUsernameAPI from "../../API/getUsernameAPI";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -25,7 +24,10 @@ const LoginForm = () => {
         navigate('/login');
       } else {
         localStorage.setItem('token', res);
-        navigate('/');
+        getUsernameAPI(res).then((res) => {
+          localStorage.setItem('username', res);
+        })
+        window.location.assign('/');
       }
     });
   };
