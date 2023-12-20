@@ -45,7 +45,7 @@ const Posts = ({username}) => {
         {posts.map((post) => (
           <Col key={post.postId} md={4} >
             <Card>
-              <Card.Img variant="top" src={post.imageUrl} />
+              <Card.Img variant="top" src={`${process.env.REACT_APP_IMAGE_URL}/${post.imageUrl}`} />
               <Card.Body>
                 <Card.Title>{post.title}</Card.Title>
                 <Card.Text>

@@ -68,7 +68,7 @@ function PostBoard() {
                     <Link to={`/members/${post.writer}`} className="postItem-username">
                         <h3>{post.writer}</h3>
                     </Link>                    
-                    <img className="postItem-image" src={`https://my-jw-s3-bucket.s3.ap-northeast-2.amazonaws.com/${post.imageUrl}`} alt="post image" />
+                    <img className="postItem-image" src={`${process.env.REACT_APP_IMAGE_URL}/${post.imageUrl}`} alt="post image" />
                     <p className="postItem-likesCount">{post.likedCount}명이 좋아합니다.</p>
                     <Link to={`/post/${post.postId}`} className="postItem-title">
                         <h4 className="postItem-title-text">{post.title}</h4>
