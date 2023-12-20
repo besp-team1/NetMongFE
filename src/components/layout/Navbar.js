@@ -30,8 +30,8 @@ function Navbar() {
   const handleLogout = async(e) => {
     e.preventDefault();
     await logoutAPI(localStorage.getItem('token')).then((res)=>{
-        localStorage.removeItem('token');
-        navigate('/');
+        localStorage.clear();
+        window.location.assign('/');
       })
     };
 

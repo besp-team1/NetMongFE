@@ -28,8 +28,8 @@ function ProductEdit() {
   };
 
   const handleEdit = async (e) => {
-    e.preventDefault(); 
-
+    e.preventDefault();
+  
     let newError = {};
     const { productName, price, content, count, category } = formData;
     if (!productName) newError.productName = '상품 이름은 필수 입니다.';
@@ -37,10 +37,10 @@ function ProductEdit() {
     if (!content) newError.content = '상품 설명은 필수 입니다.';
     if (!count) newError.count = '상품 갯수는 필수 입니다.';
     if (!category) newError.category = '상품 카테고리는 필수 입니다.';
-
+  
     setError(newError);
     if (Object.keys(newError).length > 0) return;
-
+  
     try {
       const updatedFormData = new FormData();
       updatedFormData.append('productName', formData.productName);
@@ -48,11 +48,23 @@ function ProductEdit() {
       updatedFormData.append('content', formData.content);
       updatedFormData.append('count', formData.count);
       updatedFormData.append('category', formData.category);
-
-      await axios.patch(`http://localhost:9000/api/v1/products/${productId}`, updatedFormData);
+  
+      const authToken = localStorage.getItem('token');
+      const config = {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+  
+      await axios.patch(`${process.env.REACT_APP_HOST_URL}/api/v1/products/${productId}`, updatedFormData, config);
       navigate('/api/v1/products');
     } catch (error) {
-      console.error('상품 수정 중 오류 발생:', error.message);
+      if (error.response && error.response.status === 500) {
+        alert('이용 권한이 없습니다.');
+      } else {
+        console.error('상품 수정 중 오류 발생:', error.message);
+      }
     }
   };
 
@@ -99,7 +111,7 @@ function ProductEdit() {
               {error.content && <div style={{color: 'red'}}>{error.content}</div>}
             </label>
             <label>
-                  상품 갯수:
+                  수량:
                   <input 
                     type="number" 
                     name="count" 

@@ -7,8 +7,7 @@ async function loginAPI(username, token) {
             token: token
         })
             .then((response) => {
-                localStorage.removeItem('token');
-                localStorage.removeItem('username');
+                localStorage.clear();
             })
             .catch((error) => console.log(error));
         return logout;

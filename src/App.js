@@ -29,6 +29,7 @@ import ReportedPosts from './components/reports/ReportedPosts';
 import MemberDetail from './components/memberDetail/MemberDetail';
 import Carts from './components/carts/Carts';
 import AddToCart from './components/carts/AddToCart';
+import GoogleLoginRedirect from './components/members/GoogleLogin';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -71,7 +72,7 @@ function App() {
               <Route path="/welcome" element={<Welcome/>} />
               <Route path="/parks/:parkId" element={<ParkComment />} />
               <Route path="/parks/:parkId/comment" element={<ParkCommentForm />} /> 
-              <Route path="/post/search" element={<SearchPost />} />
+              <Route path="/post/categorySearch" element={<SearchPost />} />
               <Route path="/post/hashtagSearch" element={<HashtagSearch />} />
               <Route path="/admin/reports" element={<ReportsPage />}>
                 <Route path="posts" element={<ReportedPosts />} />
@@ -81,6 +82,7 @@ function App() {
               <Route path="/members/:username" element={<MemberDetail />} />
               <Route path="/api/v1/products/cart" element={<Carts />} />
               <Route path="/api/v1/products/cart/:productId" element={<AddToCart />} />
+              <Route path="/login/google/token/:token" element={<GoogleLoginRedirect />} />
             </Routes>
           </div>
           <Footer />

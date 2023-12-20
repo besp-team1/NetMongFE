@@ -37,6 +37,10 @@
     color: #262626;
     width: 100%;
     font-weight: 600;
+    text-decoration: none;
+}
+.postItem .postItem-username:hover {
+    color: red;
 }
 
 .postItem .postItem-title {

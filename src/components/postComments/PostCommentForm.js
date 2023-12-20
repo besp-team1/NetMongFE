@@ -5,6 +5,7 @@ import '../../style/postComments/PostCommentForm.css'
 const PostCommentForm = ({ postId, onCommentSubmit }) => {
     const [comment, setComment] = useState('');
     const authToken = localStorage.getItem('token');
+    const API_BASE_URL = `${process.env.REACT_APP_HOST_URL}/api/v1/post/comment`; 
 
     const handleCommentChange = (e) => {
         setComment(e.target.value);
@@ -15,7 +16,7 @@ const PostCommentForm = ({ postId, onCommentSubmit }) => {
     
         try {
             const response = await axios.post(
-                `http://localhost:9000/api/v1/post/comment/${postId}`,
+                `${API_BASE_URL}/${postId}`,
                 { content: comment },
                 {
                     headers: {

@@ -17,11 +17,12 @@ const PostDetail = () => {
     const [liked, setLiked] = useState(false);
 
     const authToken = localStorage.getItem('token');
+    const API_BASE_URL = `${process.env.REACT_APP_HOST_URL}/api/v1/post`; 
     const navigate = useNavigate();
 
     const fetchPost = async () => {
         try {
-            const response = await axios.get(`${process.env.REACT_APP_HOST_URL}/api/v1/post/${id}`, {
+            const response = await axios.get(`${API_BASE_URL}/${id}`, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                 },
@@ -35,7 +36,7 @@ const PostDetail = () => {
 
     const fetchComments = async () => {
         try {
-            const response = await axios.get(`http://localhost:9000/api/v1/post/comment/${id}`, {
+            const response = await axios.get(`${API_BASE_URL}/comment/${id}`, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                 },
@@ -48,7 +49,7 @@ const PostDetail = () => {
 
     const fetchLikesCount = async () => {
         try {
-            const response = await axios.get(`http://localhost:9000/api/v1/post/likes/${id}`, {
+            const response = await axios.get(`${API_BASE_URL}/likes/${id}`, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                 },
@@ -74,7 +75,7 @@ const PostDetail = () => {
         
         if (loggedInUsername && loggedInUsername === post.writer) { 
             try {
-                await axios.delete(`http://localhost:9000/api/v1/post/${id}`, {
+                await axios.delete(`${API_BASE_URL}/${id}`, {
                     headers: {
                         Authorization: `Bearer ${authToken}`,
                     },
@@ -98,7 +99,7 @@ const PostDetail = () => {
     const handleLike = async () => {
         if (liked) {
             try {
-                const response = await axios.delete(`http://localhost:9000/api/v1/post/likes/${id}`, {
+                const response = await axios.delete(`${API_BASE_URL}/likes/${id}`, {
                     headers: {
                         Authorization: `Bearer ${authToken}`,
                     },
@@ -110,7 +111,7 @@ const PostDetail = () => {
             }
         } else {
             try {
-                const response = await axios.post(`http://localhost:9000/api/v1/post/likes/${id}`, {}, {
+                const response = await axios.post(`${API_BASE_URL}/likes/${id}`, {}, {
                     headers: {
                         Authorization: `Bearer ${authToken}`,
                     },
@@ -125,7 +126,7 @@ const PostDetail = () => {
     
     const handleUnlike = async () => {
         try {
-            const response = await axios.delete(`http://localhost:9000/api/v1/post/likes/${id}`, {
+            const response = await axios.delete(`${API_BASE_URL}/likes/${id}`, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                 },
@@ -143,7 +144,7 @@ const PostDetail = () => {
     return (
         <div className="Post-container">
             <div className="post-left">
-                <img src={`${post.imageUrl}`} alt="게시물 이미지" style={{ maxWidth: '100%', height: 'auto' }} />
+                <img src={`${process.env.REACT_APP_IMAGE_URL}/${post.imageUrl}`} alt="게시물 이미지" style={{ maxWidth: '100%', height: 'auto' }} />
             </div>
             <div className="post-right">
                 <div className="title-actions">

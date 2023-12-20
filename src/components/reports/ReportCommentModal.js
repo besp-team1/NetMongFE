@@ -9,7 +9,8 @@ const ReportCommentModal = ({ commentId }) => {
     const [selectedType, setSelectedType] = useState('');
     const [description, setDescription] = useState('');
     const [reportTypes, setReportTypes] = useState([]);
-    
+
+    const API_BASE_URL = `${process.env.REACT_APP_HOST_URL}/api/v1/reports`;
     const authToken = localStorage.getItem('token');
 
     const reportTypeToKorean = (type) => {
@@ -26,12 +27,12 @@ const ReportCommentModal = ({ commentId }) => {
 
     const fetchReportTypes = async () => {
         try {
-            const response = await axios.get('http://localhost:9000/api/v1/reports/types', {
+            const response = await axios.get(`${API_BASE_URL}/types`, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                 },
             });
-            setReportTypes(response.data.data); // Here we get the 'data' field from the response object
+            setReportTypes(response.data.data);
         } catch (error) {
             console.error('신고 유형 불러오기 실패:', error.message);
         }
@@ -50,13 +51,13 @@ const ReportCommentModal = ({ commentId }) => {
     };
 
     const handleSubmitReport = async () => {
-        if (!selectedType) { // Check if the report type is selected
+        if (!selectedType) {
             alert('신고 유형을 선택해주세요.');
             return;
         }
 
         try {
-            const response = await axios.post(`http://localhost:9000/api/v1/reports/comment/${commentId}`, {
+            const response = await axios.post(`${API_BASE_URL}/comment/${commentId}`, {
                 reportType: selectedType,
                 content: description,
             }, {
