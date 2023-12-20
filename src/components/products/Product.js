@@ -26,7 +26,7 @@ function Product() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     let newError = {};
     const { productName, price, content, count, category } = formData;
     if (!productName) newError.productName = '상품 이름은 필수 입니다.';
@@ -37,7 +37,7 @@ function Product() {
   
     setError(newError);
     if (Object.keys(newError).length > 0) return;
-
+  
     try {
       const formDataForUpload = new FormData();
       formDataForUpload.append('productName', formData.productName);
@@ -48,7 +48,16 @@ function Product() {
       if (formData.images) {
         formDataForUpload.append('images', formData.images);
       }
-      await axios.post(`${process.env.REACT_APP_HOST_URL}/api/v1/products`, formDataForUpload);
+  
+      const authToken = localStorage.getItem('token');
+      const config = {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+  
+      await axios.post(`${process.env.REACT_APP_HOST_URL}/api/v1/products`, formDataForUpload, config);
       navigate('/api/v1/products', { replace: true });
     } catch (error) {
       console.error('상품 등록 중 오류 발생:', error.message);

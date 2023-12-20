@@ -63,10 +63,9 @@ function ProductDetail() {
       <p>상세 내용: {product.content}</p>
       <p>카테고리: {product.category}</p>
 
-      <img className="productItem-image" src={`https://my-jw-s3-bucket.s3.ap-northeast-2.amazonaws.com/${product.imageUrl}`} alt="상품 이미지"
+      <img className="productItem-image" src={`${process.env.REACT_APP_IMAGE_URL}/${product.imageUrl}`} alt="상품 이미지"
               width="100"
               height="100" />
-
       <AddToCart productId={productId} />
 
       <div className="button-container">
