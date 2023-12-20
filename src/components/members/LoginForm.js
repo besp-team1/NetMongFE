@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import loginAPI from "../../API/loginAPI";
 import "../../style/members/LoginForm.css"
 import { redirect, useNavigate } from 'react-router-dom';
+import getUsernameAPI from "../../API/getUsernameAPI";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -23,10 +24,18 @@ const LoginForm = () => {
         navigate('/login');
       } else {
         localStorage.setItem('token', res);
-        navigate('/');
+        getUsernameAPI(res).then((res) => {
+          localStorage.setItem('username', res);
+        })
+        window.location.assign('/');
       }
     });
   };
+  const loginGoogle = () => {
+    // 사용자를 구글 로그인 페이지로 리디렉션
+    window.location.href = `${process.env.REACT_APP_HOST_URL}/oauth2/authorization/google`;
+  };
+  
 
   return (
     <div className="LoginForm-container">
@@ -38,6 +47,8 @@ const LoginForm = () => {
         <input type="password" id="inputPassword" className="form-control" placeholder="Password" value={password} onChange={handlePasswordChange} required />
         <button className="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
       </form>
+      
+      <button onClick={loginGoogle}>Sign in with Google</button>
     </div>
   );
 };
