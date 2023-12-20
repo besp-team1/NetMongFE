@@ -103,7 +103,11 @@ function ProductList() {
           .filter(product => selectedCategory ? product.category === selectedCategory : true)
           .map((product, index) => (
             <li key={index} onClick={() => handleProductDetails(product.productId)} style={{cursor: 'pointer'}}>
-              <img className="productItem-image" src={product.imageUrl} alt="상품 이미지" width="100" height="100" />
+              {/* <img className="productItem-image" src={product.imageUrl} alt={product.productName} width="100" height="100" /> */}
+              <img className="productItem-image" src={`https://my-jw-s3-bucket.s3.ap-northeast-2.amazonaws.com/${product.imageUrl}`} alt="상품 이미지"
+              width="100"
+              height="100" />
+              {/* console.log(src={`${process.env.REACT_APP_HOST_URL}/${product.imageUrl}`}) */}
               <h3 className="productItem-productName">{product.productName}</h3>
               <p className="productItem-price"><span className="label">가격:</span> {product.price}</p>
               <p className="productItem-content"><span className="label">내용:</span> {product.content}</p>
