@@ -10,8 +10,8 @@ function GoogleLoginRedirect(){
     localStorage.setItem('token', token);
     getUsernameAPI(token).then((res) => {
       localStorage.setItem('username', res);
-    })
-    window.location.replace("/");
+    });
+    window.location.assign("/");
   },[]);
 
   return <></>;
