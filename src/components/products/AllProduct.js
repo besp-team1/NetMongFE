@@ -104,7 +104,7 @@ function ProductList() {
           .map((product, index) => (
             <li key={index} onClick={() => handleProductDetails(product.productId)} style={{cursor: 'pointer'}}>
               {/* <img className="productItem-image" src={product.imageUrl} alt={product.productName} width="100" height="100" /> */}
-              <img className="productItem-image" src={`https://my-jw-s3-bucket.s3.ap-northeast-2.amazonaws.com/${product.imageUrl}`} alt="상품 이미지"
+              <img className="productItem-image" src={`${process.env.REACT_APP_IMAGE_URL}/${product.imageUrl}`} alt="상품 이미지"
               width="100"
               height="100" />
               {/* console.log(src={`${process.env.REACT_APP_HOST_URL}/${product.imageUrl}`}) */}

@@ -60,6 +60,9 @@ const Carts = () => {
               </h2>
               <p>가격: {item.price}</p>
               <p>수량: {item.count}</p>
+              <img className="productItem-image" src={`${process.env.REACT_APP_IMAGE_URL}/${item.imageUrl}`} alt="상품 이미지"
+              width="100"
+              height="100"/>
             </div>
           ))
         ) : (
