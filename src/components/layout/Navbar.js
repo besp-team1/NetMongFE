@@ -29,7 +29,7 @@ function Navbar() {
 
   const handleLogout = async(e) => {
     e.preventDefault();
-    await logoutAPI(localStorage.getItem('token'))
+    await logoutAPI(localStorage.getItem('username'), localStorage.getItem('token'))
       .then((res)=>{
         window.location.assign('/');
       });

@@ -1,0 +1,97 @@
+.profileUsernameBtn {
+  display: block;
+  width: 100%;
+  border-radius: 5px;
+  background-color: #74A3FF;
+  color: #fff;
+  font-size: 10px;
+}
+.profileUsernameBtn:hover {
+  background-color: #5680E9;
+}
+
+.usernameModal {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
+.usernameModal .modal-dialog {
+  margin: auto;
+  width: 50%;
+}
+
+.usernameModalBtn {
+  color: #74A3FF;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.Form.Control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #E5E5E5;
+  background-color: #fff;
+  color: #74A3FF;
+  margin-bottom: 16px;
+  outline: none;
+  cursor: pointer;
+}
+
+.Form.Control:focus {
+  z-index: 2;
+  background-color: #f2f2f2;
+}
+
+.Form.Label {
+  font-size: 14px;
+  color: #74A3FF;
+  align-self: flex-start;
+  margin-bottom: 5px;
+  margin-top: 20px;
+}
+
+.usernameChangeModalBtn {
+  display: block;
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #74A3FF;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.usernameChangeModalBtn:hover {
+  background-color: #5680E9;
+}
+
+.usernameCloseModalBtn {
+  display: block;
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #bbb;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.usernameCloseModalBtn:hover {
+  background-color: #9e9e9e;
+}
+
+
