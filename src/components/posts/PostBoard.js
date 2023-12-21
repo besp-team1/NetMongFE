@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import '../../style/posts/PostBoard.css';
 import { useInView } from 'react-intersection-observer';
+import logoutAPI from "../../API/logoutAPI";
 
 function PostBoard() {
     const authToken = localStorage.getItem('token');
@@ -11,6 +12,11 @@ function PostBoard() {
     const [totalCnt, setTotalCnt] = useState(0);
     const [loading, setLoading] = useState(false);
     const [ref, inView] = useInView();
+
+    const isLoggedIn = checkLoggedInStatus();
+    let username = '';
+  
+    if (isLoggedIn) {username = localStorage.getItem('username');}
 
     const navigate = useNavigate();
 
@@ -61,38 +67,67 @@ function PostBoard() {
         return res.data.data.likedCount;
     };
 
-    return (
-        <div>
-            {posts.length > 0 ? (
-                posts.map((post) => (
-                    <div className="postItem" key={post.postId}>
-                        <Link to={`/members/${post.writer}`}>
-                            <h3 className="postItem-username">{post.writer}</h3>
-                        </Link>
-                        <img className="postItem-image" src={`${process.env.REACT_APP_IMAGE_URL}/${post.imageUrl}`} alt="post image" />
-                        <p className="postItem-likesCount">{post.likedCount}명이 좋아합니다.</p>
-                        <Link to={`/post/${post.postId}`} className="postItem-title">
-                            <h4 className="postItem-title-text">{post.title}</h4>
-                        </Link>
-                        <p className="postItem-content">{post.content.split(/(#[^\s]+)/g).map((v, i) => {
-                            if (v.match(/#[^\s]+/)) {
-                                return <Link key={i} to={`/post/hashtagSearch?hashtag=${v.slice(1)}`}>{v}</Link>;
-                            }
-                            return v;
-                        })}</p>
-                        <p className="postItem-date">{post.createDate}</p>
-                    </div>
-                ))
-            ) : (
-                <div className="emptyPosts">
-                    아직 아무도 게시글을 작성하지 않았어요.<br />첫 번째로 게시글을 남겨주세요.
-                </div>
-            )}
-            <div ref={ref} style={{ "marginTop": "200px" }} className="loading-message">포스트를 불러오는 중...</div>
-            {loading && <p></p>}
-        </div>
-    );
+    function checkLoggedInStatus() {
+        const token = localStorage.getItem('token');
+        return token ? true : false;
+      }
     
+      const handleLogout = async(e) => {
+        e.preventDefault();
+        await logoutAPI(localStorage.getItem('token')).then((res)=>{
+            localStorage.clear();
+            window.location.assign('/');
+        })
+      };
+      return (
+        <div>
+          {isLoggedIn ? (
+            posts.length > 0 ? (
+              posts.map((post) => (
+                <div className="postItem" key={post.postId}>
+                  <Link to={`/members/${post.writer}`}>
+                    <h3 className="postItem-username">{post.writer}</h3>
+                  </Link>
+                  <img
+                    className="postItem-image"
+                    src={`${process.env.REACT_APP_IMAGE_URL}/${post.imageUrl}`}
+                    alt="post image"
+                  />
+                  <p className="postItem-likesCount">{post.likedCount}명이 좋아합니다.</p>
+                  <Link to={`/post/${post.postId}`} className="postItem-title">
+                    <h4 className="postItem-title-text">{post.title}</h4>
+                  </Link>
+                  <p className="postItem-content">
+                    {post.content.split(/(#[^\s]+)/g).map((v, i) => {
+                      if (v.match(/#[^\s]+/)) {
+                        return <Link key={i} to={`/post/hashtagSearch?hashtag=${v.slice(1)}`}>{v}</Link>;
+                      }
+                      return v;
+                    })}
+                  </p>
+                  <p className="postItem-date">{post.createDate}</p>
+                </div>
+              ))
+            ) : (
+              <div className="emptyPosts">
+                아직 아무도 게시글을 작성하지 않았어요.<br />첫 번째로 게시글을 남겨주세요.
+              </div>
+            )
+          ) : (
+            <div className="emptyPosts">
+              로그인 후 이용해주세요.
+            </div>
+          )}
+          {isLoggedIn && (
+            <>
+              <div ref={ref} style={{ "marginTop": "200px" }} className="loading-message">
+                포스트를 불러오는 중...
+              </div>
+              {loading && <p></p>}
+            </>
+          )}
+        </div>
+      );
 }
 
 export default PostBoard;

@@ -97,7 +97,7 @@ const ParkComment = () => {
                     <div id="map" style={{ width: '100%', height: '300px' }}></div>
                 </div>
                 <div className="right-section">
-                    <button className="myButton" onClick={() => navigate(`/parks/${parkId}/comment`)}>
+                    <button className="parkCommentsButton" onClick={() => navigate(`/parks/${parkId}/comment`)}>
                         후기쓰기
                     </button>
                     {

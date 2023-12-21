@@ -37,13 +37,17 @@
     margin-left: 10px;
 }
 
-.myButton {
+.parkCommentsButton {
     align-self: flex-end;
     width: 20%;
     margin-bottom: 1px;
     margin-right: 20%;
     font-size: 12px;
-
+    background-color: #74A3FF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
 }
 
 .park-info-container p {
