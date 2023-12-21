@@ -21,7 +21,7 @@
 .profileButtonContainer {
   display: flex;
 }
-.profileImageBtn, .profilePasswordBtn {
+.profileImageBtn, .profilePasswordBtn, .profileUsernameBtn {
   background-color: #f4f4f4;
   color: black;
   width: 150%;

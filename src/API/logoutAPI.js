@@ -1,15 +1,17 @@
 import axios from "axios";
 
-async function loginAPI(username, token) {
+async function logoutAPI(username, token) {
     try {
-        const logout = await axios.post(`${process.env.REACT_APP_HOST_URL}/api/v1/members/logout`, {
-            username: username,
-            token: token
+        const logout = await axios.post(`${process.env.REACT_APP_HOST_URL}/api/v1/members/logout`,{}, {
+            headers:{
+              'Authorization': `Bearer ${token}`
+            },
         })
-            .then((response) => {
-                localStorage.clear();
-            })
-            .catch((error) => console.log(error));
+        .then((response) => {
+          localStorage.removeItem('username');
+          localStorage.removeItem('token');
+        })
+        .catch((error) => console.log(error));
         return logout;
 
     } catch (e) {
@@ -17,4 +19,4 @@ async function loginAPI(username, token) {
     }
 }
 
-export default loginAPI;
+export default logoutAPI;
