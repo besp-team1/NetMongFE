@@ -1,0 +1,12 @@
+.welcomeMent {
+    font-size: 24px; 
+    color: #333; 
+    font-weight: bold; 
+    text-align: center;
+    margin-top: 10%;
+}
+.welcomeP {
+    font-size: 15px;
+    color: #74A3FF; 
+    text-align: center; 
+}

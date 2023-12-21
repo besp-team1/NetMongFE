@@ -33,7 +33,6 @@ const MemberDetail = () => {
   useEffect(() => {
     fetchUser();
   }, [username]);
-  
   return (
     <div className="MemberDetail">
       <div className="leftRight">

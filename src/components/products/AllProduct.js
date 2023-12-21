@@ -91,6 +91,7 @@ function ProductList() {
           </select>
         </label>
         <input
+          className="productListInput"
           type="text"
           placeholder="상품명을 입력하세요"
           value={searchTerm}
@@ -99,26 +100,28 @@ function ProductList() {
         <button className="ProductNameBtn" onClick={handleSearch}>검색</button>
       </div>
       <ul className="products-container">
-        {products
-          .filter(product => selectedCategory ? product.category === selectedCategory : true)
-          .map((product, index) => (
-            <li key={index} onClick={() => handleProductDetails(product.productId)} style={{cursor: 'pointer'}}>
-              {/* <img className="productItem-image" src={product.imageUrl} alt={product.productName} width="100" height="100" /> */}
-              <img className="productItem-image" src={`${process.env.REACT_APP_IMAGE_URL}/${product.imageUrl}`} alt="상품 이미지"
-              width="100"
-              height="100" />
-              {/* console.log(src={`${process.env.REACT_APP_HOST_URL}/${product.imageUrl}`}) */}
-              <h3 className="productItem-productName">{product.productName}</h3>
-              <p className="productItem-price"><span className="label">가격:</span> {product.price}</p>
-              <p className="productItem-content"><span className="label">내용:</span> {product.content}</p>
-              <p className="productItem-count">
-                <span className="label">수량:</span> {product.count > 0 ? product.count : <span className="sold-out">품절</span>}
-              </p>
-              <p className={`productItem-category productItem-category-${product.category}`}>{product.category}</p>
-            </li>
-          ))}
+        {products.length > 0 ? (
+          products
+            .filter(product => selectedCategory ? product.category === selectedCategory : true)
+            .map((product, index) => (
+              <li key={index} onClick={() => handleProductDetails(product.productId)} style={{cursor: 'pointer'}}>
+                <img className="productItem-image" 
+                src={`${process.env.REACT_APP_IMAGE_URL}/${product.imageUrl}`} alt="상품 이미지"
+                width="100"
+                height="100" />
+                <h3 className="productItem-productName">{product.productName}</h3>
+                <p className="productItem-price"><span className="label">가격:</span> {product.price}</p>
+                <p className="productItem-content"><span className="label">내용:</span> {product.content}</p>
+                <p className="productItem-count">
+                  <span className="label">수량:</span> {product.count > 0 ? product.count : <span className="sold-out">품절</span>}
+                </p>
+                <p className={`productItem-category productItem-category-${product.category}`}>{product.category}</p>
+              </li>
+            ))
+        ) : (
+          <h3 className="no-products">아직 등록된 상품이 없어요</h3>
+        )}
       </ul>
-
       <div className="ProductPagination-container">
         <button onClick={() => setPage((prevPage) => Math.max(prevPage - 1, 1))}>{"<"}</button>
         {Array.from({length: totalPages}, (_, i) => i + 1).map((number) => (

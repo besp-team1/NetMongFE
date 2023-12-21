@@ -120,7 +120,10 @@ function SearchPost({ setIsSearching }) {
             </div>
             {posts.map((post) => (
                 <div className="postItem" key={post.postId}>
-                    <h3 className="postItem-username">{post.writer}</h3>
+                     <Link to={`/members/${post.writer}`}>
+                        <h3 className="postItem-username">{post.writer}</h3>
+                    </Link>  
+                    {/* <h3 className="postItem-username">{post.writer}</h3> */}
                     <img className="postItem-image" src={`https://my-jw-s3-bucket.s3.ap-northeast-2.amazonaws.com/${post.imageUrl}`} alt="post image" />
                     <p className="postItem-likesCount">{post.likedCount}명이 좋아합니다.</p>
                     <Link to={`/post/${post.postId}`} className="postItem-title">
@@ -139,7 +142,7 @@ function SearchPost({ setIsSearching }) {
                 {noResults ? (
                     <div>작성된 내용이 없습니다.</div>
                 ) : (
-                    <div ref={ref} style={{ "marginTop": "200px" }}>포스트를 불러오는 중...</div>
+                    <div ref={ref} style={{ "marginTop": "200px" }} className="loading-message">포스트를 불러오는 중...</div>
                 )}
             </div>
             {loading && <p></p>}

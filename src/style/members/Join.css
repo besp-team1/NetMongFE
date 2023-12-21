@@ -1,47 +1,96 @@
 .join-container {
-    max-width: 400px;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .join-container .form-group {
-    margin-bottom: 20px;
-  }
-  
-  .form-label {
-    font-weight: bold;
-  }
-  
-  .form-control {
-    border-radius: 4px;
-  }
-  
-  .submit-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-  }
-  
-  .submit-button:hover {
-    background-color: #0056b3;
-  }
-  
-  .btn-block {
-    display: block;
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-    background-color: #74A3FF;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  .btn{
-    /* width: 100%; */
-    margin-bottom: 10px;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+}
+
+.join-container .form-group {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #E5E5E5;
+  background-color: #fff;
+  color: #74A3FF;
+  margin-bottom: 16px;
+  outline: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.join-container h1 {
+  color: #74A3FF;
+  font-size: 30px; 
+}
+
+.form-label {
+  font-size: 14px;
+  color: #74A3FF;
+  align-self: flex-start;
+  margin-bottom: 5px;
+}
+
+.form-control:focus {
+  z-index: 2;
+  background-color: #f2f2f2;
+  display: block !important ; 
+}
+
+.submit-button {
+  display: block;
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+  border: none;
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #74A3FF;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.btn:hover {
+  background-color: #5680E9;
+  border: none;
+}
+
+.checkDupButton {
+  font-size: 12px;
+}
+.text-success {
+  font-size: 12px;
+}
+.text-danger {
+  font-size: 12px;
+}
+.join-container .form-control {
+  width: 500px;
+}

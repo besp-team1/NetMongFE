@@ -86,6 +86,7 @@ const Join = () => {
             type="button"
             onClick={checkEmailAvailability}
             name='checkDupButton'
+            className='checkDupButton'
           >
             이메일 중복체크
           </Button>
@@ -110,6 +111,7 @@ const Join = () => {
             type="button"
             onClick={checkUsernameAvailability}
             name='checkDupButton'
+            className='checkDupButton'
           >
             닉네임 중복체크
           </Button>

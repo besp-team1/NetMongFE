@@ -51,22 +51,33 @@ const Carts = () => {
           cartItems.map((item, index) => (
             <div key={index} className="cartItemContainer">
               <h2 className="cartPageH2">
-                <input className="cartCheckbox"
+                <input
+                  className="cartCheckbox"
                   type="checkbox"
                   checked={item.selected}
                   onChange={() => handleCheckboxChange(index)}
                 />
-                <Link className="productLink" to={`/products/${item.productId}`}>{item.productName}</Link>
+                <Link className="productLink" to={`/products/${item.productId}`}>
+                  {item.productName}
+                </Link>
               </h2>
-              <p>가격: {item.price}</p>
-              <p>수량: {item.count}</p>
-              <img className="productItem-image" src={`${process.env.REACT_APP_IMAGE_URL}/${item.imageUrl}`} alt="상품 이미지"
-              width="100"
-              height="100"/>
+              <div className="cartDetails">
+                <img
+                  className="cartImg"
+                  src={`${process.env.REACT_APP_IMAGE_URL}/${item.imageUrl}`}
+                  alt="상품 이미지"
+                  width="100"
+                  height="100"
+                />
+                <div className="priceAndCount">
+                  <p>가격: {item.price}</p>
+                  <p>수량: {item.count}</p>
+                </div>
+              </div>
             </div>
           ))
         ) : (
-          <p className="cartP1">주문내역이 없습니다.</p>
+          <p className="cartP1">주문 내역이 없습니다.</p>
         )}
       </div>
       <div className="cartSummary">
@@ -75,6 +86,8 @@ const Carts = () => {
       </div>
     </>
   );
+  
+  
   
 };
 
