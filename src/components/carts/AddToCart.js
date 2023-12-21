@@ -37,6 +37,13 @@ const AddToCart = ({ productId, onProductAdd }) => {
         localStorage.setItem('cartCount', Number(currentCount) + 1);
       }
     } catch (error) {
+      
+      if (error.response && error.response.status === 409) {
+        alert('본인이 등록한 상품은 장바구니에 담을 수 없습니다.');
+      } else {
+        console.error('장바구니에 상품 추가 중 오류 발생:', error.message);
+      }
+
       if (error.response && error.response.status === 500) {
         alert('품절된 상품입니다. 다음에 이용해주세요.');
       } else {
