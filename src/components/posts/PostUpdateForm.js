@@ -110,7 +110,7 @@ const PostUpdateForm = () => {
                                 <img
                                     src={imagePreview}
                                     alt="이미지 미리보기"
-                                    style={{ maxWidth: '200px', maxHeight: '200px' }}
+                                    style={{ maxWidth: '340px', maxHeight: '360px' }}
                                 />
                             </div>
                         ) : (
@@ -149,7 +149,7 @@ const PostUpdateForm = () => {
                         </label>
     
                         <div className="button-container">
-                            <button type="submit">UPDATE</button>
+                            <button className="postUploadBtn" type="submit">수정하기</button>
                         </div>
                     </div>
                 </div>

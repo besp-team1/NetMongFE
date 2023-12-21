@@ -144,8 +144,13 @@ const PostDetail = () => {
     return (
         <div className="Post-container">
             <div className="post-left">
-                <img src={`${process.env.REACT_APP_IMAGE_URL}/${post.imageUrl}`} alt="게시물 이미지" style={{ maxWidth: '100%', height: 'auto' }} />
-            </div>
+    <img
+        src={`${process.env.REACT_APP_IMAGE_URL}/${post.imageUrl}`}
+        alt="게시물 이미지"
+        style={{ width: '90%', height: 'auto' }} // 원하는 폭으로 조절
+    />
+</div>
+
             <div className="post-right">
                 <div className="title-actions">
                     <h1 className="post-title">{post.title}</h1>

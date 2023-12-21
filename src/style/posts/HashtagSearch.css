@@ -50,3 +50,7 @@ p.no-results {
     color: #74A3FF;
     text-align: center;
 }
+
+.loading-message {
+    color: transparent;
+}

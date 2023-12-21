@@ -37,20 +37,20 @@ const PasswordChangeButton = () => {
       <>
         <Button className="profilePasswordBtn" onClick={handleShow}>비밀번호 변경</Button>
         <Modal className="passwordModal" show={show} onHide={handleClose}>
-          <Modal.Header className="passwordModalBtn" closeButton>
-            <Modal.Title>비밀번호 변경</Modal.Title>
+          <Modal.Header className="passwordCloseBtn" closeButton>
+            <Modal.Title className="passwordTitle">비밀번호 변경</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form>
               <Form.Group controlId="formOldPassword">
                 <Form.Label>기존 비밀번호</Form.Label>
-                <Form.Control type="password" placeholder="기존 비밀번호" value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} />
+                <Form.Control className="passwordForm" type="password" placeholder="기존 비밀번호" value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} />
                 {oldPasswordError && <div style={{color: 'red', fontSize: '12px', marginTop: '-10px', marginBottom: '10px'}}>{oldPasswordError}</div>}
               </Form.Group>
   
               <Form.Group controlId="formNewPassword">
                 <Form.Label>새 비밀번호</Form.Label>
-                <Form.Control type="password" placeholder="새 비밀번호" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+                <Form.Control className="passwordForm" type="password" placeholder="새 비밀번호" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
                 {newPasswordError && <div style={{color: 'red', fontSize: '12px', marginTop: '-10px'}}>{newPasswordError}</div>}
               </Form.Group>
             </Form>

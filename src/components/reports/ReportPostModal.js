@@ -50,7 +50,7 @@ const ReportPostModal = ({ postId }) => {
     };
 
     const handleSubmitReport = async () => {
-        if (!selectedType) { // Check if the report type is selected
+        if (!selectedType) { 
             alert('신고 유형을 선택해주세요.');
             return;
         }
@@ -68,7 +68,12 @@ const ReportPostModal = ({ postId }) => {
             alert('신고가 완료되었습니다.');
             handleCloseModal();
         } catch (error) {
-            console.error('신고 제출 실패:', error.message);
+            if (error.response && error.response.status === 400) {
+                alert('이미 신고를 했습니다.');
+                handleCloseModal();
+            } else {
+                console.error(`신고 제출 실패: ${error}`);
+            }
         }
     };
 
@@ -77,23 +82,27 @@ const ReportPostModal = ({ postId }) => {
             <button className="btn-report" onClick={handleOpenModal}>
                 <FontAwesomeIcon icon={faFlag} />
             </button>
-
+    
             {isOpen && (
-                <div className="modal-container">
-                    <h2>신고</h2>
-                    <div className="modal-content">
+                <React.Fragment>
+                    <div className="overlay"></div>
+                    <div className="modal-container">
+                        <h2>신고하기</h2>
+                        <div className="modal-content">
                         <select value={selectedType} onChange={(e) => setSelectedType(e.target.value)}>
+                            <option value="" disabled>신고 유형을 선택하세요.</option>
                             {reportTypes.map((type, index) => (
                                 <option key={index} value={type}>{reportTypeToKorean(type)}</option>
                             ))}
                         </select>
                         <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="신고 사유를 입력하세요." />
+                        </div>
+                        <div className="modal-buttons">
+                            <button className="submitReport-button" onClick={handleSubmitReport}>신고 제출</button>
+                            <button className="close-button" onClick={handleCloseModal}>닫기</button>
+                        </div>
                     </div>
-                    <div className="modal-buttons">
-                        <button className="submit-button" onClick={handleSubmitReport}>신고 제출</button>
-                        <button className="close-button" onClick={handleCloseModal}>닫기</button>
-                    </div>
-                </div>
+                </React.Fragment>
             )}
         </div>
     );

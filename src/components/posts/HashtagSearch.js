@@ -75,7 +75,10 @@ function HashtagSearch() {
         <h1 className="search-title">"#{hashtag}" 검색 결과</h1>
         {posts.map((post) => (
           <div className="postItem" key={post.postId}>
-            <h3 className="postItem-username">{post.writer}</h3>
+            <Link to={`/members/${post.writer}`}>
+              <h3 className="postItem-username">{post.writer}</h3>
+            </Link> 
+            {/* <h3 className="postItem-username">{post.writer}</h3> */}
             <img className="postItem-image" src={`${process.env.REACT_APP_IMAGE_URL}/${post.imageUrl}`} alt="post image" />
             <p className="postItem-likesCount">{post.likesCount}명이 좋아합니다.</p>
             <Link to={`/post/${post.postId}`} className="postItem-title">

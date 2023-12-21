@@ -14,61 +14,98 @@
     align-items: center;
 }
 
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999; 
+}
+
 .modal-container {
     position: fixed; 
     top: 50%; 
     left: 50%; 
     transform: translate(-50%, -50%);
-    background-color: white;
+    background-color: #fff;
     padding: 20px;
+    border: 1px solid #E5E5E5;
+    border-radius: 5px;
+    box-sizing: border-box;
+    color: #74A3FF;
+    z-index: 1000;
+    width: 50%;
+    height: 70%;
 }
 
-.submit-button {
-    background-color: #74A3FF;
-    color: white;
+.submitReport-button {
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 5px;
     border: none;
-    padding: 10px 16px;
+    background-color: #f44336;
+    color: #fff;
+    font-size: 13px;
     cursor: pointer;
-    border-radius: 4px;
+    margin-top: 10px;
 }
 
 .close-button {
-    background-color: #f44336;
-    color: white;
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 5px;
     border: none;
-    padding: 10px 16px;
+    background-color: #ababab;
+    color: #fff;
+    font-size: 13px;
     cursor: pointer;
-    border-radius: 4px;
-}
-
-.modal-container {
-    position: absolute;
-    top: 50%;
-    left: 90%;
-    transform: translate(-50%, -50%);
-    background-color: #ffffff;
-    padding: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    border-radius: 8px;
-    width: 300px; 
+    margin-top: 10px;
 }
 
 .modal-container h2 {
-    margin-top: 0;
+    color: #f44336;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
 .modal-content {
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
+    align-items: center;
+    justify-content: center;
 }
-
-.modal-content select, .modal-content textarea {
-    margin-bottom: 10px;
+.modal-content select {
     width: 100%;
     padding: 8px;
     border-radius: 4px;
     border: 1px solid #ccc;
+    background-color: #fff;
+    color: #74A3FF;
+}
+
+.modal-content select, .modal-content textarea {
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #E5E5E5;
+    background-color: #fff;
+    color: #484747;
+    margin-bottom: 16px;
+    outline: none;
+    cursor: pointer;
+    width: 100%;
+}
+.modal-content textarea {
+    height: 300px;
 }
 
 .modal-buttons {
@@ -77,22 +114,3 @@
     gap: 10px;
 }
 
-.submit-button {
-    background-color: #f0f0f0; 
-    color: #333;
-    border: none;
-    padding: 8px 16px;
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 0.9em; 
-}
-
-.close-button {
-    background-color: #f0f0f0; 
-    color: #333; 
-    border: none;
-    padding: 8px 16px; 
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 0.9em;
-}

@@ -6,6 +6,7 @@ import AddToCart from '../carts/AddToCart';
 import '../../style/products/ProductDetail.css';
 
 function ProductDetail() {
+  const authToken = localStorage.getItem('token');
   const [product, setProduct] = useState(null);
   const { productId } = useParams();
   const navigate = useNavigate();
@@ -23,7 +24,12 @@ function ProductDetail() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/${productId}`);
+        const response = await axios.get(`${API_BASE_URL}/${productId}`, {
+          headers: {
+            'Authorization': `Bearer ${authToken}`
+          }
+        });
+        
         setProduct(response.data.data);
       } catch (error) {
         console.error('상품 정보 불러오기 중 오류 발생:', error.message);
@@ -58,14 +64,23 @@ function ProductDetail() {
   return (
     <div className="product-detail-container">
       <h2>상품 상세 정보</h2>
+      <div className="product-details">
+    <div className="product-image">
+      <img
+        className="productItem-image"
+        src={product.imageUrl ? `${process.env.REACT_APP_IMAGE_URL}/${product.imageUrl}` : null}
+        alt={product.imageUrl ? "상품 이미지" : "이미지 없음"}
+        width="100"
+        height="100"
+      />
+    </div>
+    <div className="product-info">
       <p>상품 이름: {product.productName}</p>
       <p>가격: {product.price}</p>
       <p>상세 내용: {product.content}</p>
       <p>카테고리: {product.category}</p>
-
-      <img className="productItem-image" src={`${process.env.REACT_APP_IMAGE_URL}/${product.imageUrl}`} alt="상품 이미지"
-              width="100"
-              height="100" />
+    </div>
+  </div>
       <AddToCart productId={productId} />
 
       <div className="button-container">

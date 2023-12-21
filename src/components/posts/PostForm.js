@@ -98,7 +98,7 @@ const PostForm = () => {
                   <div className="form-left">
                       {imagePreview ? (
                           <div>
-                              <img src={imagePreview} alt="이미지 미리보기" style={{ maxWidth: '200px', maxHeight: '200px' }} />
+                              <img src={imagePreview} alt="이미지 미리보기" style={{ maxWidth: '340px', maxHeight: '360px' }} />
                           </div>
                       ) : (
                           <p>이미지 미리보기</p>
@@ -136,7 +136,7 @@ const PostForm = () => {
                       </label>
 
                       <div className='button-container'>
-                          <button type="submit">UPLOAD</button>
+                          <button className="postUploadBtn"type="submit">작성하기</button>
                       </div>
                   </div>
               </div>

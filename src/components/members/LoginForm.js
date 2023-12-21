@@ -47,8 +47,10 @@ const LoginForm = () => {
         <input type="password" id="inputPassword" className="form-control" placeholder="Password" value={password} onChange={handlePasswordChange} required />
         <button className="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
       </form>
+
+      <div className="separator">or</div>
       
-      <button onClick={loginGoogle}>Sign in with Google</button>
+      <button className="gooleBtn" onClick={loginGoogle}>Google 계정으로 가입</button>
     </div>
   );
 };
