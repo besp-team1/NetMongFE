@@ -26,8 +26,8 @@ const LoginForm = () => {
         localStorage.setItem('token', res);
         getUsernameAPI(res).then((res) => {
           localStorage.setItem('username', res);
+          window.location.assign('/');
         })
-        window.location.assign('/');
       }
     });
   };
