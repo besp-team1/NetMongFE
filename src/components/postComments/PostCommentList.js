@@ -106,16 +106,23 @@ const PostCommentList = ({ postId }) => {
                         <div key={comment.id}>
                             <div className="comment-header">
                             <p className="comment-username">{comment.username}</p>
-                            {!comment.isDeleted && comment.username === localStorage.getItem('username') && (
-                                    <div className="postCommentButton-container">
+                            {!comment.isDeleted && (
+                            <div className="postCommentButton-container">
+                                {comment.username === localStorage.getItem('username') ? (
+                                    <>
                                         {!isEditing || comment.id !== editingId ? (
                                             <button className="edit-delete-button" onClick={() => handleEditClick(comment.content, comment.id)}>수정</button>
                                         ) : (
                                             <button className="edit-delete-button" onClick={() => setIsEditing(false)}>취소</button>
                                         )}
                                         <button className="edit-delete-button" onClick={() => deleteComment(comment.id)}>삭제</button>
-                                    </div>
-                                )}
+                                    </>
+                                ) : (
+                                    <ReportCommentModal commentId={comment.id} 
+                                />                                
+                            )}
+                            </div>
+                            )}
                             </div>
                             <div className="comment-item">
                                 {!isEditing || comment.id !== editingId ? (
@@ -128,39 +135,51 @@ const PostCommentList = ({ postId }) => {
                                         <button type="submit">저장</button>
                                     </form>
                                 )}
-                                {comment.username !== localStorage.getItem('username') &&  // 현재 사용자가 댓글 작성자와 다른 경우에만 신고 버튼을 렌더링합니다.
-                                    <ReportCommentModal commentId={comment.id} />
-                                }
-                                
                             </div>
                             <button className="reply-button" onClick={() => handleReplyClick(comment.id)}>
-                                            {replyingCommentId === comment.id ? '답글 닫기' : '답글 달기'}
+                                    {replyingCommentId === comment.id ? '답글 닫기' : '답글 달기'}
+                                </button>
+                                {replyingCommentId === comment.id && <ReplyForm commentId={comment.id} />}
+                                {showingRepliesId !== comment.id ? (
+                                    <button className="reply-button" onClick={() => handleShowRepliesClick(comment.id)}>답글 더 보기</button>
+                                ) : (
+                                    <button className="reply-button" onClick={handleHideRepliesClick}>답글 숨기기</button>
+                                )}
+                                {showingRepliesId === comment.id && comment.childCommentsIds.map((childComment) => (
+                                    <div key={childComment.id} className="comment-reply-item">
+                                        <p className="comment-username">{childComment.username}</p>
+                                        <p className="comment-content">{childComment.content}</p>
+                                        <button className="reply-button" onClick={() => handleReplyClick(childComment.id)}>
+                                            {replyingCommentId === childComment.id ? '답글 닫기' : '답글 달기'}
                                         </button>
-                            {replyingCommentId === comment.id && <ReplyForm commentId={comment.id} />}
-                            {showingRepliesId !== comment.id ? (
-                                <button className="reply-button" onClick={() => handleShowRepliesClick(comment.id)}>답글 더 보기</button>
-                            ) : (
-                                <button className="reply-button" onClick={handleHideRepliesClick}>답글 숨기기</button>
-                            )}
-                            {showingRepliesId === comment.id && comment.childCommentsIds.map((childComment) => (
-                                <div key={childComment.id} className="comment-reply-item">
-                                    <p className="comment-username">{childComment.username}</p>
-                                    <p className="comment-content">{childComment.content}</p>
-                                    <button className="reply-button" onClick={() => handleReplyClick(childComment.id)}>
-                                    {replyingCommentId === childComment.id ? '답글 닫기' : '답글 달기'}
-                                    </button>
-                                    {replyingCommentId === childComment.id && <ReplyForm commentId={childComment.id} />}
-                                    {childComment.childCommentsIds && childComment.childCommentsIds.map((grandChildComment) => (  // 대댓글의 대댓글을 렌더링합니다.
-                                    <div key={grandChildComment.id} className="comment-reply-item">
-                                        <p className="comment-username">{grandChildComment.username}</p>
-                                        <p className="comment-content">{grandChildComment.content}</p>
-                                        <button className="reply-button" onClick={() => handleReplyClick(grandChildComment.id)}>
-                                        {replyingCommentId === grandChildComment.id ? '답글 닫기' : '답글 달기'}
-                                        </button>
-                                        {replyingCommentId === grandChildComment.id && <ReplyForm commentId={grandChildComment.id} />}
+                                        {replyingCommentId === childComment.id && <ReplyForm commentId={childComment.id} />}
+                                        {childComment.childCommentsIds && childComment.childCommentsIds.map((grandChildComment) => (  // 대댓글의 대댓글을 렌더링합니다.
+                                            <div key={grandChildComment.id} className="comment-reply-item">
+                                                <p className="comment-username">{grandChildComment.username}</p>
+                                                <p className="comment-content">{grandChildComment.content}</p>
+                                                <button className="reply-button" onClick={() => handleReplyClick(grandChildComment.id)}>
+                                                    {replyingCommentId === grandChildComment.id ? '답글 닫기' : '답글 달기'}
+                                                </button>
+                                                {replyingCommentId === grandChildComment.id && <ReplyForm commentId={grandChildComment.id} />}
+                                                {!grandChildComment.isDeleted && (
+                                                    <div className="postCommentButton-container">
+                                                        {grandChildComment.username === localStorage.getItem('username') ? (
+                                                            <>
+                                                                {!isEditing || grandChildComment.id !== editingId ? (
+                                                                    <button className="edit-delete-button" onClick={() => handleEditClick(grandChildComment.content, grandChildComment.id)}>수정</button>
+                                                                ) : (
+                                                                    <button className="edit-delete-button" onClick={() => setIsEditing(false)}>취소</button>
+                                                                )}
+                                                                <button className="edit-delete-button" onClick={() => deleteComment(grandChildComment.id)}>삭제</button>
+                                                            </>
+                                                        ) : (
+                                                            <ReportCommentModal commentId={grandChildComment.id} />
+                                                        )}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        ))}
                                     </div>
-                                    ))}
-                                </div>
                                 ))}
                         </div>
                     ))
