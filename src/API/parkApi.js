@@ -141,3 +141,9 @@ export const removeLikeFromPark = async (parkId) => {
     return null;
   }
 };
+
+export const getLikedParksByUser = (setParks) =>
+  api
+    .get("/likes")
+    .then((response) => setParks(response.data.data))
+    .catch((error) => console.error("There was an error!", error));

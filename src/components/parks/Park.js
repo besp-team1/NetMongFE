@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getParksStates, getParksCities, getParksInCity } from '../../API/parkApi';
+import { getParksStates, getParksCities, getParksInCity, getLikedParksByUser } from '../../API/parkApi';
 import '../../style/parks/Park.css';
 
 const Park = ({ setParks }) => {
@@ -7,7 +7,7 @@ const Park = ({ setParks }) => {
   const [selectedState, setSelectedState] = useState('');
   const [cities, setCities] = useState([]);
   const [selectedCity, setSelectedCity] = useState('');
-  const [parks, setLocalParks] = useState([]);
+
 
   useEffect(() => {
     getParksStates(setStates)
@@ -31,6 +31,18 @@ const Park = ({ setParks }) => {
     setSelectedCity(e.target.value);
     setParks([]);
   };
+
+  const handleLikedParks = () => {
+    getLikedParksByUser((data) => {
+      if (data.length === 0) {
+        alert('좋아요 누른 공원이 없습니다.');
+      } else {
+        setParks(data); // 원래는 setLocalParks(data)였습니다.
+      }
+    });
+  };
+  
+  
 
   useEffect(() => {
     if (!selectedState || !selectedCity) {
@@ -56,6 +68,7 @@ const Park = ({ setParks }) => {
           ))}
         </select>
         <button className="search-button" onClick={handleSearch}>검색</button>
+        <button className="liked-parks-button" onClick={handleLikedParks}>관심 공원</button>
       </div>
     </div>
   );

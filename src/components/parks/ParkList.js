@@ -6,7 +6,7 @@ import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
 import { getPark, addLikeToPark, removeLikeFromPark, getLikesCountByPark } from '../../API/parkApi';
 
-const ParkList = ({ parks, selectedPark, setSelectedPark }) => {
+const ParkList = ({ parks, selectedPark, setSelectedPark, setParks }) => {
   const navigate = useNavigate();
   const [likesCount, setLikesCount] = useState(0);
   const [likedParks, setLikedParks] = useState({});
@@ -55,6 +55,8 @@ const ParkList = ({ parks, selectedPark, setSelectedPark }) => {
           [parkId]: false,
         }));
         fetchLikesCount(parkId);
+        setSelectedPark(null); 
+        setParks((prev) => prev.filter((park) => park.id !== parkId)); 
       }
     } else {
       const response = await addLikeToPark(parkId);

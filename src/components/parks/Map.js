@@ -105,7 +105,7 @@ const Map = () => {
       <Park setParks={setParks} /> {/* 상태 변경 함수를 Park 컴포넌트에 전달 */}
       <div className={`map-park-container ${parks.length > 0 ? "with-list" : ""}`}>
         <div id="map"></div>
-        {parks.length > 0 && <ParkList parks={parks} selectedPark={selectedPark} setSelectedPark={setSelectedPark} />} {/* 상태 변경 함수를 ParkList 컴포넌트에 전달 */}
+        {parks.length > 0 && <ParkList parks={parks} selectedPark={selectedPark} setSelectedPark={setSelectedPark} setParks={setParks} />} 
       </div>
     </div>
   );
