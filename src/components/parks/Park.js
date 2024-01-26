@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getParksStates, getParksCities, getParksInCity, getLikedParksByUser } from '../../API/parkApi';
+import { getParksStates, getParksCities, getParksInCity, getLikedParksByUser, getParksWithPetAllowed } from '../../API/parkApi';
 import '../../style/parks/Park.css';
 
 const Park = ({ setParks }) => {
@@ -37,12 +37,20 @@ const Park = ({ setParks }) => {
       if (data.length === 0) {
         alert('좋아요 누른 공원이 없습니다.');
       } else {
-        setParks(data); // 원래는 setLocalParks(data)였습니다.
+        setParks(data);
       }
     });
   };
-  
-  
+
+  const handlePetAllowedParks = () => {
+    getParksWithPetAllowed((data) => {
+      if (data.length === 0) {
+        alert('반려동물 출입 가능한 공원이 없습니다.');
+      } else {
+        setParks(data);
+      }
+    });
+  };
 
   useEffect(() => {
     if (!selectedState || !selectedCity) {
@@ -69,6 +77,7 @@ const Park = ({ setParks }) => {
         </select>
         <button className="search-button" onClick={handleSearch}>검색</button>
         <button className="liked-parks-button" onClick={handleLikedParks}>관심 공원</button>
+        <button className="pet-allowed-parks-button" onClick={handlePetAllowedParks}>출입 가능 공원</button>
       </div>
     </div>
   );

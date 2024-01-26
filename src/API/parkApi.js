@@ -79,9 +79,9 @@ export const deleteComment = async (id) => {
 };
 
 // 댓글 작성 POST 요청
-export const postComment = async (parkId, comment) => {
+export const postComment = async (parkId, comment, petAllowed) => {
   try {
-      const response = await api.post(`/comments/${parkId}`, { content: comment });
+      const response = await api.post(`/comments/${parkId}`, { content: comment, petAllowed });
       return response.data;
   } catch (error) {
       console.error('댓글 작성 중 오류 발생:', error.response.data);
@@ -147,3 +147,11 @@ export const getLikedParksByUser = (setParks) =>
     .get("/likes")
     .then((response) => setParks(response.data.data))
     .catch((error) => console.error("There was an error!", error));
+
+// 출입 가능 공원 GET 요청
+export const getParksWithPetAllowed = (setParks) =>
+  api
+    .get("/petAllowed")
+    .then((response) => setParks(response.data.data))
+    .catch((error) => console.error("출입 가능 공원 조회 중 오류 발생:", error));
+

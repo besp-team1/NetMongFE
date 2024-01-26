@@ -4,7 +4,7 @@ import '../../style/parks/ParkList.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
-import { getPark, addLikeToPark, removeLikeFromPark, getLikesCountByPark } from '../../API/parkApi';
+import { getPark, addLikeToPark, removeLikeFromPark, getLikesCountByPark, getParksWithPetAllowed } from '../../API/parkApi';
 
 const ParkList = ({ parks, selectedPark, setSelectedPark, setParks }) => {
   const navigate = useNavigate();
