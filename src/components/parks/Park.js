@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getParksStates, getParksCities, getParksInCity, getLikedParksByUser, getParksWithPetAllowed } from '../../API/parkApi';
 import '../../style/parks/Park.css';
 
 const Park = ({ setParks }) => {
+  const navigate = useNavigate();
   const [states, setStates] = useState([]);
   const [selectedState, setSelectedState] = useState('');
   const [cities, setCities] = useState([]);
@@ -18,6 +20,7 @@ const Park = ({ setParks }) => {
   }, [selectedState]);
 
   const handleSearch = () => {
+    navigate('/parks');
     getParksInCity(selectedState, selectedCity, setParks);
   };
 
@@ -32,12 +35,13 @@ const Park = ({ setParks }) => {
     setParks([]);
   };
 
-  const handleLikedParks = () => {
+ const handleLikedParks = () => {
     getLikedParksByUser((data) => {
       if (data.length === 0) {
         alert('좋아요 누른 공원이 없습니다.');
       } else {
         setParks(data);
+        navigate('/parks/likes');
       }
     });
   };
@@ -48,6 +52,7 @@ const Park = ({ setParks }) => {
         alert('반려동물 출입 가능한 공원이 없습니다.');
       } else {
         setParks(data);
+        navigate('/parks/petAllowed');
       }
     });
   };

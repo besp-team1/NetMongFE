@@ -72,6 +72,8 @@ function App() {
               <Route path="/welcome" element={<Welcome/>} />
               <Route path="/parks/:parkId" element={<ParkComment />} />
               <Route path="/parks/:parkId/comment" element={<ParkCommentForm />} /> 
+              <Route path="/parks/likes" element={<Map />} /> 
+              <Route path="/parks/petAllowed" element={<Map />} /> 
               <Route path="/post/categorySearch" element={<SearchPost />} />
               <Route path="/post/hashtagSearch" element={<HashtagSearch />} />
               <Route path="/admin/reports" element={<ReportsPage />}>
