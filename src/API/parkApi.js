@@ -27,27 +27,31 @@ export const getParksCities = (selectedState, setCities) => {
       .catch((error) => console.error("There was an error!", error));
   }};
 
-export const getParksInCity = (selectedState, selectedCity, setParks) => {
-  if (selectedState && selectedCity) {
-    api
-      .get(`/states/${selectedState}/${selectedCity}`)
-      .then((response) => {
-        const parkSet = new Set();
-        const nonDuplicateParks = response.data.data.filter((park) => {
-          const duplicate = parkSet.has(park.parkNm);
-          parkSet.add(park.parkNm);
-          return !duplicate;
+  export const getParksInCity = (selectedState, selectedCity, setParks) => {
+    if (selectedState && selectedCity) {
+      api
+        .get(`/states/${selectedState}/${selectedCity}`)
+        .then((response) => {
+          const parkSet = new Set();
+          const nonDuplicateParks = response.data.data.filter((park) => {
+            const duplicate = parkSet.has(park.parkNm);
+            parkSet.add(park.parkNm);
+            return !duplicate;
+          });
+          // 각 공원의 isLiked 상태를 확인
+          nonDuplicateParks.forEach(park => {
+            console.log(`Park ${park.parkNm} is liked: ${park.isLiked}`);
+          });
+          setParks(nonDuplicateParks);
+        })
+        .catch((error) => {
+          console.error("There was an error!", error);
         });
-        console.log(nonDuplicateParks);
-        setParks(nonDuplicateParks);
-      })
-      .catch((error) => {
-        console.error("There was an error!", error);
-      });
-  } else {
-    setParks([]);
-  }};  
-
+    } else {
+      setParks([]);
+    }
+  };
+  
 // 댓글 조회 GET 요청
 export const fetchComments = async (parkId, page) => {
   try {

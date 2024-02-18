@@ -19,21 +19,24 @@ const ParkList = ({ parks, selectedPark, setSelectedPark, setParks }) => {
 
   useEffect(() => {
     if (authToken) {
-      parks.forEach(async (park) => {
-        const response = await getPark(park.id);
-        if (response) {
-          setLikedParks(prev => ({
-            ...prev,
-            [park.id]: response.data.isLiked,
-          }));
-          fetchLikesCount(park.id);
-        }
-      });
+      setLikedParks(
+        parks.reduce((acc, park) => {
+          acc[park.id] = park.isLiked;
+          return acc;
+        }, {})
+      );
+      setLikesCount(
+        parks.reduce((acc, park) => {
+          acc[park.id] = park.likesCount;
+          return acc;
+        }, {})
+      );
     } else {
       setLikedParks({});
+      setLikesCount({});
     }
   }, [authToken, parks]);
-
+  
   const fetchLikesCount = async (parkId) => { 
     const response = await getLikesCountByPark(parkId); 
     if (response) {
@@ -55,8 +58,6 @@ const ParkList = ({ parks, selectedPark, setSelectedPark, setParks }) => {
           [parkId]: false,
         }));
         fetchLikesCount(parkId);
-        setSelectedPark(null); 
-        setParks((prev) => prev.filter((park) => park.id !== parkId)); 
       }
     } else {
       const response = await addLikeToPark(parkId);
