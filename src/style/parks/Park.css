@@ -44,16 +44,46 @@
 }
 
 .search-button {
-  padding: 6px 18px;
+  padding: 6px 14px;
   border-radius: 5px;
   border: none;
   background-color: #74A3FF;
   color: #fff;
-  font-size: 16px;
+  font-size: 14px;
   cursor: pointer;
-  margin-left: 15px;
+  margin-left: 9px;
 }
 
 .search-button:hover {
   background-color: #5680E9;
+}
+
+.liked-parks-button {
+  padding: 6px 14px;
+  border-radius: 5px;
+  border: none;
+  background-color: #E85B81;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 9px;
+}
+
+.liked-parks-button:hover {
+  background-color: #d04a6d;
+}
+
+.pet-allowed-parks-button {
+  padding: 6px 14px;
+  border-radius: 5px;
+  border: none;
+  background-color: #E1CDBD;
+  color: #5B3A29;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 9px;
+}
+
+.pet-allowed-parks-button:hover {
+  background-color: #D2B8A6;
 }

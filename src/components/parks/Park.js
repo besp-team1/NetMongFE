@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { getParksStates, getParksCities, getParksInCity } from '../../API/parkApi';
+import { useNavigate } from 'react-router-dom';
+import { getParksStates, getParksCities, getParksInCity, getLikedParksByUser, getParksWithPetAllowed } from '../../API/parkApi';
 import '../../style/parks/Park.css';
 
 const Park = ({ setParks }) => {
+  const navigate = useNavigate();
   const [states, setStates] = useState([]);
   const [selectedState, setSelectedState] = useState('');
   const [cities, setCities] = useState([]);
   const [selectedCity, setSelectedCity] = useState('');
-  const [parks, setLocalParks] = useState([]);
+
 
   useEffect(() => {
     getParksStates(setStates)
@@ -18,6 +20,7 @@ const Park = ({ setParks }) => {
   }, [selectedState]);
 
   const handleSearch = () => {
+    navigate('/parks');
     getParksInCity(selectedState, selectedCity, setParks);
   };
 
@@ -30,6 +33,28 @@ const Park = ({ setParks }) => {
   const handleCityChange = (e) => {
     setSelectedCity(e.target.value);
     setParks([]);
+  };
+
+ const handleLikedParks = () => {
+    getLikedParksByUser((data) => {
+      if (data.length === 0) {
+        alert('좋아요 누른 공원이 없습니다.');
+      } else {
+        setParks(data);
+        navigate('/parks/likes');
+      }
+    });
+  };
+
+  const handlePetAllowedParks = () => {
+    getParksWithPetAllowed((data) => {
+      if (data.length === 0) {
+        alert('반려동물 출입 가능한 공원이 없습니다.');
+      } else {
+        setParks(data);
+        navigate('/parks/petAllowed');
+      }
+    });
   };
 
   useEffect(() => {
@@ -56,6 +81,8 @@ const Park = ({ setParks }) => {
           ))}
         </select>
         <button className="search-button" onClick={handleSearch}>검색</button>
+        <button className="liked-parks-button" onClick={handleLikedParks}>관심 공원</button>
+        <button className="pet-allowed-parks-button" onClick={handlePetAllowedParks}>출입 가능 공원</button>
       </div>
     </div>
   );

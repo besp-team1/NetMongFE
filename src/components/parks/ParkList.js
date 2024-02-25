@@ -4,9 +4,9 @@ import '../../style/parks/ParkList.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
-import { getPark, addLikeToPark, removeLikeFromPark, getLikesCountByPark } from '../../API/parkApi';
+import { getPark, addLikeToPark, removeLikeFromPark, getLikesCountByPark, getParksWithPetAllowed } from '../../API/parkApi';
 
-const ParkList = ({ parks, selectedPark, setSelectedPark }) => {
+const ParkList = ({ parks, selectedPark, setSelectedPark, setParks }) => {
   const navigate = useNavigate();
   const [likesCount, setLikesCount] = useState(0);
   const [likedParks, setLikedParks] = useState({});
@@ -19,21 +19,24 @@ const ParkList = ({ parks, selectedPark, setSelectedPark }) => {
 
   useEffect(() => {
     if (authToken) {
-      parks.forEach(async (park) => {
-        const response = await getPark(park.id);
-        if (response) {
-          setLikedParks(prev => ({
-            ...prev,
-            [park.id]: response.data.isLiked,
-          }));
-          fetchLikesCount(park.id);
-        }
-      });
+      setLikedParks(
+        parks.reduce((acc, park) => {
+          acc[park.id] = park.isLiked;
+          return acc;
+        }, {})
+      );
+      setLikesCount(
+        parks.reduce((acc, park) => {
+          acc[park.id] = park.likesCount;
+          return acc;
+        }, {})
+      );
     } else {
       setLikedParks({});
+      setLikesCount({});
     }
   }, [authToken, parks]);
-
+  
   const fetchLikesCount = async (parkId) => { 
     const response = await getLikesCountByPark(parkId); 
     if (response) {

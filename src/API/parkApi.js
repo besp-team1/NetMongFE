@@ -27,27 +27,31 @@ export const getParksCities = (selectedState, setCities) => {
       .catch((error) => console.error("There was an error!", error));
   }};
 
-export const getParksInCity = (selectedState, selectedCity, setParks) => {
-  if (selectedState && selectedCity) {
-    api
-      .get(`/states/${selectedState}/${selectedCity}`)
-      .then((response) => {
-        const parkSet = new Set();
-        const nonDuplicateParks = response.data.data.filter((park) => {
-          const duplicate = parkSet.has(park.parkNm);
-          parkSet.add(park.parkNm);
-          return !duplicate;
+  export const getParksInCity = (selectedState, selectedCity, setParks) => {
+    if (selectedState && selectedCity) {
+      api
+        .get(`/states/${selectedState}/${selectedCity}`)
+        .then((response) => {
+          const parkSet = new Set();
+          const nonDuplicateParks = response.data.data.filter((park) => {
+            const duplicate = parkSet.has(park.parkNm);
+            parkSet.add(park.parkNm);
+            return !duplicate;
+          });
+          // 각 공원의 isLiked 상태를 확인
+          nonDuplicateParks.forEach(park => {
+            console.log(`Park ${park.parkNm} is liked: ${park.isLiked}`);
+          });
+          setParks(nonDuplicateParks);
+        })
+        .catch((error) => {
+          console.error("There was an error!", error);
         });
-        console.log(nonDuplicateParks);
-        setParks(nonDuplicateParks);
-      })
-      .catch((error) => {
-        console.error("There was an error!", error);
-      });
-  } else {
-    setParks([]);
-  }};  
-
+    } else {
+      setParks([]);
+    }
+  };
+  
 // 댓글 조회 GET 요청
 export const fetchComments = async (parkId, page) => {
   try {
@@ -79,9 +83,9 @@ export const deleteComment = async (id) => {
 };
 
 // 댓글 작성 POST 요청
-export const postComment = async (parkId, comment) => {
+export const postComment = async (parkId, comment, petAllowed) => {
   try {
-      const response = await api.post(`/comments/${parkId}`, { content: comment });
+      const response = await api.post(`/comments/${parkId}`, { content: comment, petAllowed });
       return response.data;
   } catch (error) {
       console.error('댓글 작성 중 오류 발생:', error.response.data);
@@ -141,3 +145,17 @@ export const removeLikeFromPark = async (parkId) => {
     return null;
   }
 };
+
+export const getLikedParksByUser = (setParks) =>
+  api
+    .get("/likes")
+    .then((response) => setParks(response.data.data))
+    .catch((error) => console.error("There was an error!", error));
+
+// 출입 가능 공원 GET 요청
+export const getParksWithPetAllowed = (setParks) =>
+  api
+    .get("/petAllowed")
+    .then((response) => setParks(response.data.data))
+    .catch((error) => console.error("출입 가능 공원 조회 중 오류 발생:", error));
+
